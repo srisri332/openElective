@@ -1,11 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Landpage from "./components/Landpage";
+import LoginPage from "./components/LoginPage";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Open Elective</h1>
-          </div>
+    <div className='App'>
+      <LoginPage />
+    </div>
   );
 }
 
