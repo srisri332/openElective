@@ -1,0 +1,27 @@
+{
+   "OES":[
+      {
+         "OE1":[
+            {
+               "Name":"OS",
+               "Code":"abc",
+               "Dept":"CSE",
+               "Faculty":"Mr. Abc",
+               "Seats":100
+            },
+            {
+               "Name":"DWDM",
+               "Code":"jkl",
+               "Dept":"IT",
+               "Faculty":"Mr. Abc",
+               "Seats":200
+            }
+         ]
+      }
+   ]
+}
+
+
+
+
+
