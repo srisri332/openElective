@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
-import logo from "./logos.png";
+import logo from "./images/logos.png";
 
 import React from "react";
 

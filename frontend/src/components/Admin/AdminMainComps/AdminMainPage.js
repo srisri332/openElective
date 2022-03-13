@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import SubjectModal from "./SubjectModal";
 
 function AdminMainPage() {
   const [oes, setOes] = useState(null);
@@ -63,6 +64,7 @@ function AdminMainPage() {
     <div>
       <h1>Admin Main Page</h1>
       {oes && <DeArray data={oes} />}
+      <SubjectModal />
     </div>
   );
 }
