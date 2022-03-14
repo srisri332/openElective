@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OpenElective.Services.Interfaces;
+using AutoMapper;
+using OpenElective.Models.DTOs.OpenElectives;
+using OpenElective.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,10 +13,12 @@ namespace OpenElective.Controllers
     public class OpenElectivesController : ControllerBase
     {
         private readonly IOpenElectiveService openElectiveService;
+        private readonly IMapper mapper;
 
-        public OpenElectivesController(IOpenElectiveService openElectiveService)
+        public OpenElectivesController(IOpenElectiveService openElectiveService, IMapper mapper)
         {
             this.openElectiveService = openElectiveService;
+            this.mapper = mapper;
         }
         // GET: api/<OpenElectivesController>
         [HttpGet]
@@ -22,7 +27,8 @@ namespace OpenElective.Controllers
             try
             {
                 var allOE = openElectiveService.GetAll();
-                return Ok(allOE);
+                var allDTO = mapper.Map < IEnumerable < GetOpenElectiveDTO>>(allOE);
+                return Ok(allDTO);
             }
             catch (Exception)
             {
@@ -37,7 +43,8 @@ namespace OpenElective.Controllers
             try
             {
                 var OE = openElectiveService.Get(id);
-                return Ok(OE);
+                var OEDTO = mapper.Map<GetOpenElectiveDTO>(OE);
+                return Ok(OEDTO);
 
             }
             catch (Exception)
@@ -49,7 +56,7 @@ namespace OpenElective.Controllers
 
         // POST api/<OpenElectivesController>
         [HttpPost]
-        public IActionResult Post([FromBody] OpenElective.Models.OpenElective openElective)
+        public IActionResult Post([FromBody] CreateOpenElectiveDTO openElective)
         {
             try
             {
@@ -57,8 +64,14 @@ namespace OpenElective.Controllers
                 {
                     return BadRequest(openElective);
                 }
-
-                var createdOE = openElectiveService.Create(openElective);
+                var OE=mapper.Map<OpenElective.Models.OpenElective>(openElective);
+                OE.Id = Guid.NewGuid();
+                OE.Name = openElective.Name;
+                OE.UpdatedBy = "ADMIN";
+                OE.CreatedBy = "ADMIN";
+                OE.CreatedOn = DateTime.Now;
+                OE.UpdatedOn = DateTime.Now;
+                var createdOE = openElectiveService.Create(OE);
                 return CreatedAtAction(nameof(Get), createdOE);
 
             }
