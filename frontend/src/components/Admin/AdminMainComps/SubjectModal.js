@@ -25,7 +25,8 @@ function SubjectModal() {
         variant='outline'
         color='orange'
         borderColor='orange'
-        onClick={onOpen}>
+        onClick={onOpen}
+        marginTop='10px'>
         + Subject
       </Button>
 

@@ -1,4 +1,8 @@
+import { CheckIcon } from "@chakra-ui/icons";
+import { Button, Center, div, Flex, VStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import OECard from "./OECard";
+import OEModal from "./OEModal";
 import SubjectModal from "./SubjectModal";
 
 function AdminMainPage() {
@@ -64,7 +68,18 @@ function AdminMainPage() {
     <div>
       <h1>Admin Main Page</h1>
       {oes && <DeArray data={oes} />}
-      <SubjectModal />
+      <Center>
+        <VStack marginBottom='15px'>
+          <OECard />
+          <OECard />
+          <Flex>
+            <OEModal />
+            <Button leftIcon={<CheckIcon />} colorScheme='green'>
+              Start Allotment
+            </Button>
+          </Flex>
+        </VStack>
+      </Center>
     </div>
   );
 }
