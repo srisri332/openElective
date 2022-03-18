@@ -6,6 +6,7 @@ import {
   Link as Clink,
   Text,
   Image,
+  Container,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import gear from "../images/gear.png";
@@ -28,12 +29,10 @@ function NavBar() {
           <Spacer />
 
           <div>
-            <Clink marginRight='10px'>
-              <Link to='/adminmainpage'>Main Page</Link>
-            </Clink>
-            <Clink marginRight='10px'>
-              <Link to='/adminelecpage'>Elective Page</Link>
-            </Clink>
+            <Link to='/adminmainpage' style={{ marginRight: "10px" }}>
+              Main Page
+            </Link>
+            <Link to='/adminelecpage'>Elective Page</Link>
           </div>
         </Flex>
       </Box>
