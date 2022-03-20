@@ -16,6 +16,7 @@ builder.Services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(
 
 builder.Services.AddScoped<IOpenElectiveService,OpenElectiveService>();
 builder.Services.AddScoped<ISubjectService, SubjectService>();
+builder.Services.AddScoped<IStudentService, StudentService>();
 
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));

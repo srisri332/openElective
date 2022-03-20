@@ -12,6 +12,8 @@ namespace OpenElective.Models
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Department> Departments { get; set; }
 
+        public DbSet<Student> Students { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -21,6 +23,7 @@ namespace OpenElective.Models
 
             modelBuilder.Entity<Department>().HasMany<Subject>(o => o.Subjects)
                 .WithOne(s => s.Department);
+
 
 
             Department department1 = new Department
@@ -104,8 +107,29 @@ namespace OpenElective.Models
                 Instructor = "Viper Ramesh",
             };
 
-            modelBuilder.Entity<Subject>().HasData(subject2,subject1,subject3,subject4);
 
+            Student student1 = new Student
+            {
+                Id = Guid.NewGuid(),
+                RollNumber = "18211A05A4",
+                Name = "Mark Zukerberg",
+                Password = "facebook",
+                CGPA = 8.0f,
+                Backlogs=0
+            };
+            Student student2 = new Student
+            {
+                Id = Guid.NewGuid(),
+                RollNumber = "18211A05Z4",
+                Name = "Bill Gates",
+                Password = "microsoft",
+                CGPA = 9.0f,
+                Backlogs = 0
+            };
+            modelBuilder.Entity<Student>().HasData(student1, student2);
+
+            modelBuilder.Entity<Subject>().HasData(subject2,subject1,subject3,subject4);
+           
         }
 
     }
