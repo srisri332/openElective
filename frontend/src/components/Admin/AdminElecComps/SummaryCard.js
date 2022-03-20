@@ -9,37 +9,18 @@ import {
   Td,
   chakra,
   Center,
+  Button,
+  Container,
+  Spacer,
+  Flex,
+  Select,
 } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { useTable, useSortBy } from "react-table";
+import { useTable, useSortBy, usePagination } from "react-table";
+import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
 
-function SummaryCard() {
-  const data = React.useMemo(
-    () => [
-      {
-        name: "inches",
-        roll: "millimetres (mm)",
-        sec: 25.4,
-        cgpa: "8.5",
-        elec: "No",
-      },
-      {
-        name: "inches",
-        roll: "millimetres (mm)",
-        sec: 25.4,
-        cgpa: "8.5",
-        elec: "No",
-      },
-      {
-        name: "inches",
-        roll: "millimetres (mm)",
-        sec: 25.4,
-        cgpa: "8.5",
-        elec: "No",
-      },
-    ],
-    []
-  );
+function SummaryCard(props) {
+  const data = React.useMemo(() => props.studentData, []);
 
   const columns = React.useMemo(
     () => [
@@ -67,8 +48,24 @@ function SummaryCard() {
     []
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useSortBy);
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    state,
+    gotoPage,
+    pageCount,
+    setPageSize,
+    prepareRow,
+  } = useTable({ columns, data }, useSortBy, usePagination);
+
+  const { pageIndex, pageSize } = state;
 
   return (
     <Center mt='10px'>
@@ -105,7 +102,7 @@ function SummaryCard() {
             ))}
           </Thead>
           <Tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
+            {page.map((row) => {
               prepareRow(row);
               return (
                 <Tr {...row.getRowProps()}>
@@ -121,6 +118,73 @@ function SummaryCard() {
             })}
           </Tbody>
         </Table>
+
+        <Container maxW='container.xl' marginTop='10px'>
+          <Flex>
+            <span>
+              Page{" "}
+              <strong>
+                {pageIndex + 1} of {pageOptions.length}
+              </strong>{" "}
+            </span>
+
+            <Spacer />
+
+            <span>
+              Go to Page:{" "}
+              <input
+                type='number'
+                defaultValue={pageIndex + 1}
+                style={{
+                  width: "25px",
+                  border: "0.5px solid grey",
+                  borderRadius: "3px",
+                }}
+                onChange={(e) => {
+                  const pageNumber = e.target.value
+                    ? Number(e.target.value) - 1
+                    : 0;
+                  gotoPage(pageNumber);
+                }}
+              />
+            </span>
+
+            <Spacer />
+
+            <Select
+              size='xs'
+              value={pageSize}
+              maxW='6em'
+              onChange={(e) => setPageSize(Number(e.target.value))}>
+              {[10, 25, 50].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  Show {pageSize}
+                </option>
+              ))}
+            </Select>
+
+            <Spacer />
+
+            <span>
+              <Button
+                colorScheme='blue'
+                onClick={() => previousPage()}
+                disabled={!canPreviousPage}
+                leftIcon={<ChevronLeftIcon />}
+                size='sm'>
+                Prev
+              </Button>
+              <Button
+                colorScheme='blue'
+                onClick={() => nextPage()}
+                disabled={!canNextPage}
+                rightIcon={<ChevronRightIcon />}
+                size='sm'>
+                Next
+              </Button>
+            </span>
+          </Flex>
+        </Container>
       </Box>
     </Center>
   );

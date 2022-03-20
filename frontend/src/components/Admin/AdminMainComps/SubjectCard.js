@@ -7,7 +7,9 @@ import {
   Tr,
   Thead,
   Tbody,
+  Center,
 } from "@chakra-ui/react";
+import { CloseIcon } from "@chakra-ui/icons";
 
 function SubjectCard() {
   return (
@@ -30,6 +32,11 @@ function SubjectCard() {
             <Td>CSE</Td>
             <Td>100</Td>
             <Td>IOP</Td>
+            <Center>
+              <Td>
+                <CloseIcon color='red.400' cursor='pointer' />
+              </Td>
+            </Center>
           </Tr>
 
           <Tr>
@@ -38,6 +45,11 @@ function SubjectCard() {
             <Td>CSE</Td>
             <Td>100</Td>
             <Td>IOP</Td>
+            <Center>
+              <Td>
+                <CloseIcon color='red.400' cursor='pointer' />
+              </Td>
+            </Center>
           </Tr>
 
           <Tr>
@@ -46,6 +58,11 @@ function SubjectCard() {
             <Td>CSE</Td>
             <Td>100</Td>
             <Td>IOuuuuuuuuuuuP</Td>
+            <Center>
+              <Td>
+                <CloseIcon color='red.400' cursor='pointer' />
+              </Td>
+            </Center>
           </Tr>
         </Tbody>
       </Table>

@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Flex,
-  Spacer,
-  Link as Clink,
-  Text,
-  Image,
-  Container,
-} from "@chakra-ui/react";
+import { Box, Flex, Spacer, Text, Image } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import gear from "../images/gear.png";
 

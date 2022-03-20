@@ -25,6 +25,260 @@
     "updatedBy": "ADMIN"
   }
 
-]
+],
+
+"STDS": [
+      {
+        "name": "anches",
+        "roll": "millimetres (mm)",
+        "sec": 25.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "bnches",
+        "roll": "millimetres (mm)",
+        "sec": 2.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "cnches",
+        "roll": "millimetres (mm)",
+        "sec": 4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "anches",
+        "roll": "millimetres (mm)",
+        "sec": 25.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "bnches",
+        "roll": "millimetres (mm)",
+        "sec": 2.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "cnches",
+        "roll": "millimetres (mm)",
+        "sec": 4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "anches",
+        "roll": "millimetres (mm)",
+        "sec": 25.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "bnches",
+        "roll": "millimetres (mm)",
+        "sec": 2.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "cnches",
+        "roll": "millimetres (mm)",
+        "sec": 4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "anches",
+        "roll": "millimetres (mm)",
+        "sec": 25.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "bnches",
+        "roll": "millimetres (mm)",
+        "sec": 2.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "cnches",
+        "roll": "millimetres (mm)",
+        "sec": 4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "anches",
+        "roll": "millimetres (mm)",
+        "sec": 25.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "bnches",
+        "roll": "millimetres (mm)",
+        "sec": 2.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "cnches",
+        "roll": "millimetres (mm)",
+        "sec": 4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "anches",
+        "roll": "millimetres (mm)",
+        "sec": 25.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "bnches",
+        "roll": "millimetres (mm)",
+        "sec": 2.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "cnches",
+        "roll": "millimetres (mm)",
+        "sec": 4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },{
+        "name": "anches",
+        "roll": "millimetres (mm)",
+        "sec": 25.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "bnches",
+        "roll": "millimetres (mm)",
+        "sec": 2.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "cnches",
+        "roll": "millimetres (mm)",
+        "sec": 4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "anches",
+        "roll": "millimetres (mm)",
+        "sec": 25.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "bnches",
+        "roll": "millimetres (mm)",
+        "sec": 2.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "cnches",
+        "roll": "millimetres (mm)",
+        "sec": 4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "anches",
+        "roll": "millimetres (mm)",
+        "sec": 25.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "bnches",
+        "roll": "millimetres (mm)",
+        "sec": 2.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "cnches",
+        "roll": "millimetres (mm)",
+        "sec": 4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "anches",
+        "roll": "millimetres (mm)",
+        "sec": 25.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "bnches",
+        "roll": "millimetres (mm)",
+        "sec": 2.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "cnches",
+        "roll": "millimetres (mm)",
+        "sec": 4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "anches",
+        "roll": "millimetres (mm)",
+        "sec": 25.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "bnches",
+        "roll": "millimetres (mm)",
+        "sec": 2.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "cnches",
+        "roll": "millimetres (mm)",
+        "sec": 4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "anches",
+        "roll": "millimetres (mm)",
+        "sec": 25.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "bnches",
+        "roll": "millimetres (mm)",
+        "sec": 2.4,
+        "cgpa": "8.5",
+        "elec": "No"
+      },
+      {
+        "name": "cnches",
+        "roll": "millimetres (mm)",
+        "sec": 4,
+        "cgpa": "8.5",
+        "elec": "No"
+      }
+    ]
 
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, Center, Flex, Image, Tooltip } from "@chakra-ui/react";
-import calendar from "../../images/calendar.png";
 import stop from "../../images/stop.png";
 import stats from "../../images/stats.png";
+import DateModal from "./DateModal";
 
 function ButtonCards() {
   return (
@@ -41,14 +41,7 @@ function ButtonCards() {
 
             <Box w='25%' borderRadius='5px'>
               <Center>
-                <Tooltip label='Set Last Date' fontSize='md'>
-                  <Image
-                    src={calendar}
-                    alt='logo'
-                    width='50px'
-                    cursor='pointer'
-                  />
-                </Tooltip>
+                <DateModal />
               </Center>{" "}
             </Box>
           </Flex>
