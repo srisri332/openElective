@@ -3,16 +3,18 @@ import { Route, Switch } from "react-router-dom";
 import AdminMainPage from "./AdminMainComps/AdminMainPage";
 import AdminElectivePage from "./AdminElecComps/AdminElectivePage";
 import NavBar from "./NavBar";
+import { OEProvider } from "../../contexts/OEContext";
 
 function AdminPage() {
   return (
     <div>
       <NavBar />
       <Switch>
-        <Route path='/adminmainpage'>
-          <AdminMainPage />
-        </Route>
-
+        <OEProvider>
+          <Route path='/adminmainpage'>
+            <AdminMainPage />
+          </Route>
+        </OEProvider>
         <Route path='/adminelecpage'>
           <AdminElectivePage />
         </Route>

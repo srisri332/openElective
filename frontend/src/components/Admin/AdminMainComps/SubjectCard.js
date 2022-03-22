@@ -31,7 +31,7 @@ function SubjectCard(props) {
           {props.subjects &&
             props.subjects.map((subject) => {
               return (
-                <Tr>
+                <Tr key={subject.id}>
                   <Td>{subject.name}</Td>
                   <Td>ABCDE</Td>
                   <Td>{subject.departmentId}</Td>

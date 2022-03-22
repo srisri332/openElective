@@ -14,7 +14,6 @@ function AdminElectivePage() {
     });
 
     api.get("/STDS").then((res) => {
-      console.log(res.data);
       setStudents(res.data);
     });
   }, []);

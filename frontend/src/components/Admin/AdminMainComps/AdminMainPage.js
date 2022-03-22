@@ -1,14 +1,17 @@
 import { CheckIcon } from "@chakra-ui/icons";
 import { Button, Center, div, Flex, VStack } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import OECard from "./OECard";
 import OEModal from "./OEModal";
 import SubjectModal from "./SubjectModal";
 import axios from "axios";
+import OEContext from "../../../contexts/OEContext";
 
 function AdminMainPage() {
-  const [oes, setOes] = useState(null);
+  const { setAllOES } = useContext(OEContext);
+  const { allOES } = useContext(OEContext);
 
+  //this will intially get the data and update the global OES if there are any existing ones
   useEffect(() => {
     const api = axios.create({
       baseURL: "http://localhost:8000/",
@@ -16,59 +19,16 @@ function AdminMainPage() {
 
     api.get("/OES").then((res) => {
       console.log(res.data);
-      setOes(res.data);
+      setAllOES(res.data);
     });
   }, []);
 
-  // const OneSub = (props) => {
-  //   console.log(props.s);
-  //   return <></>;
-  // };
-
-  // const OneOe = (props) => {
-  //   const data = props.subs;
-  //   //     console.log(data);
-
-  //   let arr = [];
-
-  //   Object.entries(data).map(([key, value]) => {
-  //     data[key].map((d) => {
-  //       arr = [...arr, d];
-  //     });
-  //   });
-
-  //   console.log(arr);
-  //   return (
-  //     <>
-  //       {arr.map((d) => {
-  //         return <h1>{d.Name}</h1>;
-  //       })}
-  //     </>
-  //   );
-  // };
-
-  // const DeArray = (props) => {
-  //   const oess = props.data;
-  //   return (
-  //     <>
-  //       <h1>Superman</h1>
-  //       {oess.map((d) => {
-  //         return (
-  //           <>
-  //             <OneOe subs={d} />
-  //           </>
-  //         );
-  //       })}
-  //     </>
-  //   );
-  // };
-
   return (
-    <div>
+    <>
       <Center>
         <VStack marginBottom='15px' marginTop='15px'>
-          {oes &&
-            oes.map((singleOE) => {
+          {allOES &&
+            allOES.map((singleOE) => {
               return <OECard elective={singleOE} key={singleOE.id} />;
             })}
 
@@ -80,7 +40,7 @@ function AdminMainPage() {
           </Flex>
         </VStack>
       </Center>
-    </div>
+    </>
   );
 }
 
