@@ -11,9 +11,11 @@ import {
 } from "@chakra-ui/react";
 import { CloseIcon } from "@chakra-ui/icons";
 
-function SubjectCard() {
+function SubjectCard(props) {
+  console.log(props.subjects);
+
   return (
-    <div>
+    <>
       <Table variant='simple' margin='15px' size='sm'>
         <Thead>
           <Tr>
@@ -26,47 +28,27 @@ function SubjectCard() {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>OS</Td>
-            <Td>ABCDE</Td>
-            <Td>CSE</Td>
-            <Td>100</Td>
-            <Td>IOP</Td>
-            <Center>
-              <Td>
-                <CloseIcon color='red.400' cursor='pointer' />
-              </Td>
-            </Center>
-          </Tr>
+          {props.subjects &&
+            props.subjects.map((subject) => {
+              return (
+                <Tr>
+                  <Td>{subject.name}</Td>
+                  <Td>ABCDE</Td>
+                  <Td>{subject.departmentId}</Td>
+                  <Td>{subject.seats}</Td>
 
-          <Tr>
-            <Td>OS</Td>
-            <Td>ABCDE</Td>
-            <Td>CSE</Td>
-            <Td>100</Td>
-            <Td>IOP</Td>
-            <Center>
-              <Td>
-                <CloseIcon color='red.400' cursor='pointer' />
-              </Td>
-            </Center>
-          </Tr>
-
-          <Tr>
-            <Td>OS</Td>
-            <Td>ABCDE</Td>
-            <Td>CSE</Td>
-            <Td>100</Td>
-            <Td>IOuuuuuuuuuuuP</Td>
-            <Center>
-              <Td>
-                <CloseIcon color='red.400' cursor='pointer' />
-              </Td>
-            </Center>
-          </Tr>
+                  <Td>{subject.instructor}</Td>
+                  <Center>
+                    <Td>
+                      <CloseIcon color='red.400' cursor='pointer' />
+                    </Td>
+                  </Center>
+                </Tr>
+              );
+            })}
         </Tbody>
       </Table>
-    </div>
+    </>
   );
 }
 

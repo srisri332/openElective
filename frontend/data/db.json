@@ -27,6 +27,110 @@
 
 ],
 
+"SUBS":[
+
+  { 
+    "id":"47a93150-1072-411f-9fb5-71a2d9956ce9",
+    "datas" : [
+  {
+    "id": "07c2d99e-68b8-4e17-a9a3-0e47503ca60e",
+    "name": "CD",
+    "departmentId": "d758cc3f-0671-4737-9301-384cf65bc265",
+    "credits": 3,
+    "seats": 60,
+    "instructor": "",
+    "details": "string"
+  },
+  {
+    "id": "3b873e07-af61-4963-82bc-755d0f8bd2b6",
+    "name": "Digital Logic Design",
+    "departmentId": "8240ac93-4678-4d64-bd44-8ba070e4c0d1",
+    "credits": 3,
+    "seats": 60,
+    "instructor": "Viper Ramesh",
+    "details": "Very Easy Subject ma"
+  },
+  {
+    "id": "4e178fe3-d8fd-40e1-a8a4-7a673b247a5c",
+    "name": "Unethical Hacking",
+    "departmentId": "d758cc3f-0671-4737-9301-384cf65bc265",
+    "credits": 3,
+    "seats": 60,
+    "instructor": "Viper Ramesh",
+    "details": "Very Easy Subject ma"
+  }
+]
+
+  },
+ { 
+    "id":"2b44056a-8d06-4a93-8088-c2c41e077c28",
+    "datas" : [
+  {
+    "id": "07c2d99e-68b8-4e17-a9a3-0e47503ca60e",
+    "name": "CD",
+    "departmentId": "d758cc3f-0671-4737-9301-384cf65bc265",
+    "credits": 3,
+    "seats": 60,
+    "instructor": "",
+    "details": "string"
+  },
+  {
+    "id": "3b873e07-af61-4963-82bc-755d0f8bd2b6",
+    "name": "Digital Logic Design",
+    "departmentId": "8240ac93-4678-4d64-bd44-8ba070e4c0d1",
+    "credits": 3,
+    "seats": 60,
+    "instructor": "Viper Ramesh",
+    "details": "Very Easy Subject ma"
+  },
+  {
+    "id": "4e178fe3-d8fd-40e1-a8a4-7a673b247a5c",
+    "name": "Unethical Hacking",
+    "departmentId": "d758cc3f-0671-4737-9301-384cf65bc265",
+    "credits": 3,
+    "seats": 60,
+    "instructor": "Viper Ramesh",
+    "details": "Very Easy Subject ma"
+  }
+]
+
+  },
+ { 
+    "id":"f1e35197-c1f9-49b9-8b33-873475f36cfa",
+    "datas" : [
+  {
+    "id": "07c2d99e-68b8-4e17-a9a3-0e47503ca60e",
+    "name": "CD",
+    "departmentId": "d758c",
+    "credits": 3,
+    "seats": 60,
+    "instructor": "",
+    "details": "string"
+  },
+  {
+    "id": "3b873e07-af61-4963-82bc-755d0f8bd2b6",
+    "name": "Digital Logic Design",
+    "departmentId": "8240",
+    "credits": 3,
+    "seats": 60,
+    "instructor": "Viper Ramesh",
+    "details": "Very Easy Subject ma"
+  },
+  {
+    "id": "4e178fe3-d8fd-40e1-a8a4-7a673b247a5c",
+    "name": "Unethical Hacking",
+    "departmentId": "d758cc",
+    "credits": 3,
+    "seats": 60,
+    "instructor": "Viper Ramesh",
+    "details": "Very Easy Subject ma"
+  }
+]
+
+  }
+]
+,
+
 "STDS": [
       {
         "name": "anches",
