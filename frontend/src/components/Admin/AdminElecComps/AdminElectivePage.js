@@ -20,7 +20,6 @@ function AdminElectivePage() {
 
   return (
     <div>
-      AdminElectivePage
       <ButtonCards />
       {students && <SummaryCard studentData={students} />}
       <Center mt='10px' mb='10px'>

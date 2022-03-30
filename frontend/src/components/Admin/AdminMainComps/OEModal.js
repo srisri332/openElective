@@ -26,6 +26,7 @@ function OEModal() {
 
   //function that updates the total number of OES
   const { setAllOES } = useContext(OEContext);
+  const { electiveStatus } = useContext(OEContext);
 
   const api = axios.create({
     baseURL: "http://localhost:8000",
@@ -67,6 +68,7 @@ function OEModal() {
         bgColor='red.500'
         marginRight='10px'
         onClick={onOpen}
+        disabled={!electiveStatus}
         leftIcon={<AddIcon />}>
         ADD Elective
       </Button>

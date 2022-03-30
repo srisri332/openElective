@@ -10,6 +10,8 @@ import OEContext from "../../../contexts/OEContext";
 function AdminMainPage() {
   const { setAllOES } = useContext(OEContext);
   const { allOES } = useContext(OEContext);
+  const { electiveStatus } = useContext(OEContext);
+  const { setAllElectiveStatus } = useContext(OEContext);
 
   //this will intially get the data and update the global OES if there are any existing ones
   useEffect(() => {
@@ -23,6 +25,12 @@ function AdminMainPage() {
     });
   }, []);
 
+  const startAllotment = () => {
+    setAllElectiveStatus();
+    console.log("start elctive");
+    console.log(electiveStatus);
+  };
+
   return (
     <>
       <Center>
@@ -34,7 +42,11 @@ function AdminMainPage() {
 
           <Flex>
             <OEModal />
-            <Button leftIcon={<CheckIcon />} colorScheme='green'>
+            <Button
+              leftIcon={<CheckIcon />}
+              colorScheme='green'
+              disabled={!electiveStatus}
+              onClick={startAllotment}>
               Start Allotment
             </Button>
           </Flex>

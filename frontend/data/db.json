@@ -24,7 +24,6 @@
       "updatedOn": "2022-03-13T10:54:40.3167884",
       "updatedBy": "ADMIN"
     }
-    
   ],
   "SUBS": [
     {
@@ -64,7 +63,8 @@
       "datas": [
         {
           "id": "07c2d99e-68b8-4e17-a9a3-0e47503ca60e",
-          "name": "CD",
+          "name": "dwdm",
+
           "departmentId": "d758cc3f-0671-4737-9301-384cf65bc265",
           "credits": 3,
           "seats": 60,
@@ -73,7 +73,7 @@
         },
         {
           "id": "3b873e07-af61-4963-82bc-755d0f8bd2b6",
-          "name": "Digital Logic Design",
+          "name": "svm",
           "departmentId": "8240ac93-4678-4d64-bd44-8ba070e4c0d1",
           "credits": 3,
           "seats": 60,
@@ -82,7 +82,7 @@
         },
         {
           "id": "4e178fe3-d8fd-40e1-a8a4-7a673b247a5c",
-          "name": "Unethical Hacking",
+          "name": "ssvm",
           "departmentId": "d758cc3f-0671-4737-9301-384cf65bc265",
           "credits": 3,
           "seats": 60,
@@ -123,6 +123,7 @@
         }
       ]
     }
+   
   ],
   "STDS": [
     {

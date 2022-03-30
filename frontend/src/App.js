@@ -11,8 +11,8 @@ function App() {
     <Router>
       <div className='App'>
         {/* <LoginPage /> */}
-        <AdminPage />
-        {/* <StudentPage /> */}
+        {/* <AdminPage /> */}
+        <StudentPage />
       </div>
     </Router>
   );

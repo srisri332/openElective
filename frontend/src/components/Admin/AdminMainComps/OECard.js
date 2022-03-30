@@ -29,7 +29,7 @@ function OECard(props) {
         {props.elective.name}
       </Text>
       <SubjectCard subjects={subjects} />
-      <SubjectModal />
+      <SubjectModal electiveID={props.elective.id} />
     </Box>
   );
 }
