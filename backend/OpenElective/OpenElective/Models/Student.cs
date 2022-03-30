@@ -10,6 +10,8 @@
 
         public string Password { get; set; }
 
+     
+
         public float CGPA { get; set; }
 
         public int Backlogs { get; set; }

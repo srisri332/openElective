@@ -32,6 +32,11 @@ namespace OpenElective.Services
             return appDbContext.Subjects.FirstOrDefault(s => ((s.OpenElectiveId == openElectiveId) && (s.Id == subjectId)));
         }
 
+        public Subject Get(Guid subjectId)
+        {
+            return appDbContext.Subjects.FirstOrDefault(s => (s.Id == subjectId));
+        }
+
         public IEnumerable<Subject> GetAll(Guid openElectiveId)
         {
             return appDbContext.Subjects.Where(s => s.OpenElectiveId == openElectiveId).ToList();

@@ -13,10 +13,10 @@ namespace OpenElective.Models.DTOs.Subjects
         public int Credits { get; set; }
         public int Seats { get; set; }
 
+        public string Code { get; set; }
         public string Instructor { get; set; }
 
         public string Details{ get; set; }
-   
 
     }
 }

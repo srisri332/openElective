@@ -84,16 +84,17 @@ namespace OpenElective.Controllers
 
         // PUT api/<OpenElectivesController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] OpenElective.Models.OpenElective openElective)
+        public IActionResult Put(Guid id, [FromBody] UpdateOpenElectiveDTO openElectiveDTO)
         {
             try
             {
-                if (openElective == null)
+                if (openElectiveDTO == null)
                 {
-                    return BadRequest(openElective);
+                    return BadRequest(openElectiveDTO);
                 }
-
-                var updatedOE = openElectiveService.Update(openElective);
+                var oe=openElectiveService.Get(id);
+                oe.Name = openElectiveDTO.Name;
+                var updatedOE = openElectiveService.Update(oe);
                 return CreatedAtAction(nameof(Put), updatedOE);
 
             }

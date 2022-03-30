@@ -78,15 +78,40 @@ namespace OpenElective.Controllers
         }
 
         // PUT api/<SubjectsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{OEId}/{Id}")]
+        public IActionResult Put(Guid OEID,Guid Id, [FromBody] CreateSubjectDTO createSubjectDTO)
         {
+            try
+            {
+                if(createSubjectDTO == null)
+                {
+                    return BadRequest(createSubjectDTO);
+                }
+                var sub=mapper.Map<Subject>(createSubjectDTO);
+                var updatedSub=subjectService.Update(sub);
+                return CreatedAtAction(nameof(Put), updatedSub);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }      
         }
 
         // DELETE api/<SubjectsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{OEId}/{Id}")]
+        public IActionResult Delete(Guid OEId, Guid Id)
         {
+            try
+            {
+                var deleted = subjectService.Delete(OEId,Id);
+                return Ok(deleted);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

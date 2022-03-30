@@ -6,6 +6,8 @@ namespace OpenElective.Services.Interfaces
     {
         public Subject Get(Guid openElectiveId,Guid subjectId);
 
+        public Subject Get(Guid subjectId);
+
         public Subject Create(Subject subject);
 
         public Subject Update(Subject subject);

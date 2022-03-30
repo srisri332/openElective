@@ -11,9 +11,8 @@ namespace OpenElective.Models
         public DbSet<OpenElective> OpenElectives { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Department> Departments { get; set; }
-
         public DbSet<Student> Students { get; set; }
-
+        public DbSet<StudentChoice> StudentChoices { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -65,6 +64,7 @@ namespace OpenElective.Models
                  Name="Unethical Hacking",
                  Credits =3,
                  Seats=60,
+                 Code="S1",
                  DepartmentId=department1.Id,
                  OpenElectiveId=openElective1.Id,
                  Details="Very Easy Subject ma",
@@ -77,6 +77,8 @@ namespace OpenElective.Models
                 Name = "Old Product Development",
                 Credits = 3,
                 Seats = 60,
+                Code = "S2",
+
                 DepartmentId = department1.Id,
                 OpenElectiveId = openElective2.Id,
                 Details = "Very Easy Subject ma",
@@ -89,6 +91,8 @@ namespace OpenElective.Models
                 Name = "Digital Logic Design",
                 Credits = 3,
                 Seats = 60,
+                Code = "S3",
+
                 DepartmentId = department2.Id,
                 OpenElectiveId = openElective1.Id,
                 Details = "Very Easy Subject ma",
@@ -101,6 +105,8 @@ namespace OpenElective.Models
                 Name = "Basic Electronical Engg",
                 Credits = 3,
                 Seats = 60,
+                Code = "S4",
+
                 DepartmentId = department2.Id,
                 OpenElectiveId = openElective2.Id,
                 Details = "Very Easy Subject ma",
@@ -126,9 +132,46 @@ namespace OpenElective.Models
                 CGPA = 9.0f,
                 Backlogs = 0
             };
+
+            StudentChoice choice1 = new StudentChoice
+            {
+                Priority=1,
+                Id = Guid.NewGuid(),
+                RollNumber = "18211A05A4",
+                SubId =subject1.Id
+           
+            };
+            StudentChoice choice2 = new StudentChoice
+            {
+                Priority = 2,
+                Id = Guid.NewGuid(),
+                RollNumber = "18211A05A4",
+                SubId = subject2.Id,
+
+            };
+            StudentChoice choice3 = new StudentChoice
+            {
+                Priority = 1,
+                Id = Guid.NewGuid(),
+                RollNumber = "18211A05Z4",
+                SubId = subject1.Id
+
+            };
+            StudentChoice choice4 = new StudentChoice
+            {
+                Priority = 2,
+                Id = Guid.NewGuid(),
+                RollNumber = "18211A05Z4",
+                SubId = subject2.Id
+
+            };
+
+
             modelBuilder.Entity<Student>().HasData(student1, student2);
 
             modelBuilder.Entity<Subject>().HasData(subject2,subject1,subject3,subject4);
+            modelBuilder.Entity<StudentChoice>().HasData(choice1,choice2,choice3,choice4);
+            
            
         }
 

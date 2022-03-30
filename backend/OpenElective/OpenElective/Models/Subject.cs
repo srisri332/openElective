@@ -9,6 +9,7 @@
         public int Credits { get; set; }
         public int Seats { get; set; }
 
+        public string Code { get; set; }
         public Department Department { get; set; }
 
         public Guid DepartmentId { get; set; }
