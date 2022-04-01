@@ -40,8 +40,10 @@ function LoginPage() {
         }
       );
 
-      if (res.status === 201) {
-        navigate.push("/adminmainpage");
+      console.log(res.status);
+      if (res.status == 201) {
+        navigate("/admin/adminmainpage");
+        console.log("nive");
       }
     } catch (err) {
       if (!err?.response) {

@@ -304,77 +304,77 @@
       "roll": "millimetres (mm)",
       "sec": 2.4,
       "cgpa": "8.5",
-      "elec": "No"
+      "elec": "Yes"
     },
     {
       "name": "cnches",
       "roll": "millimetres (mm)",
       "sec": 4,
       "cgpa": "8.5",
-      "elec": "No"
+      "elec": "Yes"
     },
     {
       "name": "anches",
       "roll": "millimetres (mm)",
       "sec": 25.4,
       "cgpa": "8.5",
-      "elec": "No"
+      "elec": "Yes"
     },
     {
       "name": "bnches",
       "roll": "millimetres (mm)",
       "sec": 2.4,
       "cgpa": "8.5",
-      "elec": "No"
+      "elec": "Yes"
     },
     {
       "name": "cnches",
       "roll": "millimetres (mm)",
       "sec": 4,
       "cgpa": "8.5",
-      "elec": "No"
+      "elec": "Yes"
     },
     {
       "name": "anches",
       "roll": "millimetres (mm)",
       "sec": 25.4,
       "cgpa": "8.5",
-      "elec": "No"
+      "elec": "Yes"
     },
     {
       "name": "bnches",
       "roll": "millimetres (mm)",
       "sec": 2.4,
       "cgpa": "8.5",
-      "elec": "No"
+      "elec": "Yes"
     },
     {
       "name": "cnches",
       "roll": "millimetres (mm)",
       "sec": 4,
       "cgpa": "8.5",
-      "elec": "No"
+      "elec": "Yes"
     },
     {
       "name": "anches",
       "roll": "millimetres (mm)",
       "sec": 25.4,
       "cgpa": "8.5",
-      "elec": "No"
+      "elec": "Yes"
     },
     {
       "name": "bnches",
       "roll": "millimetres (mm)",
       "sec": 2.4,
       "cgpa": "8.5",
-      "elec": "No"
+      "elec": "Yes"
     },
     {
       "name": "cnches",
       "roll": "millimetres (mm)",
       "sec": 4,
       "cgpa": "8.5",
-      "elec": "No"
+      "elec": "Yes"
     }
   ],
   "LOGIN": [
@@ -384,9 +384,14 @@
       "password": "123"
     },
     {
-      "email": "jn@gmail.com",
-      "password": "jkbk",
-      "id": "qv-jMKw"
+      "email": "asdf@gmail.com",
+      "password": "superman",
+      "id": "dD940YC"
+    },
+    {
+      "email": "adfkajkl@gmail.com",
+      "password": "sisisi",
+      "id": "Yp5rqUs"
     }
   ]
 }

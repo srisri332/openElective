@@ -18,6 +18,7 @@ import {
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
 import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 function SummaryCard(props) {
   const data = React.useMemo(() => props.studentData, []);
@@ -78,7 +79,16 @@ function SummaryCard(props) {
         maxW='60vw'
         boxShadow='sm'
         bg='white'>
-        <Table {...getTableProps()}>
+        <ReactHTMLTableToExcel
+          id='test-table-xls-button'
+          className='download-table-xls-button'
+          table='table-to-xls'
+          filename='tablexls'
+          sheet='tablexls'
+          buttonText='Download as XLS'
+        />
+
+        <Table id='table-to-xls' {...getTableProps()}>
           <Thead>
             {headerGroups.map((headerGroup) => (
               <Tr {...headerGroup.getHeaderGroupProps()}>
