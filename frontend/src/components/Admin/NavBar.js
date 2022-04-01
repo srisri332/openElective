@@ -8,11 +8,11 @@ function NavBar() {
     <div>
       <Box bg='#4299E1' w='100%' p={5} color='white'>
         <Flex>
-          <Link to='/adminmainpage'>
+          <Link to='/admin/adminmainpage'>
             <Image src={gear} alt='logo' width='30px' marginRight='17px' />
           </Link>
           <div>
-            <Link to='/adminmainpage'>
+            <Link to='/admin/adminmainpage'>
               <Text fontSize='lg' fontWeight='500'>
                 Administrator
               </Text>
@@ -21,10 +21,10 @@ function NavBar() {
           <Spacer />
 
           <div>
-            <Link to='/adminmainpage' style={{ marginRight: "10px" }}>
+            <Link to='/admin/adminmainpage' style={{ marginRight: "10px" }}>
               Main Page
             </Link>
-            <Link to='/adminelecpage'>Elective Page</Link>
+            <Link to='/admin/adminelecpage'>Elective Page</Link>
           </div>
         </Flex>
       </Box>

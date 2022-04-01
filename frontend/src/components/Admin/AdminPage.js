@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes, Switch } from "react-router-dom";
 import AdminMainPage from "./AdminMainComps/AdminMainPage";
 import AdminElectivePage from "./AdminElecComps/AdminElectivePage";
 import NavBar from "./NavBar";
@@ -10,18 +10,18 @@ function AdminPage() {
   return (
     <div>
       <NavBar />
-      <Switch>
-        <Route path='/adminmainpage'>
-          <OEProvider>
-            <SubjectProvider>
-              <AdminMainPage />
-            </SubjectProvider>
-          </OEProvider>
-        </Route>
-        <Route path='/adminelecpage'>
-          <AdminElectivePage />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route
+          path='adminmainpage'
+          element={
+            <OEProvider>
+              <SubjectProvider>
+                <AdminMainPage />{" "}
+              </SubjectProvider>
+            </OEProvider>
+          }></Route>
+        <Route path='adminelecpage' element={<AdminElectivePage />}></Route>
+      </Routes>
     </div>
   );
 }

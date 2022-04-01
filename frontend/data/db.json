@@ -64,7 +64,6 @@
         {
           "id": "07c2d99e-68b8-4e17-a9a3-0e47503ca60e",
           "name": "dwdm",
-
           "departmentId": "d758cc3f-0671-4737-9301-384cf65bc265",
           "credits": 3,
           "seats": 60,
@@ -123,7 +122,6 @@
         }
       ]
     }
-   
   ],
   "STDS": [
     {
@@ -377,6 +375,18 @@
       "sec": 4,
       "cgpa": "8.5",
       "elec": "No"
+    }
+  ],
+  "LOGIN": [
+    {
+      "id": "ab12",
+      "email": "superman@gmail.com",
+      "password": "123"
+    },
+    {
+      "email": "jn@gmail.com",
+      "password": "jkbk",
+      "id": "qv-jMKw"
     }
   ]
 }
