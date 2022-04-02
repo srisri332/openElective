@@ -9,28 +9,25 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  FormControl,
-  Input,
+  Text,
   useToast,
-  FormLabel,
 } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import OEContext from "../../../contexts/OEContext";
+import { DeleteIcon } from "@chakra-ui/icons";
 
-function OEModal() {
+function DelOEModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef();
-  const [inputOE, setInputOE] = useState(null);
 
   //this fucntion is used for showing toast messages
   const toast = useToast();
   const toggleToast = () => {
     return toast({
-      title: "OE created.",
-      description: `Successfully added ${inputOE}`,
-      status: "success",
+      title: `OE Deleted Successfully`,
+      description: ` `,
+      status: "error",
       duration: 6000,
       isClosable: true,
     });
@@ -38,7 +35,6 @@ function OEModal() {
 
   //function that updates the total number of OES
   const { setAllOES } = useContext(OEContext);
-  const { electiveStatus } = useContext(OEContext);
 
   const api = axios.create({
     baseURL: "https://localhost:7006",
@@ -53,11 +49,11 @@ function OEModal() {
   };
 
   //This function is used to send the post request to add OE card
-  const addOE = async () => {
-    let res = await api.post("/api/OpenElectives", { name: inputOE });
+  const deleteOE = async () => {
+    let res = await api.delete("/api/OpenElectives/" + props.electiveID);
 
     console.log(res.status);
-    if (res.status == 201) {
+    if (res.status == 200) {
       updateAllOES();
     }
     toggleToast();
@@ -65,27 +61,12 @@ function OEModal() {
   };
 
   const cancelAddOE = () => {
-    setInputOE(null);
     onClose();
-  };
-
-  const changeOE = (e) => {
-    setInputOE(e.target.value);
   };
 
   return (
     <>
-      <Button
-        variant='outline'
-        color='white'
-        borderColor='red'
-        bgColor='red.500'
-        marginRight='10px'
-        onClick={onOpen}
-        // disabled={!electiveStatus}
-        leftIcon={<AddIcon />}>
-        ADD Elective
-      </Button>
+      <DeleteIcon color='red.300' cursor='pointer' onClick={onOpen} />
 
       <Modal
         closeOnOverlayClick={false}
@@ -94,23 +75,15 @@ function OEModal() {
         onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Enter OE Details</ModalHeader>
+          <ModalHeader>Confirmation</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={4}>
-            <FormControl isRequired>
-              <FormLabel>Name</FormLabel>
-              <Input
-                ref={initialRef}
-                placeholder='Name'
-                name='OEName'
-                onChange={changeOE}
-              />
-            </FormControl>
+            <Text>Are you sure you want to delete the Open Elective?</Text>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='green' mr={3} onClick={addOE}>
-              Submit
+            <Button colorScheme='red' mr={3} onClick={deleteOE}>
+              Delete
             </Button>
             <Button onClick={cancelAddOE}>Cancel</Button>
           </ModalFooter>
@@ -120,4 +93,4 @@ function OEModal() {
   );
 }
 
-export default OEModal;
+export default DelOEModal;

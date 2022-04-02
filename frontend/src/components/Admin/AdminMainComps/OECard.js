@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
 import SubjectModal from "./SubjectModal";
 import SubjectCard from "./SubjectCard";
 import axios from "axios";
+import DelOEModal from "./DelOEModal";
 
 function OECard(props) {
   const [subjects, setSubjects] = useState(null);
 
   useEffect(() => {
     const api = axios.create({
-      baseURL: "http://localhost:8000",
+      baseURL: "https://localhost:7006",
     });
 
-    api.get("/SUBS/" + props.elective.id).then((res) => {
+    api.get("/api/Subjects/" + props.elective.id).then((res) => {
       // console.log(res.data);
-      setSubjects(res.data.datas);
+      setSubjects(res.data);
     });
   }, []);
 
@@ -25,10 +26,15 @@ function OECard(props) {
       overflow='hidden'
       padding='30px'
       bg='white'>
-      <Text fontSize='lg' fontWeight='500'>
-        {props.elective.name}
-      </Text>
-      <SubjectCard subjects={subjects} />
+      <Flex>
+        <Text fontSize='lg' fontWeight='500'>
+          {props.elective.name}
+        </Text>
+        <Spacer />
+        <DelOEModal electiveID={props.elective.id} />
+      </Flex>
+
+      <SubjectCard subjects={subjects} electiveID={props.elective.id} />
       <SubjectModal electiveID={props.elective.id} />
     </Box>
   );

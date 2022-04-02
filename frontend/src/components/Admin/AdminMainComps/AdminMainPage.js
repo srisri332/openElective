@@ -16,10 +16,10 @@ function AdminMainPage() {
   //this will intially get the data and update the global OES if there are any existing ones
   useEffect(() => {
     const api = axios.create({
-      baseURL: "http://localhost:8000/",
+      baseURL: "https://localhost:7006",
     });
 
-    api.get("/OES").then((res) => {
+    api.get("/api/OpenElectives").then((res) => {
       console.log(res.data);
       setAllOES(res.data);
     });

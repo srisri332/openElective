@@ -79,6 +79,7 @@ function SummaryCard(props) {
         maxW='60vw'
         boxShadow='sm'
         bg='white'>
+        
         <ReactHTMLTableToExcel
           id='test-table-xls-button'
           className='download-table-xls-button'
