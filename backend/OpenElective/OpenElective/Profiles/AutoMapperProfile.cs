@@ -5,6 +5,7 @@ using OpenElective.Models.DTOs.OpenElectives;
 using OpenElective.Models.DTOs.Students;
 using OpenElective.Models.DTOs;
 using OpenElective.Models.DTOs.StudentChoices;
+using OpenElective.Models.DTOs.Admin;
 
 namespace OpenElective.Profiles
 {
@@ -21,6 +22,7 @@ namespace OpenElective.Profiles
             CreateMap<Student,GetStudentDTO>();
             CreateMap<StudentChoice, GetStudentChoiceDTO>();
             CreateMap<CreateStudentChoiceDTO, StudentChoice>();
+            CreateMap<AdminAuthDTO, Admin>();
         }
     }
 }

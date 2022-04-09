@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+
 namespace OpenElective.Models
 {
     public class AppDbContext:DbContext
@@ -8,11 +9,15 @@ namespace OpenElective.Models
         {
 
         }
+        
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<OpenElective> OpenElectives { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentChoice> StudentChoices { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -23,7 +28,14 @@ namespace OpenElective.Models
             modelBuilder.Entity<Department>().HasMany<Subject>(o => o.Subjects)
                 .WithOne(s => s.Department);
 
+            
 
+            Admin admin = new Admin
+            {
+                Id = Guid.NewGuid(),
+                Name = "admin",
+                Password = BCrypt.Net.BCrypt.HashPassword("Admin@1234")
+            };
 
             Department department1 = new Department
             {
@@ -166,7 +178,7 @@ namespace OpenElective.Models
 
             };
 
-
+            modelBuilder.Entity<Admin>().HasData(admin);
             modelBuilder.Entity<Student>().HasData(student1, student2);
 
             modelBuilder.Entity<Subject>().HasData(subject2,subject1,subject3,subject4);
