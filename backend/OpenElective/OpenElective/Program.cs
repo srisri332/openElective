@@ -31,7 +31,7 @@ builder.Services.AddScoped<IOpenElectiveService,OpenElectiveService>();
 builder.Services.AddScoped<ISubjectService, SubjectService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IStudentChoiceService, StudentChoiceService>();
-
+builder.Services.AddScoped<IAdminService, AdminService>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddControllers();

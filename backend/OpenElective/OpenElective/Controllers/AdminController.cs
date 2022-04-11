@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using OpenElective.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using OpenElective.Models.DTOs.Admin;
 using OpenElective.Services.Interfaces;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OpenElective.Controllers
 {
@@ -13,20 +11,45 @@ namespace OpenElective.Controllers
     public class AdminController : ControllerBase
     {
         private readonly IAdminService adminService;
-        private readonly IMapper mapper; 
-        public AdminController(IAdminService adminService, IMapper mapper)
-        {  
-            this.adminService = adminService;
-            this.mapper = mapper;
-        }
-        [AllowAnonymous]
-        [HttpPost("auth")]
-        public IActionResult Authenticate([FromBody] AdminAuthDTO admin)
+
+        public AdminController(IAdminService adminService)
         {
-            var token = adminService.Authenticate(admin.Name, admin.Password);
+            this.adminService = adminService;
+        }
+        // GET: api/<AdminController>
+        [HttpGet]
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
+        // GET api/<AdminController>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
+        }
+
+        // POST api/<AdminController>
+        [HttpPost("auth")]
+        public IActionResult Post([FromBody] AdminAuthDTO adminAuthDTO)
+        {
+            var token = adminService.Authenticate(adminAuthDTO.Name, adminAuthDTO.Password);
             if (token == null)
                 return Unauthorized();
             return Ok(token);
+        }
+
+        // PUT api/<AdminController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE api/<AdminController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
         }
     }
 }

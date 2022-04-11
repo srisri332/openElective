@@ -23,6 +23,7 @@ namespace OpenElective.Profiles
             CreateMap<StudentChoice, GetStudentChoiceDTO>();
             CreateMap<CreateStudentChoiceDTO, StudentChoice>();
             CreateMap<AdminAuthDTO, Admin>();
+            CreateMap<StudentLoginDTO, Student>();
         }
     }
 }

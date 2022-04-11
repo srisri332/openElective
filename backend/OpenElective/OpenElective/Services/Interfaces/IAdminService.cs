@@ -2,6 +2,6 @@
 {
     public interface IAdminService
     {
-        public string Authenticate(Guid Id, string password);
+        public string Authenticate(string name, string password);
     }
 }

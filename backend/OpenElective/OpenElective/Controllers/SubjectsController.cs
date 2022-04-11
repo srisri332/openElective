@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpenElective.Models;
 using OpenElective.Models.DTOs.Subjects;
@@ -8,6 +9,7 @@ using OpenElective.Services.Interfaces;
 
 namespace OpenElective.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class SubjectsController : ControllerBase
@@ -20,6 +22,7 @@ namespace OpenElective.Controllers
             this.subjectService = subjectService;
         }
         // GET: api/<SubjectsController>
+        [AllowAnonymous]
         [HttpGet("{OEId}")]
         public IActionResult Get(Guid OEId)
         {
@@ -37,6 +40,7 @@ namespace OpenElective.Controllers
         }
 
         // GET api/<SubjectsController>/5
+        [AllowAnonymous]
         [HttpGet("{OEId}/{Id}")]
         public IActionResult Get(Guid OEId,Guid Id)
         {

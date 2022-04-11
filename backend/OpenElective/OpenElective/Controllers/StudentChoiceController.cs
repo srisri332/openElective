@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using OpenElective.Models;
 using OpenElective.Models.DTOs.StudentChoices;
 using OpenElective.Services.Interfaces;
+using System.Linq;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -79,11 +81,18 @@ namespace OpenElective.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] CreateStudentChoiceDTO createStudentChoiceDTO)
         {
+
             try
             {
                 if (createStudentChoiceDTO == null)
                 {
                     return BadRequest(createStudentChoiceDTO);
+                }
+                var claimsIdentity=User.Identity as ClaimsIdentity;
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                if (IdClaim.Value.ToString() != createStudentChoiceDTO.RollNumber.ToString())
+                {
+                    return Forbid();
                 }
                 var sc=mapper.Map<StudentChoice>(createStudentChoiceDTO);
                 sc.Id = Guid.NewGuid();
@@ -107,6 +116,12 @@ namespace OpenElective.Controllers
                 if (createStudentChoiceDTO == null)
                 {
                     return BadRequest(createStudentChoiceDTO);
+                }
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                if (IdClaim.Value.ToString() != createStudentChoiceDTO.RollNumber.ToString())
+                {
+                    return Forbid();
                 }
                 var sc = mapper.Map<StudentChoice>(createStudentChoiceDTO);
                 var created = studentChoiceService.Update(sc);

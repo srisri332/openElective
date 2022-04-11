@@ -45,11 +45,9 @@ namespace OpenElective.Controllers
                 var student = studentService.Get(RollNumber);
                 var studentDTO = mapper.Map<GetStudentDTO>(student);
                 return Ok(studentDTO);
-
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -90,6 +88,15 @@ namespace OpenElective.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [HttpPost("auth")]
+        public IActionResult Authenticate([FromBody] StudentLoginDTO studentLoginDTO)
+        {
+            var token = studentService.Authenticate(studentLoginDTO.RollNumber, studentLoginDTO.Password);
+            if (token == null)
+                return Unauthorized();
+            return Ok(token);
         }
     }
 }

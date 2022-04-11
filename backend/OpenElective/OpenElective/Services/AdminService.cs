@@ -2,6 +2,7 @@
 using OpenElective.Models;
 using OpenElective.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace OpenElective.Services
@@ -13,18 +14,23 @@ namespace OpenElective.Services
         {
             this.appDbContext = appDbContext;
         }
-        public string Authenticate(Guid Id, string password)
+        public string Authenticate(string name, string password)
         {
-            Admin account = appDbContext.Admins.SingleOrDefault(a => a.Id == id);
+            Admin account = appDbContext.Admins.FirstOrDefault(a => a.Name == name);
             if (account == null)
                 return null;
-            bool res = BCrypt.Net.BCrypt.Verify(password, account.Password);
-            if(!res)
+            if(account.Password != password)
+            {
                 return null;
+            }
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes("Kurzgesagt – In a Nutshell");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
+                Subject = new ClaimsIdentity(
+                    new Claim[] {
+                        new Claim(ClaimTypes.Role,account.Name.ToString())
+                    }),
                 Expires = DateTime.Now.AddHours(10),
                 SigningCredentials =
                 new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256)

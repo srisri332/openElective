@@ -3,11 +3,13 @@ using OpenElective.Services.Interfaces;
 using AutoMapper;
 using OpenElective.Models.DTOs.OpenElectives;
 using OpenElective.Models;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OpenElective.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class OpenElectivesController : ControllerBase
@@ -21,6 +23,7 @@ namespace OpenElective.Controllers
             this.mapper = mapper;
         }
         // GET: api/<OpenElectivesController>
+       
         [HttpGet]
         public IActionResult Get()
         {
@@ -37,6 +40,7 @@ namespace OpenElective.Controllers
         }
 
         // GET api/<OpenElectivesController>/5
+       
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {

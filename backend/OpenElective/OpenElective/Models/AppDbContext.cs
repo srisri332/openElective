@@ -34,7 +34,7 @@ namespace OpenElective.Models
             {
                 Id = Guid.NewGuid(),
                 Name = "admin",
-                Password = BCrypt.Net.BCrypt.HashPassword("Admin@1234")
+                Password = "admin"
             };
 
             Department department1 = new Department
