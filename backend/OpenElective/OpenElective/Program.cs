@@ -18,8 +18,9 @@ builder.Services.AddCors(options =>
                           builder.WithOrigins("http://localhost:3000",
                                               "http://www.contoso.com")
                                                 .AllowAnyHeader()
-                                                  .AllowAnyMethod();
-                          ;
+                                                .AllowAnyMethod()
+                                                .AllowCredentials();
+                          
                       });
 });
 
