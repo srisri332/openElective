@@ -4,12 +4,13 @@ using AutoMapper;
 using OpenElective.Models.DTOs.OpenElectives;
 using OpenElective.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OpenElective.Controllers
 {
-    
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OpenElectivesController : ControllerBase
@@ -23,7 +24,7 @@ namespace OpenElective.Controllers
             this.mapper = mapper;
         }
         // GET: api/<OpenElectivesController>
-       
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
         {
@@ -40,7 +41,7 @@ namespace OpenElective.Controllers
         }
 
         // GET api/<OpenElectivesController>/5
-       
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
@@ -59,6 +60,7 @@ namespace OpenElective.Controllers
         }
 
         // POST api/<OpenElectivesController>
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Post([FromBody] CreateOpenElectiveDTO openElective)
         {
@@ -67,6 +69,12 @@ namespace OpenElective.Controllers
                 if(openElective == null)
                 {
                     return BadRequest(openElective);
+                }
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
+                if (IdClaim.Value.ToString() != "admin")
+                {
+                    return Forbid();
                 }
                 var OE=mapper.Map<OpenElective.Models.OpenElective>(openElective);
                 OE.Id = Guid.NewGuid();
@@ -87,6 +95,9 @@ namespace OpenElective.Controllers
         }
 
         // PUT api/<OpenElectivesController>/5
+
+        [Authorize(Roles = "admin")]
+
         [HttpPut("{id}")]
         public IActionResult Put(Guid id, [FromBody] UpdateOpenElectiveDTO openElectiveDTO)
         {
@@ -95,6 +106,12 @@ namespace OpenElective.Controllers
                 if (openElectiveDTO == null)
                 {
                     return BadRequest(openElectiveDTO);
+                }
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
+                if (IdClaim.Value.ToString() != "admin")
+                {
+                    return Forbid();
                 }
                 var oe=openElectiveService.Get(id);
                 oe.Name = openElectiveDTO.Name;
@@ -110,17 +127,24 @@ namespace OpenElective.Controllers
         }
 
         // DELETE api/<OpenElectivesController>/5
+        [Authorize(Roles = "admin")]
+
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             try
             {
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                if (IdClaim.Value.ToString() != "admin")
+                {
+                    return Forbid();
+                }
                 var deleted=openElectiveService.Delete(id);
                 return Ok(deleted);
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

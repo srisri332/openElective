@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpenElective.Models;
 using OpenElective.Models.DTOs.StudentChoices;
@@ -10,6 +11,7 @@ using System.Security.Claims;
 
 namespace OpenElective.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentChoiceController : ControllerBase
@@ -89,7 +91,7 @@ namespace OpenElective.Controllers
                     return BadRequest(createStudentChoiceDTO);
                 }
                 var claimsIdentity=User.Identity as ClaimsIdentity;
-                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
                 if (IdClaim.Value.ToString() != createStudentChoiceDTO.RollNumber.ToString())
                 {
                     return Forbid();
@@ -118,7 +120,7 @@ namespace OpenElective.Controllers
                     return BadRequest(createStudentChoiceDTO);
                 }
                 var claimsIdentity = User.Identity as ClaimsIdentity;
-                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
                 if (IdClaim.Value.ToString() != createStudentChoiceDTO.RollNumber.ToString())
                 {
                     return Forbid();

@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using OpenElective.Models;
 using OpenElective.Models.DTOs.Subjects;
 using OpenElective.Services.Interfaces;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OpenElective.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class SubjectsController : ControllerBase
@@ -59,6 +60,7 @@ namespace OpenElective.Controllers
         }
 
         // POST api/<SubjectsController>
+        [Authorize(Roles = "Admin")]
         [HttpPost("{OEId}")]
         public IActionResult Post(Guid OEId, [FromBody] CreateSubjectDTO createSubject)
         {
@@ -68,6 +70,7 @@ namespace OpenElective.Controllers
                 {
                     return BadRequest();
                 }
+                
                 var sub=mapper.Map<Subject>(createSubject);
                 sub.Id = Guid.NewGuid();
                 sub.OpenElectiveId = OEId;
@@ -82,6 +85,7 @@ namespace OpenElective.Controllers
         }
 
         // PUT api/<SubjectsController>/5
+        [Authorize(Roles = "Admin")]
         [HttpPut("{OEId}/{Id}")]
         public IActionResult Put(Guid OEID,Guid Id, [FromBody] CreateSubjectDTO createSubjectDTO)
         {
@@ -91,7 +95,8 @@ namespace OpenElective.Controllers
                 {
                     return BadRequest(createSubjectDTO);
                 }
-                var sub=mapper.Map<Subject>(createSubjectDTO);
+                
+                var sub =mapper.Map<Subject>(createSubjectDTO);
                 var updatedSub=subjectService.Update(sub);
                 return CreatedAtAction(nameof(Put), updatedSub);
             }
@@ -103,6 +108,7 @@ namespace OpenElective.Controllers
         }
 
         // DELETE api/<SubjectsController>/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{OEId}/{Id}")]
         public IActionResult Delete(Guid OEId, Guid Id)
         {

@@ -29,8 +29,7 @@ namespace OpenElective.Services
             {
                 Subject = new ClaimsIdentity(
                     new Claim[] {
-                        new Claim(ClaimTypes.Name,student.RollNumber.ToString()) ,
-                        new Claim(ClaimTypes.Role,student.Name.ToString())
+                        new Claim(ClaimTypes.Role,student.RollNumber)
                     }),
                 Expires = DateTime.Now.AddHours(1),
                 SigningCredentials =
