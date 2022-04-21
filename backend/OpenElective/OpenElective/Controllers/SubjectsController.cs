@@ -10,7 +10,7 @@ using System.Security.Claims;
 
 namespace OpenElective.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SubjectsController : ControllerBase
@@ -60,7 +60,7 @@ namespace OpenElective.Controllers
         }
 
         // POST api/<SubjectsController>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost("{OEId}")]
         public IActionResult Post(Guid OEId, [FromBody] CreateSubjectDTO createSubject)
         {
@@ -70,7 +70,12 @@ namespace OpenElective.Controllers
                 {
                     return BadRequest();
                 }
-                
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
+                if (IdClaim.Value.ToString() != "admin")
+                {
+                    return Forbid();
+                }
                 var sub=mapper.Map<Subject>(createSubject);
                 sub.Id = Guid.NewGuid();
                 sub.OpenElectiveId = OEId;
@@ -85,7 +90,7 @@ namespace OpenElective.Controllers
         }
 
         // PUT api/<SubjectsController>/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPut("{OEId}/{Id}")]
         public IActionResult Put(Guid OEID,Guid Id, [FromBody] CreateSubjectDTO createSubjectDTO)
         {
@@ -95,7 +100,12 @@ namespace OpenElective.Controllers
                 {
                     return BadRequest(createSubjectDTO);
                 }
-                
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
+                if (IdClaim.Value.ToString() != "admin")
+                {
+                    return Forbid();
+                }
                 var sub =mapper.Map<Subject>(createSubjectDTO);
                 var updatedSub=subjectService.Update(sub);
                 return CreatedAtAction(nameof(Put), updatedSub);
@@ -108,12 +118,18 @@ namespace OpenElective.Controllers
         }
 
         // DELETE api/<SubjectsController>/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpDelete("{OEId}/{Id}")]
         public IActionResult Delete(Guid OEId, Guid Id)
         {
             try
             {
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
+                if (IdClaim.Value.ToString() != "admin")
+                {
+                    return Forbid();
+                }
                 var deleted = subjectService.Delete(OEId,Id);
                 return Ok(deleted);
             }
