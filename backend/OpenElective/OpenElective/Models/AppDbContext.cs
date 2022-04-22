@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace OpenElective.Models
 {
@@ -8,11 +9,15 @@ namespace OpenElective.Models
         {
 
         }
+        
         public DbSet<OpenElective> OpenElectives { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<Department> Departments { get; set; }
-
         public DbSet<Student> Students { get; set; }
+        public DbSet<StudentChoice> StudentChoices { get; set; }
+        public DbSet<Details> Details { get; set; }
+
+        public DbSet<Allotment> Allotments { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,24 +26,52 @@ namespace OpenElective.Models
             modelBuilder.Entity<OpenElective>().HasMany<Subject>(o => o.Subjects)
                 .WithOne(s => s.OpenElective);
 
-            modelBuilder.Entity<Department>().HasMany<Subject>(o => o.Subjects)
-                .WithOne(s => s.Department);
+            
 
 
-
-            Department department1 = new Department
+            Details details = new Details
             {
-                Id = Guid.NewGuid(),
-                Name = "CSE",
+                Id = 1,
+                Name = "BVRIT",
+                IsStarted = false,
+                IsCompleted = false,
+                Date = DateTime.Now.ToString("ddMMyyyy", CultureInfo.InvariantCulture)
             };
+            
+            //Department department1 = new Department
+            //{
+            //    Id = "CSE",
+            //    Name = "CSE",
+            //};
 
-            Department department2 = new Department
-            {
-                Id = Guid.NewGuid(),
-                Name = "ECE",
-            };
+            //Department department2 = new Department
+            //{
+            //    Id = "ECE",
+            //    Name = "ECE",
+            //};
+            //Department department3 = new Department
+            //{
+            //    Id = "MEC",
+            //    Name = "Mechanical",
+            //};
 
-            modelBuilder.Entity<Department>().HasData(department1,department2);
+            //Department department4 = new Department
+            //{
+            //    Id = "CHE",
+            //    Name = "Chemical",
+            //};
+            //Department department5 = new Department
+            //{
+            //    Id = "BME",
+            //    Name = "BioMedical",
+            //};
+            //Department department6 = new Department
+            //{
+            //    Id = "EEE",
+            //    Name = "Electrical",
+            //};
+            
+            //modelBuilder.Entity<Department>().HasData(department1,department2,department3,department4,department5,department6);
             OpenElective openElective1 = new OpenElective
             {
                 Id = Guid.NewGuid(),
@@ -65,7 +98,8 @@ namespace OpenElective.Models
                  Name="Unethical Hacking",
                  Credits =3,
                  Seats=60,
-                 DepartmentId=department1.Id,
+                 Code="S1",
+                 DepartmentId="CSE",
                  OpenElectiveId=openElective1.Id,
                  Details="Very Easy Subject ma",
                  Instructor="Viper Ramesh",
@@ -77,7 +111,9 @@ namespace OpenElective.Models
                 Name = "Old Product Development",
                 Credits = 3,
                 Seats = 60,
-                DepartmentId = department1.Id,
+                Code = "S2",
+
+                DepartmentId = "CSE",
                 OpenElectiveId = openElective2.Id,
                 Details = "Very Easy Subject ma",
                 Instructor = "Viper Ramesh",
@@ -89,7 +125,9 @@ namespace OpenElective.Models
                 Name = "Digital Logic Design",
                 Credits = 3,
                 Seats = 60,
-                DepartmentId = department2.Id,
+                Code = "S3",
+
+                DepartmentId = "ECE",
                 OpenElectiveId = openElective1.Id,
                 Details = "Very Easy Subject ma",
                 Instructor = "Viper Ramesh",
@@ -101,7 +139,9 @@ namespace OpenElective.Models
                 Name = "Basic Electronical Engg",
                 Credits = 3,
                 Seats = 60,
-                DepartmentId = department2.Id,
+                Code = "S4",
+
+                DepartmentId = "EEE",
                 OpenElectiveId = openElective2.Id,
                 Details = "Very Easy Subject ma",
                 Instructor = "Viper Ramesh",
@@ -115,7 +155,8 @@ namespace OpenElective.Models
                 Name = "Mark Zukerberg",
                 Password = "facebook",
                 CGPA = 8.0f,
-                Backlogs=0
+                Backlogs=0,
+                Elected=true,
             };
             Student student2 = new Student
             {
@@ -124,12 +165,56 @@ namespace OpenElective.Models
                 Name = "Bill Gates",
                 Password = "microsoft",
                 CGPA = 9.0f,
-                Backlogs = 0
+                Backlogs = 0,
+                Elected=true,
             };
-            modelBuilder.Entity<Student>().HasData(student1, student2);
 
-            modelBuilder.Entity<Subject>().HasData(subject2,subject1,subject3,subject4);
+            Student admin = new Student
+            {
+                Id = Guid.NewGuid(),
+                RollNumber = "admin",
+                Name = "Admin",
+                Password = "admin",
+
+            };
+
+            StudentChoice choice1 = new StudentChoice
+            {
+                Priority=1,
+                Id = Guid.NewGuid(),
+                RollNumber = "18211A05A4",
+                SubId =subject1.Id
            
+            };
+            StudentChoice choice2 = new StudentChoice
+            {
+                Priority = 2,
+                Id = Guid.NewGuid(),
+                RollNumber = "18211A05A4",
+                SubId = subject2.Id,
+
+            };
+            StudentChoice choice3 = new StudentChoice
+            {
+                Priority = 1,
+                Id = Guid.NewGuid(),
+                RollNumber = "18211A05Z4",
+                SubId = subject1.Id
+
+            };
+            StudentChoice choice4 = new StudentChoice
+            {
+                Priority = 2,
+                Id = Guid.NewGuid(),
+                RollNumber = "18211A05Z4",
+                SubId = subject2.Id
+
+            };
+
+            modelBuilder.Entity<Student>().HasData(student1, student2,admin);
+            modelBuilder.Entity<Subject>().HasData(subject2,subject1,subject3,subject4);
+            modelBuilder.Entity<StudentChoice>().HasData(choice1,choice2,choice3,choice4);
+            modelBuilder.Entity<Details>().HasData(details);
         }
 
     }

@@ -45,15 +45,41 @@ namespace OpenElective.Controllers
                 var student = studentService.Get(RollNumber);
                 var studentDTO = mapper.Map<GetStudentDTO>(student);
                 return Ok(studentDTO);
-
             }
             catch (Exception)
             {
-
+                throw;
+            }
+        }
+        [HttpGet("Filled")]
+        public IActionResult GetFilled()
+        {
+            try
+            {
+                var all = studentService.GetFilled();
+                var allDTO = mapper.Map<IEnumerable<GetStudentDTO>>(all);
+                return Ok(allDTO);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
 
+        [HttpGet("Unfilled")]
+        public IActionResult GetUnfilled()
+        {
+            try
+            {
+                var all = studentService.GetUnFilled();
+                var allDTO = mapper.Map<IEnumerable<GetStudentDTO>>(all);
+                return Ok(allDTO);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         // POST api/<StudentController>
         [HttpPost]
         public IActionResult Post([FromBody] CreateStudentDTO createStudentDTO)
@@ -90,6 +116,15 @@ namespace OpenElective.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [HttpPost("auth")]
+        public IActionResult Authenticate([FromBody] StudentLoginDTO studentLoginDTO)
+        {
+            var token = studentService.Authenticate(studentLoginDTO.RollNumber, studentLoginDTO.Password);
+            if (token == null)
+                return Unauthorized();
+            return Ok(token);
         }
     }
 }
