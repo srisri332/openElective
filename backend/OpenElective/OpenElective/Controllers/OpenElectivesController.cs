@@ -135,7 +135,7 @@ namespace OpenElective.Controllers
             try
             {
                 var claimsIdentity = User.Identity as ClaimsIdentity;
-                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
                 if (IdClaim.Value.ToString() != "admin")
                 {
                     return Forbid();

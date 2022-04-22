@@ -12,7 +12,6 @@ namespace OpenElective.Models
         
         public DbSet<OpenElective> OpenElectives { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<Department> Departments { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentChoice> StudentChoices { get; set; }
         public DbSet<Details> Details { get; set; }
@@ -25,8 +24,7 @@ namespace OpenElective.Models
             modelBuilder.Entity<OpenElective>().HasMany<Subject>(o => o.Subjects)
                 .WithOne(s => s.OpenElective);
 
-            modelBuilder.Entity<Department>().HasMany<Subject>(o => o.Subjects)
-                .WithOne(s => s.Department);
+            
 
 
             Details details = new Details
@@ -38,19 +36,40 @@ namespace OpenElective.Models
                 Date = DateTime.Now.ToString("ddMMyyyy", CultureInfo.InvariantCulture)
             };
             
-            Department department1 = new Department
-            {
-                Id = Guid.NewGuid(),
-                Name = "CSE",
-            };
+            //Department department1 = new Department
+            //{
+            //    Id = "CSE",
+            //    Name = "CSE",
+            //};
 
-            Department department2 = new Department
-            {
-                Id = Guid.NewGuid(),
-                Name = "ECE",
-            };
+            //Department department2 = new Department
+            //{
+            //    Id = "ECE",
+            //    Name = "ECE",
+            //};
+            //Department department3 = new Department
+            //{
+            //    Id = "MEC",
+            //    Name = "Mechanical",
+            //};
 
-            modelBuilder.Entity<Department>().HasData(department1,department2);
+            //Department department4 = new Department
+            //{
+            //    Id = "CHE",
+            //    Name = "Chemical",
+            //};
+            //Department department5 = new Department
+            //{
+            //    Id = "BME",
+            //    Name = "BioMedical",
+            //};
+            //Department department6 = new Department
+            //{
+            //    Id = "EEE",
+            //    Name = "Electrical",
+            //};
+            
+            //modelBuilder.Entity<Department>().HasData(department1,department2,department3,department4,department5,department6);
             OpenElective openElective1 = new OpenElective
             {
                 Id = Guid.NewGuid(),
@@ -78,7 +97,7 @@ namespace OpenElective.Models
                  Credits =3,
                  Seats=60,
                  Code="S1",
-                 DepartmentId=department1.Id,
+                 DepartmentId="CSE",
                  OpenElectiveId=openElective1.Id,
                  Details="Very Easy Subject ma",
                  Instructor="Viper Ramesh",
@@ -92,7 +111,7 @@ namespace OpenElective.Models
                 Seats = 60,
                 Code = "S2",
 
-                DepartmentId = department1.Id,
+                DepartmentId = "CSE",
                 OpenElectiveId = openElective2.Id,
                 Details = "Very Easy Subject ma",
                 Instructor = "Viper Ramesh",
@@ -106,7 +125,7 @@ namespace OpenElective.Models
                 Seats = 60,
                 Code = "S3",
 
-                DepartmentId = department2.Id,
+                DepartmentId = "ECE",
                 OpenElectiveId = openElective1.Id,
                 Details = "Very Easy Subject ma",
                 Instructor = "Viper Ramesh",
@@ -120,7 +139,7 @@ namespace OpenElective.Models
                 Seats = 60,
                 Code = "S4",
 
-                DepartmentId = department2.Id,
+                DepartmentId = "EEE",
                 OpenElectiveId = openElective2.Id,
                 Details = "Very Easy Subject ma",
                 Instructor = "Viper Ramesh",

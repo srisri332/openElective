@@ -79,6 +79,13 @@ namespace OpenElective.Controllers
                 var sub=mapper.Map<Subject>(createSubject);
                 sub.Id = Guid.NewGuid();
                 sub.OpenElectiveId = OEId;
+                sub.Seats=createSubject.Seats;
+                sub.Details=createSubject.Details;
+                sub.Credits=createSubject.Credits;
+                sub.Code=createSubject.Code;
+                sub.Name=createSubject.Name;
+                sub.DepartmentId=createSubject.DepartmentId;
+                sub.Instructor=createSubject.Instructor;
                 var createdSub=subjectService.Create(sub);
                 return CreatedAtAction(nameof(Get), new { OEId=OEId, id = createdSub.Id }, mapper.Map<GetSubjectDTO>(createdSub));
             }
