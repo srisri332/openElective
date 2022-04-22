@@ -7,12 +7,12 @@ function OEForm(props) {
 
   useEffect(() => {
     const api = axios.create({
-      baseURL: "http://localhost:8000",
+      baseURL: "https://localhost:7006",
     });
 
-    api.get("/SUBS/" + props.singleOE.id).then((res) => {
-      // console.log(res.data);
-      setSubjects(res.data.datas);
+    api.get("/api/Subjects/" + props.singleOE.id).then((res) => {
+      console.log(res.data);
+      setSubjects(res.data);
     });
   }, []);
 

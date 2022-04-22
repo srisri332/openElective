@@ -15,30 +15,49 @@ import OEForm from "./OEForm";
 
 function StudentMainPage() {
   const [OES, setOES] = useState(null);
+  const [status, setStatus] = useState(null);
 
   useEffect(() => {
     const api = axios.create({
-      baseURL: "http://localhost:8000/",
+      baseURL: "https://localhost:7006",
     });
 
-    api.get("/OES").then((res) => {
-      console.log(res.data);
-      setOES(res.data);
+    api.get("/api/Details").then((res) => {
+      console.log(res);
+      setStatus(res.data.isStarted);
+
+      if (res.data.isStarted === true) {
+        api.get("/api/OpenElectives").then((res) => {
+          console.log(res.data);
+          setOES(res.data);
+        });
+      }
     });
+
+    // if (status === true) {
+    //   api.get("/api/OpenElectives").then((res) => {
+    //     console.log(res.data);
+    //     setOES(res.data);
+    //   });
+    // }
   }, []);
 
   return (
     <>
-      <Center>
-        <VStack width='70%'>
-          <Box w='100%' p={4} color='black'>
-            {OES &&
-              OES.map((OE) => {
-                return <OEForm singleOE={OE} />;
-              })}
-          </Box>
-        </VStack>
-      </Center>
+      {status ? (
+        <Center>
+          <VStack width='70%'>
+            <Box w='100%' p={4} color='black'>
+              {OES &&
+                OES.map((OE) => {
+                  return <OEForm singleOE={OE} />;
+                })}
+            </Box>
+          </VStack>
+        </Center>
+      ) : (
+        <StudentNullPage />
+      )}
     </>
   );
 }

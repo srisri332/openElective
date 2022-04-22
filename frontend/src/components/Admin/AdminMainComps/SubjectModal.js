@@ -46,6 +46,11 @@ function SubjectModal(props) {
   const [subjectFaculty, setSubjectFaculty] = useState(" ");
   const [subjectCredits, setSubjectCredits] = useState(0);
 
+  //authorization configs to authenticate as admin
+  const config = {
+    headers: { Authorization: `Bearer ` + localStorage.getItem("token") },
+  };
+
   //This function is used to add subject to any particular OE
   const addSubject = async (e) => {
     // e.preventDefault();
@@ -60,7 +65,11 @@ function SubjectModal(props) {
       details: "lols",
     };
 
-    let res = await api.post("/api/Subjects/" + props.electiveID, subject);
+    let res = await api.post(
+      "/api/Subjects/" + props.electiveID,
+      subject,
+      config
+    );
 
     console.log(res.status);
     // if (res.status == 201) {

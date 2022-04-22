@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   useDisclosure,
   Button,
@@ -38,7 +38,6 @@ function OEModal() {
 
   //function that updates the total number of OES
   const { setAllOES } = useContext(OEContext);
-  const { electiveStatus } = useContext(OEContext);
 
   const api = axios.create({
     baseURL: "https://localhost:7006",
@@ -52,17 +51,31 @@ function OEModal() {
     });
   };
 
+  //authorization configs to authenticate as admin
+  const config = {
+    headers: { Authorization: `Bearer ` + localStorage.getItem("token") },
+  };
+
   //This function is used to send the post request to add OE card
   const addOE = async () => {
-    let res = await api.post("/api/OpenElectives", { name: inputOE });
-
-    console.log(res.status);
+    let res = await api.post("/api/OpenElectives", { name: inputOE }, config);
+    // console.log(res.status);
     if (res.status == 201) {
       updateAllOES();
     }
     toggleToast();
     onClose();
   };
+
+  //this is used to get the status of the allotment and then enable or diable adding of allotments
+  const [status, setStatus] = useState(null);
+  useEffect(() => {
+    api.get("/api/Details").then((res) => {
+      // console.log(res.data);
+      setStatus(res.data.isStarted);
+      console.log(localStorage.getItem("token"));
+    });
+  }, []);
 
   const cancelAddOE = () => {
     setInputOE(null);
@@ -82,7 +95,7 @@ function OEModal() {
         bgColor='red.500'
         marginRight='10px'
         onClick={onOpen}
-        // disabled={!electiveStatus}
+        disabled={status}
         leftIcon={<AddIcon />}>
         ADD Elective
       </Button>

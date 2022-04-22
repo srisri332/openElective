@@ -16,11 +16,14 @@ import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import logo from "./images/logos.png";
 import axios from "axios";
 import React, { useState } from "react";
+import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const { setAuth } = useAuth();
+
   const api = axios.create({
-    baseURL: "http://localhost:8000",
+    baseURL: "https://localhost:7006",
   });
 
   let navigate = useNavigate();
@@ -32,18 +35,24 @@ function LoginPage() {
     e.preventDefault();
     try {
       const res = await api.post(
-        "/LOGIN",
-        JSON.stringify({ email: adminMail, password: adminPw }),
+        "/api/Student/auth",
+        JSON.stringify({ rollNumber: adminMail, password: adminPw }),
         {
           headers: { "content-type": "application/json" },
           withCredentials: true,
         }
       );
 
-      console.log(res.status);
-      if (res.status == 201) {
+      const accessToken = res.data;
+      const resStatus = res.status;
+
+      setAuth({ accessToken, resStatus });
+      localStorage.setItem("token", accessToken);
+
+      // console.log(res);
+      if (resStatus == 200) {
         navigate("/admin/adminmainpage");
-        console.log("nive");
+        console.log("admin logged in");
       }
     } catch (err) {
       if (!err?.response) {
@@ -60,16 +69,24 @@ function LoginPage() {
     console.log(studentMail + " " + studentPw);
     try {
       const res = await api.post(
-        "/LOGIN",
-        JSON.stringify({ email: studentMail, password: studentPw }),
+        "/api/Student/auth",
+        JSON.stringify({ rollNumber: studentMail, password: studentPw }),
         {
           headers: { "content-type": "application/json" },
           withCredentials: true,
         }
       );
 
-      if (res.status === 201) {
+      console.log(res);
+
+      const accessToken = res.data;
+      const resStatus = res.status;
+
+      setAuth({ accessToken, resStatus });
+
+      if (res.status === 200) {
         navigate("/studentmainpage");
+        console.log("student logged in");
       }
     } catch (err) {
       if (!err?.response) {
@@ -111,7 +128,7 @@ function LoginPage() {
                   margin='5px'
                 />
                 <Input
-                  type='email'
+                  type='text'
                   placeholder='Email'
                   size='lg'
                   variant='Filled'
@@ -169,7 +186,7 @@ function LoginPage() {
                   margin='5px'
                 />
                 <Input
-                  type='email'
+                  type='text'
                   placeholder='Email'
                   size='lg'
                   variant='Filled'

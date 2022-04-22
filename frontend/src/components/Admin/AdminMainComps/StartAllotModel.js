@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   useDisclosure,
   Button,
@@ -14,10 +14,10 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import OEContext from "../../../contexts/OEContext";
-import { DeleteIcon } from "@chakra-ui/icons";
 
-function DelOEModal(props) {
+function StartAllotModel(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [status, setStatus] = useState(null);
 
   const initialRef = React.useRef();
 
@@ -25,16 +25,12 @@ function DelOEModal(props) {
   const toast = useToast();
   const toggleToast = () => {
     return toast({
-      title: `OE Deleted Successfully`,
+      title: `Allotment started successfully`,
       description: ` `,
-      status: "error",
-      duration: 6000,
+      status: "success",
+      duration: 5000,
       isClosable: true,
     });
-  };
-
-  const config = {
-    headers: { Authorization: `Bearer ` + localStorage.getItem("token") },
   };
 
   //function that updates the total number of OES
@@ -44,33 +40,37 @@ function DelOEModal(props) {
     baseURL: "https://localhost:7006",
   });
 
-  //this function will update the global context Open Elctives (OES), i.e the total number of OES
-  const updateAllOES = () => {
-    api.get("/api/OpenElectives").then((res) => {
-      console.log(res.data);
-      setAllOES(res.data);
+  useEffect(() => {
+    api.get("/api/Details").then((res) => {
+      // console.log(res.data);
+      setStatus(res.data.isStarted);
+      // console.log(status);
     });
-  };
+  }, []);
 
-  //This function is used to send the post request to add OE card
-  const deleteOE = async () => {
-    let res = await api.delete(
-      "/api/OpenElectives/" + props.electiveID,
-      config
-    );
-
+  //This function is used to start the OE allotment process
+  const startAllotment = async () => {
+    let res = await api.post("/api/Details/start");
     console.log(res.status);
-    if (res.status == 200) {
-      updateAllOES();
-    }
+    //     if (res.status == 200) {
+    //       updateAllOES();
+    //     }
     toggleToast();
     onClose();
   };
 
   return (
     <>
-      <DeleteIcon color='red.300' cursor='pointer' onClick={onOpen} />
-
+      {/* <DeleteIcon color='green.300' cursor='pointer' onClick={onOpen} /> */}
+      <Button
+        color='white'
+        borderColor='red'
+        bgColor='green.600'
+        marginRight='10px'
+        onClick={onOpen}
+        disabled={status}>
+        Start Allotment
+      </Button>
       <Modal
         closeOnOverlayClick={false}
         initialFocusRef={initialRef}
@@ -78,15 +78,15 @@ function DelOEModal(props) {
         onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Confirmation</ModalHeader>
+          <ModalHeader>Confirmation </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={4}>
-            <Text>Are you sure you want to delete the Open Elective?</Text>
+            <Text>Are you sure you want start the allotment?</Text>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='red' mr={3} onClick={deleteOE}>
-              Delete
+            <Button colorScheme='green' mr={3} onClick={startAllotment}>
+              Yes
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
@@ -96,4 +96,4 @@ function DelOEModal(props) {
   );
 }
 
-export default DelOEModal;
+export default StartAllotModel;

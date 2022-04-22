@@ -16,9 +16,10 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { useTable, useSortBy, usePagination } from "react-table";
+import { useTable, useSortBy, usePagination, useFilters } from "react-table";
 import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import { Filters } from "./Filters";
 
 function SummaryCard(props) {
   const data = React.useMemo(() => props.studentData, []);
@@ -28,22 +29,29 @@ function SummaryCard(props) {
       {
         Header: "Name",
         accessor: "name",
+        Filter: Filters,
       },
       {
         Header: "Roll",
         accessor: "roll",
+        Filter: Filters,
       },
       {
         Header: "Section",
         accessor: "sec",
+        Filter: Filters,
+        disableFilters: true,
       },
       {
         Header: "CGPA",
         accessor: "cgpa",
+        Filter: Filters,
+        disableFilters: true,
       },
       {
         Header: "Elected",
         accessor: "elec",
+        Filter: Filters,
       },
     ],
     []
@@ -64,7 +72,7 @@ function SummaryCard(props) {
     pageCount,
     setPageSize,
     prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination);
+  } = useTable({ columns, data }, useFilters, useSortBy, usePagination);
 
   const { pageIndex, pageSize } = state;
 
@@ -75,11 +83,10 @@ function SummaryCard(props) {
         borderRadius='lg'
         overflow='hidden'
         padding='30px'
-        width='60vw'
-        maxW='60vw'
+        // width='60vw'
+        // maxW='60vw'
         boxShadow='sm'
         bg='white'>
-        
         <ReactHTMLTableToExcel
           id='test-table-xls-button'
           className='download-table-xls-button'
@@ -88,7 +95,6 @@ function SummaryCard(props) {
           sheet='tablexls'
           buttonText='Download as XLS'
         />
-
         <Table id='table-to-xls' {...getTableProps()}>
           <Thead>
             {headerGroups.map((headerGroup) => (
@@ -106,6 +112,9 @@ function SummaryCard(props) {
                           <TriangleUpIcon aria-label='sorted ascending' />
                         )
                       ) : null}
+                      <div>
+                        {column.canFilter ? column.render("Filter") : null}
+                      </div>
                     </chakra.span>
                   </Th>
                 ))}
@@ -129,7 +138,6 @@ function SummaryCard(props) {
             })}
           </Tbody>
         </Table>
-
         <Container maxW='container.xl' marginTop='10px'>
           <Flex>
             <span>

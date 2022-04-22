@@ -6,12 +6,16 @@ import OEModal from "./OEModal";
 import SubjectModal from "./SubjectModal";
 import axios from "axios";
 import OEContext from "../../../contexts/OEContext";
+import AuthContext from "../../../contexts/AuthProvider";
+import StartAllotModel from "./StartAllotModel";
 
 function AdminMainPage() {
   const { setAllOES } = useContext(OEContext);
   const { allOES } = useContext(OEContext);
   const { electiveStatus } = useContext(OEContext);
   const { setAllElectiveStatus } = useContext(OEContext);
+
+  const { auth } = useContext(AuthContext);
 
   //this will intially get the data and update the global OES if there are any existing ones
   useEffect(() => {
@@ -42,15 +46,11 @@ function AdminMainPage() {
 
           <Flex>
             <OEModal />
-            <Button
-              leftIcon={<CheckIcon />}
-              colorScheme='green'
-              disabled={!electiveStatus}
-              onClick={startAllotment}>
-              Start Allotment
-            </Button>
+
+            <StartAllotModel />
           </Flex>
         </VStack>
+        {/* <div>{auth.accessToken}</div> */}
       </Center>
     </>
   );

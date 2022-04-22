@@ -29,13 +29,22 @@ function DateModal() {
   return (
     <>
       <Tooltip label='Set Last Date' fontSize='md'>
-        <Image
+        <Button
+          color='white'
+          bgColor='purple.400'
+          marginRight='10px'
+          borderRadius='50px'
+          // onClick={onOpen}
+        >
+          Set Date
+        </Button>
+        {/* <Image
           src={calendar}
           alt='logo'
           width='50px'
           cursor='pointer'
           onClick={onOpen}
-        />
+        /> */}
       </Tooltip>
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

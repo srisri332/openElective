@@ -123,6 +123,13 @@
       ]
     }
   ],
+  "STATUS": [
+    {
+      "id": "stat1",
+      "status": true,
+      "stopped": false
+    }
+  ],
   "STDS": [
     {
       "name": "anches",

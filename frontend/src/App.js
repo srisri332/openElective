@@ -6,18 +6,25 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AdminPage from "./components/Admin/AdminPage";
 import StudentPage from "./components/Student/StudentPage";
 import AdminElectivePage from "./components/Admin/AdminElecComps/AdminElectivePage";
+import RequireAuth from "./components/RequireAuth";
+import { AuthProvider } from "./contexts/AuthProvider";
 
 function App() {
   return (
-    <Router>
-      <div className='App'>
-        <Routes>
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/admin/*' element={<AdminPage />} />
-          <Route path='/studentmainpage' element={<StudentPage />} />
-        </Routes>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className='App'>
+          <Routes>
+            <Route path='/login' element={<LoginPage />} />
+
+            <Route element={<RequireAuth />}>
+              <Route path='/admin/*' element={<AdminPage />} />
+              <Route path='/studentmainpage' element={<StudentPage />} />
+            </Route>
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 
