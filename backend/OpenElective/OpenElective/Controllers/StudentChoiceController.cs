@@ -31,6 +31,7 @@ namespace OpenElective.Controllers
             this.mapper = mapper;
         }
         // GET: api/<StudentChoiceController>
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
         {

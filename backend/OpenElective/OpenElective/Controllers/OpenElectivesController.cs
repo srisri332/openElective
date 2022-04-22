@@ -2,7 +2,6 @@
 using OpenElective.Services.Interfaces;
 using AutoMapper;
 using OpenElective.Models.DTOs.OpenElectives;
-using OpenElective.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
@@ -24,7 +23,7 @@ namespace OpenElective.Controllers
             this.mapper = mapper;
         }
         // GET: api/<OpenElectivesController>
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Get()
         {

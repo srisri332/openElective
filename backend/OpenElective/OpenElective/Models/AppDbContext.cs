@@ -16,6 +16,8 @@ namespace OpenElective.Models
         public DbSet<StudentChoice> StudentChoices { get; set; }
         public DbSet<Details> Details { get; set; }
 
+        public DbSet<Allotment> Allotments { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -153,7 +155,8 @@ namespace OpenElective.Models
                 Name = "Mark Zukerberg",
                 Password = "facebook",
                 CGPA = 8.0f,
-                Backlogs=0
+                Backlogs=0,
+                Elected=true,
             };
             Student student2 = new Student
             {
@@ -162,7 +165,8 @@ namespace OpenElective.Models
                 Name = "Bill Gates",
                 Password = "microsoft",
                 CGPA = 9.0f,
-                Backlogs = 0
+                Backlogs = 0,
+                Elected=true,
             };
 
             Student admin = new Student
