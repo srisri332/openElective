@@ -51,7 +51,35 @@ namespace OpenElective.Controllers
                 throw;
             }
         }
+        [HttpGet("Filled")]
+        public IActionResult GetFilled()
+        {
+            try
+            {
+                var all = studentService.GetFilled();
+                var allDTO = mapper.Map<IEnumerable<GetStudentDTO>>(all);
+                return Ok(allDTO);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
+        [HttpGet("Unfilled")]
+        public IActionResult GetUnfilled()
+        {
+            try
+            {
+                var all = studentService.GetUnFilled();
+                var allDTO = mapper.Map<IEnumerable<GetStudentDTO>>(all);
+                return Ok(allDTO);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         // POST api/<StudentController>
         [HttpPost]
         public IActionResult Post([FromBody] CreateStudentDTO createStudentDTO)

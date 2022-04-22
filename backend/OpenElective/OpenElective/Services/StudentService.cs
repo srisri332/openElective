@@ -62,7 +62,15 @@ namespace OpenElective.Services
             return appDbContext.Students.ToList();
         }
 
+        public IEnumerable<Student> GetFilled()
+        {
+            return appDbContext.Students.Where(s => s.Elected==true);
+        }
 
+        public IEnumerable<Student> GetUnFilled()
+        {
+            return appDbContext.Students.Where(s => s.Elected == false && s.RollNumber!="admin");
+        }
 
         public Student Update(Student student)
         {

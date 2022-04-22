@@ -12,7 +12,12 @@ namespace OpenElective.Services.Interfaces
         public Student Update(Student student);
         public Student Delete(Student student);
 
+        public IEnumerable<Student> GetFilled();
+        public IEnumerable<Student> GetUnFilled();
+        
         public string Authenticate(string RollNumber, string password);
+
+
     
     }
 }
