@@ -23,15 +23,13 @@ function ButtonCards() {
   }, []);
 
   const stopAllotment = async () => {
-    let res = await api.post("/api/Details/end");
-    window.location.reload(false);
-    console.log(res);
-  };
+    let temp = window.confirm(" Are you sure you want to stop allotment?");
 
-  const resetAllotment = async () => {
-    let res = await api.post("/api/Details/reset");
-    window.location.reload(false);
-    console.log(res);
+    if (temp == true) {
+      let res = await api.post("/api/Details/end");
+      window.location.reload(false);
+      console.log(res);
+    }
   };
 
   return (

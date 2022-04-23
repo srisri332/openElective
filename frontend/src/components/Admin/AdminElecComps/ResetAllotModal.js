@@ -18,6 +18,7 @@ import OEContext from "../../../contexts/OEContext";
 function ResetAllotModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [status, setStatus] = useState(null);
+  const [stopped, setStopped] = useState(null);
 
   const initialRef = React.useRef();
 
@@ -41,6 +42,7 @@ function ResetAllotModal(props) {
     api.get("/api/Details").then((res) => {
       // console.log(res.data);
       setStatus(res.data.isStarted);
+      setStopped(res.data.isCompleted);
       // console.log(status);
     });
   }, []);
@@ -68,8 +70,8 @@ function ResetAllotModal(props) {
         bgColor='red.600'
         marginRight='10px'
         onClick={onOpen}
-        disabled={status}>
-        Start Allotment
+        disabled={!(status && stopped)}>
+        Reset Allotment
       </Button>
       <Modal
         closeOnOverlayClick={false}
@@ -81,7 +83,7 @@ function ResetAllotModal(props) {
           <ModalHeader>Confirmation </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={4}>
-            <Text>Are you sure you want start the allotment?</Text>
+            <Text>Are you sure you want to reset the allotment?</Text>
           </ModalBody>
 
           <ModalFooter>

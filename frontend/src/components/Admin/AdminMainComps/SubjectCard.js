@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableCaption,
@@ -9,12 +9,22 @@ import {
   Tbody,
   Center,
   useToast,
+  IconButton,
 } from "@chakra-ui/react";
 import { CloseIcon } from "@chakra-ui/icons";
 import axios from "axios";
 
 function SubjectCard(props) {
   // console.log(props.subjects);
+  const [status, setStatus] = useState(null);
+
+  useEffect(() => {
+    api.get("/api/Details").then((res) => {
+      // console.log(res.data);
+      setStatus(res.data.isStarted);
+      // console.log(status);
+    });
+  }, []);
 
   //base api url for all requests
   const api = axios.create({
@@ -77,11 +87,20 @@ function SubjectCard(props) {
                     <Center>
                       <Td>
                         <button type='submit'>
-                          <CloseIcon
+                          <IconButton
+                            variant='outline'
+                            colorScheme='red'
+                            isRound={true}
+                            size='xs'
+                            isDisabled={status}
+                            onClick={() => deleteSubject(subject)}
+                            icon={<CloseIcon />}
+                          />
+                          {/* <CloseIcon
                             color='red.400'
                             cursor='pointer'
                             onClick={() => deleteSubject(subject)}
-                          />
+                          /> */}
                         </button>
                       </Td>
                     </Center>
