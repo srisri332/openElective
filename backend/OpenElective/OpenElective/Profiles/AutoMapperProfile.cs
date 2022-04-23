@@ -4,6 +4,8 @@ using OpenElective.Models.DTOs.Subjects;
 using OpenElective.Models.DTOs.OpenElectives;
 using OpenElective.Models.DTOs.Students;
 using OpenElective.Models.DTOs;
+using OpenElective.Models.DTOs.StudentChoices;
+using OpenElective.Models.DTOs.Allotment;
 
 namespace OpenElective.Profiles
 {
@@ -17,7 +19,11 @@ namespace OpenElective.Profiles
             CreateMap<UpdateOpenElectiveDTO, OpenElective.Models.OpenElective>();
             CreateMap<CreateSubjectDTO, Subject>();
             CreateMap<CreateStudentDTO, Student>();
-            CreateMap<Student,GetStudentDTO>();                                                    
+            CreateMap<Student,GetStudentDTO>();
+            CreateMap<StudentChoice, GetStudentChoiceDTO>();
+            CreateMap<CreateStudentChoiceDTO, StudentChoice>();
+            CreateMap<StudentLoginDTO, Student>();
+            CreateMap<Allotment, GetAllotmentDTO>();
         }
     }
 }
