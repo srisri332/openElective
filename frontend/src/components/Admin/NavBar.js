@@ -1,9 +1,22 @@
 import React from "react";
-import { Box, Flex, Spacer, Text, Image } from "@chakra-ui/react";
+import { Box, Flex, Spacer, Text, Image, IconButton } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import gear from "../images/gear.png";
+import { UnlockIcon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
+  let navigate = useNavigate();
+
+  const clearLocalStorage = () => {
+    localStorage.removeItem("token");
+  };
+
+  const logout = async () => {
+    const res = await clearLocalStorage();
+    navigate("/login");
+  };
+
   return (
     <div>
       <Box bg='#4299E1' w='100%' p={5} color='white'>
@@ -24,7 +37,16 @@ function NavBar() {
             <Link to='/admin/adminmainpage' style={{ marginRight: "10px" }}>
               Main Page
             </Link>
-            <Link to='/admin/adminelecpage'>Elective Page</Link>
+            <Link to='/admin/adminelecpage' style={{ marginRight: "10px" }}>
+              Elective Page
+            </Link>
+            <IconButton
+              variant='outline'
+              colorScheme='white'
+              fontSize='20px'
+              onClick={logout}
+              icon={<UnlockIcon />}
+            />
           </div>
         </Flex>
       </Box>

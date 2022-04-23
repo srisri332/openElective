@@ -20,7 +20,7 @@ function StudentMainPage() {
   //authorization configs to authenticate as admin
   const config = {
     headers: {
-      Authorization: `Bearer ` + localStorage.getItem("studentToken"),
+      Authorization: `Bearer ` + localStorage.getItem("token"),
     },
   };
 
@@ -65,7 +65,7 @@ function StudentMainPage() {
             <Box w='100%' p={4} color='black'>
               {OES &&
                 OES.map((OE) => {
-                  return <OEForm singleOE={OE} />;
+                  return <OEForm singleOE={OE} key={OE.id} />;
                 })}
             </Box>
           </VStack>

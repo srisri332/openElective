@@ -93,7 +93,7 @@ function LoginPage() {
 
       //setting the data for future use in other components
       setAuth({ accessToken, resStatus });
-      localStorage.setItem("studentToken", accessToken);
+      localStorage.setItem("token", accessToken);
 
       //navigating to student home page
       if (res.status === 200) {

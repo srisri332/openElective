@@ -6,11 +6,25 @@ import {
   Link as Clink,
   Text,
   Image,
+  IconButton,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import user from "../images/user.png";
+import { UnlockIcon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
+  let navigate = useNavigate();
+
+  const clearLocalStorage = () => {
+    localStorage.removeItem("token");
+  };
+
+  const logout = async () => {
+    const res = await clearLocalStorage();
+    navigate("/login");
+  };
+
   const users = {
     name: "K. Vijith",
     roll: localStorage.getItem("studentRoll"),
@@ -31,6 +45,13 @@ function NavBar() {
             </Link>
           </div>
           <Spacer />
+          <IconButton
+            variant='outline'
+            colorScheme='white'
+            fontSize='20px'
+            onClick={logout}
+            icon={<UnlockIcon />}
+          />
         </Flex>
       </Box>
     </div>
