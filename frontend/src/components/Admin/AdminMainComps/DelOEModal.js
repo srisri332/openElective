@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   useDisclosure,
   Button,
@@ -20,6 +20,15 @@ function DelOEModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef();
+
+  const [status, setStatus] = useState(null);
+  useEffect(() => {
+    api.get("/api/Details").then((res) => {
+      // console.log(res.data);
+      setStatus(res.data.isStarted);
+      // console.log(status);
+    });
+  }, []);
 
   //this fucntion is used for showing toast messages
   const toast = useToast();
@@ -46,7 +55,7 @@ function DelOEModal(props) {
 
   //this function will update the global context Open Elctives (OES), i.e the total number of OES
   const updateAllOES = () => {
-    api.get("/api/OpenElectives").then((res) => {
+    api.get("/api/OpenElectives", config).then((res) => {
       console.log(res.data);
       setAllOES(res.data);
     });
@@ -69,7 +78,21 @@ function DelOEModal(props) {
 
   return (
     <>
-      <DeleteIcon color='red.300' cursor='pointer' onClick={onOpen} />
+      {/* <DeleteIcon
+        color='red.300'
+        cursor='pointer'
+        onClick={onOpen}
+        disabled={status}
+      /> */}
+
+      <Button
+        leftIcon={<DeleteIcon />}
+        colorScheme='white'
+        variant='solid'
+        color='red.300'
+        cursor='pointer'
+        onClick={onOpen}
+        disabled={status}></Button>
 
       <Modal
         closeOnOverlayClick={false}

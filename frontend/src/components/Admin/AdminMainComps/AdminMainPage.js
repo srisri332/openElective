@@ -12,10 +12,13 @@ import StartAllotModel from "./StartAllotModel";
 function AdminMainPage() {
   const { setAllOES } = useContext(OEContext);
   const { allOES } = useContext(OEContext);
-  const { electiveStatus } = useContext(OEContext);
-  const { setAllElectiveStatus } = useContext(OEContext);
 
   const { auth } = useContext(AuthContext);
+
+  //authorization configs to authenticate as admin
+  const config = {
+    headers: { Authorization: `Bearer ` + localStorage.getItem("token") },
+  };
 
   //this will intially get the data and update the global OES if there are any existing ones
   useEffect(() => {
@@ -23,17 +26,11 @@ function AdminMainPage() {
       baseURL: "https://localhost:7006",
     });
 
-    api.get("/api/OpenElectives").then((res) => {
+    api.get("/api/OpenElectives", config).then((res) => {
       console.log(res.data);
       setAllOES(res.data);
     });
   }, []);
-
-  const startAllotment = () => {
-    setAllElectiveStatus();
-    console.log("start elctive");
-    console.log(electiveStatus);
-  };
 
   return (
     <>

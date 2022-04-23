@@ -45,7 +45,7 @@ function OEModal() {
 
   //this function will update the global context Open Elctives (OES), i.e the total number of OES
   const updateAllOES = () => {
-    api.get("/api/OpenElectives").then((res) => {
+    api.get("/api/OpenElectives", config).then((res) => {
       console.log(res.data);
       setAllOES(res.data);
     });

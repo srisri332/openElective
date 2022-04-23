@@ -10,12 +10,12 @@ function AdminElectivePage() {
   const [status, setStatus] = useState(null);
   const [stopped, setStopped] = useState(null);
 
-  useEffect(() => {
-    const api = axios.create({
-      baseURL: "https://localhost:7006/",
-    });
+  const api = axios.create({
+    baseURL: "https://localhost:7006/",
+  });
 
-    api.get("http://localhost:8000/STDS").then((res) => {
+  useEffect(() => {
+    api.get("/api/Student").then((res) => {
       setStudents(res.data);
     });
 
@@ -25,6 +25,21 @@ function AdminElectivePage() {
       setStopped(res.data.isCompleted);
     });
   }, []);
+
+  //get students that filled the OE form
+  const getFilledDetails = async () => {
+    const res = await api.get("/api/Student/Filled");
+    await setStatus(res.data);
+    console.log(res.data);
+  };
+
+  //get students that did not fill the OE form
+  const getUnfilledDetails = async () => {
+    api.get("/api/Student/Unfilled").then((res) => {
+      console.log(res.data);
+      setStudents(res.data);
+    });
+  };
 
   return (
     <>
@@ -36,10 +51,14 @@ function AdminElectivePage() {
             <Button
               leftIcon={<DownloadIcon />}
               colorScheme='green'
-              marginRight='10px'>
+              marginRight='10px'
+              onClick={getFilledDetails}>
               Filled Details
             </Button>
-            <Button leftIcon={<DownloadIcon />} colorScheme='red'>
+            <Button
+              leftIcon={<DownloadIcon />}
+              colorScheme='red'
+              onClick={getUnfilledDetails}>
               Unfilled Details
             </Button>
           </Center>

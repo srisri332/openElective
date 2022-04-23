@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import OEContext from "../../../contexts/OEContext";
 
-function StartAllotModel(props) {
+function ResetAllotModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [status, setStatus] = useState(null);
 
@@ -33,9 +33,6 @@ function StartAllotModel(props) {
     });
   };
 
-  //function that updates the total number of OES
-  const { setAllOES } = useContext(OEContext);
-
   const api = axios.create({
     baseURL: "https://localhost:7006",
   });
@@ -48,9 +45,10 @@ function StartAllotModel(props) {
     });
   }, []);
 
-  //This function is used to start the OE allotment process
-  const startAllotment = async () => {
-    let res = await api.post("/api/Details/start");
+  //This function is used to reset the OE allotment process
+  const resetAllotment = async () => {
+    let res = await api.post("/api/Details/reset");
+    window.location.reload(false);
     console.log(res.status);
     //     if (res.status == 200) {
     //       updateAllOES();
@@ -67,7 +65,7 @@ function StartAllotModel(props) {
       <Button
         color='white'
         borderColor='red'
-        bgColor='green.600'
+        bgColor='red.600'
         marginRight='10px'
         onClick={onOpen}
         disabled={status}>
@@ -87,7 +85,7 @@ function StartAllotModel(props) {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='green' mr={3} onClick={startAllotment}>
+            <Button colorScheme='green' mr={3} onClick={resetAllotment}>
               Yes
             </Button>
             <Button onClick={onClose}>Cancel</Button>
@@ -98,4 +96,4 @@ function StartAllotModel(props) {
   );
 }
 
-export default StartAllotModel;
+export default ResetAllotModal;

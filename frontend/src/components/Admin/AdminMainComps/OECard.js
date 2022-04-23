@@ -7,17 +7,23 @@ import DelOEModal from "./DelOEModal";
 
 function OECard(props) {
   const [subjects, setSubjects] = useState(null);
+  const api = axios.create({
+    baseURL: "https://localhost:7006",
+  });
 
   useEffect(() => {
-    const api = axios.create({
-      baseURL: "https://localhost:7006",
-    });
-
     api.get("/api/Subjects/" + props.elective.id).then((res) => {
       // console.log(res.data);
       setSubjects(res.data);
     });
   }, []);
+
+  const updateSubjects = () => {
+    api.get("/api/Subjects/" + props.elective.id).then((res) => {
+      // console.log(res.data);
+      setSubjects(res.data);
+    });
+  };
 
   return (
     <Box
@@ -35,7 +41,10 @@ function OECard(props) {
       </Flex>
 
       <SubjectCard subjects={subjects} electiveID={props.elective.id} />
-      <SubjectModal electiveID={props.elective.id} />
+      <SubjectModal
+        electiveID={props.elective.id}
+        updtSubject={updateSubjects}
+      />
     </Box>
   );
 }

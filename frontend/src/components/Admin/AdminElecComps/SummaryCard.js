@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { DownloadIcon } from "@chakra-ui/icons";
 import {
   Box,
   Table,
@@ -14,6 +15,7 @@ import {
   Spacer,
   Flex,
   Select,
+  useEditableState,
 } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination, useFilters } from "react-table";
@@ -112,9 +114,7 @@ function SummaryCard(props) {
                           <TriangleUpIcon aria-label='sorted ascending' />
                         )
                       ) : null}
-                      <div>
-                        {column.canFilter ? column.render("Filter") : null}
-                      </div>
+                      <>{column.canFilter ? column.render("Filter") : null}</>
                     </chakra.span>
                   </Th>
                 ))}

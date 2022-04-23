@@ -13,8 +13,7 @@ import user from "../images/user.png";
 function NavBar() {
   const users = {
     name: "K. Vijith",
-    roll: "18211A05A4",
-    section: "CSE-B",
+    roll: localStorage.getItem("studentRoll"),
   };
 
   return (
@@ -27,7 +26,7 @@ function NavBar() {
           <div>
             <Link to='/studentmainpage'>
               <Text fontSize='lg' fontWeight='500'>
-                {users.name} | {users.roll} | {users.section}
+                {users.name} | {users.roll}
               </Text>
             </Link>
           </div>

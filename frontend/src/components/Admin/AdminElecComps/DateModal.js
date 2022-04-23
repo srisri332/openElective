@@ -31,11 +31,10 @@ function DateModal() {
       <Tooltip label='Set Last Date' fontSize='md'>
         <Button
           color='white'
-          bgColor='purple.400'
+          bgColor='purple.500'
           marginRight='10px'
-          borderRadius='50px'
-          // onClick={onOpen}
-        >
+          // borderRadius='50px'
+          onClick={onOpen}>
           Set Date
         </Button>
         {/* <Image

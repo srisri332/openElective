@@ -17,18 +17,33 @@ function StudentMainPage() {
   const [OES, setOES] = useState(null);
   const [status, setStatus] = useState(null);
 
+  //authorization configs to authenticate as admin
+  const config = {
+    headers: {
+      Authorization: `Bearer ` + localStorage.getItem("studentToken"),
+    },
+  };
+
   useEffect(() => {
     const api = axios.create({
       baseURL: "https://localhost:7006",
     });
 
-    api.get("/api/Details").then((res) => {
-      console.log(res);
+    //this is how to get the studnet roll number and ID from local storage
+    // console.log(
+    //   localStorage.getItem("studentRoll") +
+    //     "  " +
+    //     localStorage.getItem("studentID") + " "  +
+    //     localStorage.getItem("studentToken")
+    // );
+
+    api.get("/api/Details", config).then((res) => {
+      // console.log(res);
       setStatus(res.data.isStarted);
 
       if (res.data.isStarted === true) {
-        api.get("/api/OpenElectives").then((res) => {
-          console.log(res.data);
+        api.get("/api/OpenElectives", config).then((res) => {
+          // console.log(res.data);
           setOES(res.data);
         });
       }

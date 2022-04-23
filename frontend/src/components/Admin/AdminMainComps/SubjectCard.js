@@ -33,11 +33,17 @@ function SubjectCard(props) {
     });
   };
 
+  //authorization configs to authenticate as admin
+  const config = {
+    headers: { Authorization: `Bearer ` + localStorage.getItem("token") },
+  };
+
   const deleteSubject = async (subject) => {
     console.log(props.electiveID + " " + subject.id);
 
     let res = await api.delete(
-      "/api/Subjects/" + props.electiveID + "/" + subject.id
+      "/api/Subjects/" + props.electiveID + "/" + subject.id,
+      config
     );
     if (res.status == 200) {
       toggleToast();

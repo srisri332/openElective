@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   useDisclosure,
   Button,
@@ -25,6 +25,15 @@ function SubjectModal(props) {
   const api = axios.create({
     baseURL: "https://localhost:7006",
   });
+
+  const [status, setStatus] = useState(null);
+  useEffect(() => {
+    api.get("/api/Details").then((res) => {
+      // console.log(res.data);
+      setStatus(res.data.isStarted);
+      // console.log(status);
+    });
+  }, []);
 
   //this fucntion is used for showing toast messages
   const toast = useToast();
@@ -53,7 +62,7 @@ function SubjectModal(props) {
 
   //This function is used to add subject to any particular OE
   const addSubject = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     let subject = {
       name: subjectName,
@@ -72,9 +81,9 @@ function SubjectModal(props) {
     );
 
     console.log(res.status);
-    // if (res.status == 201) {
-    //   updateAllOES();
-    // }
+
+    props.updtSubject();
+
     toggleToast();
     onClose();
   };
@@ -91,6 +100,7 @@ function SubjectModal(props) {
   return (
     <>
       <Button
+        disabled={status}
         variant='outline'
         color='orange'
         borderColor='orange'

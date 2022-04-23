@@ -61,12 +61,13 @@ function LoginPage() {
     }
   };
 
+  //these are all the studednt storage hooks and functions
   const [studentMail, setStudentMail] = useState(null);
   const [studentPw, setStudentPw] = useState(null);
 
   const studentLogin = async (e) => {
     e.preventDefault();
-    console.log(studentMail + " " + studentPw);
+    // console.log(studentMail + " " + studentPw);
     try {
       const res = await api.post(
         "/api/Student/auth",
@@ -82,8 +83,19 @@ function LoginPage() {
       const accessToken = res.data;
       const resStatus = res.status;
 
-      setAuth({ accessToken, resStatus });
+      if (resStatus === 200) {
+        const studentData = await api.get("/api/Student/" + studentMail);
+        console.log(studentData);
 
+        localStorage.setItem("studentID", studentData.data.id);
+        localStorage.setItem("studentRoll", studentData.data.rollNumber);
+      }
+
+      //setting the data for future use in other components
+      setAuth({ accessToken, resStatus });
+      localStorage.setItem("studentToken", accessToken);
+
+      //navigating to student home page
       if (res.status === 200) {
         navigate("/studentmainpage");
         console.log("student logged in");

@@ -4,9 +4,12 @@ import stop from "../../images/stop.png";
 import stats from "../../images/stats.png";
 import DateModal from "./DateModal";
 import axios from "axios";
+import ResetAllotModal from "./ResetAllotModal";
 
 function ButtonCards() {
   const [status, setStatus] = useState(null);
+  const [stopped, setStopped] = useState(null);
+
   const api = axios.create({
     baseURL: "https://localhost:7006",
   });
@@ -15,11 +18,19 @@ function ButtonCards() {
     api.get("/api/Details").then((res) => {
       console.log(res);
       setStatus(res.data.isStarted);
+      setStopped(res.data.isCompleted);
     });
   }, []);
 
   const stopAllotment = async () => {
     let res = await api.post("/api/Details/end");
+    window.location.reload(false);
+    console.log(res);
+  };
+
+  const resetAllotment = async () => {
+    let res = await api.post("/api/Details/reset");
+    window.location.reload(false);
     console.log(res);
   };
 
@@ -44,19 +55,12 @@ function ButtonCards() {
               <Center>
                 {" "}
                 <Tooltip label='Stop Elective' fontSize='md'>
-                  {/* <Image
-                      src={stop}
-                      alt='logo'
-                      width='50px'
-                      cursor='pointer'
-                    /> */}
-
                   <Button
-                    disabled={!status}
+                    disabled={status && stopped}
                     color='white'
                     bgColor='red.500'
                     marginRight='10px'
-                    borderRadius='50px'
+                    // borderRadius='50px'
                     onClick={stopAllotment}>
                     Stop
                   </Button>
@@ -68,24 +72,31 @@ function ButtonCards() {
               <Center>
                 <Tooltip label='Get Results' fontSize='md'>
                   <Button
-                    disabled={!status}
+                    disabled={!(status && stopped)}
                     color='white'
                     bgColor='cyan.400'
                     marginRight='10px'
-                    borderRadius='50px'
+                    // borderRadius='50px'
                     // onClick={onOpen}
                   >
                     Get Results
                   </Button>
-                  {/* <Image src={stats} alt='logo' width='50px' cursor='pointer' /> */}
                 </Tooltip>
-              </Center>{" "}
+              </Center>
             </Box>
 
             <Box w='25%' borderRadius='5px'>
               <Center>
                 <DateModal />
-              </Center>{" "}
+              </Center>
+            </Box>
+
+            <Box w='25%' borderRadius='5px'>
+              <Center>
+                <Tooltip label='Stop Elective' fontSize='md'>
+                  <ResetAllotModal />
+                </Tooltip>
+              </Center>
             </Box>
           </Flex>
         </Box>
