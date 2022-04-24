@@ -11,11 +11,13 @@ import {
   ModalCloseButton,
   Image,
   Tooltip,
+  IconButton,
 } from "@chakra-ui/react";
 import calendar from "../../images/calendar.png";
 // import { DatePicker } from "@orange_digital/chakra-datepicker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { FaCalendarAlt } from "react-icons/fa";
 
 function DateModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,21 +31,20 @@ function DateModal() {
   return (
     <>
       <Tooltip label='Set Last Date' fontSize='md'>
-        <Button
+        {/* <Button
           color='white'
           bgColor='purple.500'
           marginRight='10px'
           // borderRadius='50px'
-          onClick={onOpen}>
-          Set Date
-        </Button>
-        {/* <Image
-          src={calendar}
-          alt='logo'
-          width='50px'
-          cursor='pointer'
+          onClick={onOpen}> */}
+        <IconButton
           onClick={onOpen}
-        /> */}
+          colorScheme='purple'
+          fontSize='20px'
+          icon={<FaCalendarAlt />}
+        />
+        {/* Set Date
+        </Button> */}
       </Tooltip>
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

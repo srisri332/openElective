@@ -11,8 +11,12 @@ import {
   ModalCloseButton,
   Text,
   useToast,
+  IconButton,
+  Tooltip,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { FaRedoAlt } from "react-icons/fa";
+
 import OEContext from "../../../contexts/OEContext";
 
 function ResetAllotModal(props) {
@@ -64,15 +68,24 @@ function ResetAllotModal(props) {
   return (
     <>
       {/* <DeleteIcon color='green.300' cursor='pointer' onClick={onOpen} /> */}
-      <Button
+      {/* <Button
         color='white'
         borderColor='red'
         bgColor='red.600'
         marginRight='10px'
         onClick={onOpen}
-        disabled={!(status && stopped)}>
-        Reset Allotment
-      </Button>
+        disabled={!(status && stopped)}> */}
+      <Tooltip label='Reset Elective' fontSize='md'>
+        <IconButton
+          disabled={!(status && stopped)}
+          onClick={onOpen}
+          colorScheme='red'
+          fontSize='20px'
+          icon={<FaRedoAlt />}
+        />
+      </Tooltip>
+      {/* Reset Allotment
+      </Button> */}
       <Modal
         closeOnOverlayClick={false}
         initialFocusRef={initialRef}

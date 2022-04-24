@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Center, Flex, Image, Tooltip } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Image,
+  Tooltip,
+  IconButton,
+} from "@chakra-ui/react";
 import stop from "../../images/stop.png";
 import stats from "../../images/stats.png";
 import DateModal from "./DateModal";
 import axios from "axios";
 import ResetAllotModal from "./ResetAllotModal";
+import { FaRegStopCircle, FaRegListAlt, FaClipboardList } from "react-icons/fa";
 
 function ButtonCards() {
   const [status, setStatus] = useState(null);
@@ -34,7 +43,7 @@ function ButtonCards() {
 
   return (
     <>
-      <Center>
+      <Center marginTop='10px'>
         <Box
           borderWidth='2px'
           borderRadius='lg'
@@ -53,15 +62,21 @@ function ButtonCards() {
               <Center>
                 {" "}
                 <Tooltip label='Stop Elective' fontSize='md'>
-                  <Button
+                  {/* <Button
                     disabled={status && stopped}
                     color='white'
                     bgColor='red.500'
                     marginRight='10px'
                     // borderRadius='50px'
-                    onClick={stopAllotment}>
-                    Stop
-                  </Button>
+                    > */}
+                  <IconButton
+                    disabled={status && stopped}
+                    colorScheme='orange'
+                    fontSize='20px'
+                    onClick={stopAllotment}
+                    icon={<FaRegStopCircle />}
+                  />
+                  {/* </Button> */}
                 </Tooltip>
               </Center>
             </Box>
@@ -69,16 +84,22 @@ function ButtonCards() {
             <Box w='25%' borderRadius='5px'>
               <Center>
                 <Tooltip label='Get Results' fontSize='md'>
-                  <Button
+                  {/* <Button
                     disabled={!(status && stopped)}
                     color='white'
                     bgColor='cyan.400'
                     marginRight='10px'
                     // borderRadius='50px'
                     // onClick={onOpen}
-                  >
-                    Get Results
-                  </Button>
+                  > */}
+                  <IconButton
+                    disabled={!(status && stopped)}
+                    colorScheme='cyan'
+                    fontSize='20px'
+                    icon={<FaClipboardList />}
+                  />
+                  {/* Get Results
+                  </Button> */}
                 </Tooltip>
               </Center>
             </Box>
@@ -91,9 +112,7 @@ function ButtonCards() {
 
             <Box w='25%' borderRadius='5px'>
               <Center>
-                <Tooltip label='Stop Elective' fontSize='md'>
-                  <ResetAllotModal />
-                </Tooltip>
+                <ResetAllotModal />
               </Center>
             </Box>
           </Flex>

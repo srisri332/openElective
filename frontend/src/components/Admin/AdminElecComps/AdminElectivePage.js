@@ -18,8 +18,6 @@ function AdminElectivePage() {
   });
 
   useEffect(() => {
-    console.log(uuidv4());
-
     api.get("/api/Student").then((res) => {
       setStudents(res.data);
     });
@@ -36,7 +34,7 @@ function AdminElectivePage() {
     const res = await api.get("/api/Student/Filled");
     await setStudents(res.data);
     await setSomeID(uuidv4());
-    console.log(students);
+    // console.log(students);
   };
 
   //get students that did not fill the OE form
@@ -44,14 +42,14 @@ function AdminElectivePage() {
     const res = await api.get("/api/Student/Unfilled");
     await setStudents(res.data);
     await setSomeID(uuidv4());
-    console.log(students);
+    // console.log(students);
   };
 
   const getAllDetails = async () => {
     const res = await api.get("/api/Student");
     await setStudents(res.data);
     await setSomeID(uuidv4());
-    console.log(students);
+    // console.log(students);
   };
 
   return (
