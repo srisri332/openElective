@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react";
 import ButtonCards from "./ButtonCards";
 import SummaryCard from "./SummaryCard";
-import { Button, Center, Text } from "@chakra-ui/react";
+import { Button, Center, Text, Radio, RadioGroup } from "@chakra-ui/react";
 import { DownloadIcon } from "@chakra-ui/icons";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 function AdminElectivePage() {
   const [students, setStudents] = useState(null);
   const [status, setStatus] = useState(null);
   const [stopped, setStopped] = useState(null);
+  const [someID, setSomeID] = useState(uuidv4());
+  const [value, setValue] = React.useState("3");
 
   const api = axios.create({
     baseURL: "https://localhost:7006/",
   });
 
   useEffect(() => {
+    console.log(uuidv4());
+
     api.get("/api/Student").then((res) => {
       setStudents(res.data);
     });
@@ -29,16 +34,24 @@ function AdminElectivePage() {
   //get students that filled the OE form
   const getFilledDetails = async () => {
     const res = await api.get("/api/Student/Filled");
-    await setStatus(res.data);
-    console.log(res.data);
+    await setStudents(res.data);
+    await setSomeID(uuidv4());
+    console.log(students);
   };
 
   //get students that did not fill the OE form
   const getUnfilledDetails = async () => {
-    api.get("/api/Student/Unfilled").then((res) => {
-      console.log(res.data);
-      setStudents(res.data);
-    });
+    const res = await api.get("/api/Student/Unfilled");
+    await setStudents(res.data);
+    await setSomeID(uuidv4());
+    console.log(students);
+  };
+
+  const getAllDetails = async () => {
+    const res = await api.get("/api/Student");
+    await setStudents(res.data);
+    await setSomeID(uuidv4());
+    console.log(students);
   };
 
   return (
@@ -46,21 +59,31 @@ function AdminElectivePage() {
       {status || stopped ? (
         <>
           <ButtonCards />
-          {students && <SummaryCard studentData={students} />}
+          {students && <SummaryCard studentData={students} key={someID} />}
           <Center mt='10px' mb='10px'>
-            <Button
-              leftIcon={<DownloadIcon />}
-              colorScheme='green'
-              marginRight='10px'
-              onClick={getFilledDetails}>
-              Filled Details
-            </Button>
-            <Button
-              leftIcon={<DownloadIcon />}
-              colorScheme='red'
-              onClick={getUnfilledDetails}>
-              Unfilled Details
-            </Button>
+            <RadioGroup onChange={setValue} value={value}>
+              <Button
+                colorScheme='green'
+                marginRight='10px'
+                onClick={getFilledDetails}>
+                <Radio size='md' colorScheme='white' value='1'>
+                  Filled Details
+                </Radio>
+              </Button>
+              <Button
+                colorScheme='red'
+                marginRight='10px'
+                onClick={getUnfilledDetails}>
+                <Radio size='md' colorScheme='white' value='2'>
+                  Unfilled Details
+                </Radio>
+              </Button>
+              <Button colorScheme='pink' onClick={getAllDetails}>
+                <Radio size='md' colorScheme='white' value='3'>
+                  All Details
+                </Radio>
+              </Button>
+            </RadioGroup>
           </Center>
         </>
       ) : (

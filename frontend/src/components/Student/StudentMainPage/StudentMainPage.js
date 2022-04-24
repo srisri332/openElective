@@ -17,6 +17,8 @@ function StudentMainPage() {
   const [OES, setOES] = useState(null);
   const [status, setStatus] = useState(null);
 
+  const [stopped, setStopped] = useState(null);
+
   //authorization configs to authenticate as admin
   const config = {
     headers: {
@@ -41,6 +43,8 @@ function StudentMainPage() {
       // console.log(res);
       setStatus(res.data.isStarted);
 
+      setStopped(res.data.isCompleted);
+
       if (res.data.isStarted === true) {
         api.get("/api/OpenElectives", config).then((res) => {
           // console.log(res.data);
@@ -59,7 +63,7 @@ function StudentMainPage() {
 
   return (
     <>
-      {status ? (
+      {!(status && stopped) ? (
         <Center>
           <VStack width='70%'>
             <Box w='100%' p={4} color='black'>

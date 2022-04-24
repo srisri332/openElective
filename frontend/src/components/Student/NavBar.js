@@ -40,7 +40,8 @@ function NavBar() {
           <div>
             <Link to='/studentmainpage'>
               <Text fontSize='lg' fontWeight='500'>
-                {users.name} | {users.roll}
+                {localStorage.getItem("studentName")} |{" "}
+                {localStorage.getItem("studentRoll")}
               </Text>
             </Link>
           </div>

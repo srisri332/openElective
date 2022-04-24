@@ -87,6 +87,7 @@ function LoginPage() {
         const studentData = await api.get("/api/Student/" + studentMail);
         console.log(studentData);
 
+        localStorage.setItem("studentName", studentData.data.name);
         localStorage.setItem("studentID", studentData.data.id);
         localStorage.setItem("studentRoll", studentData.data.rollNumber);
       }
