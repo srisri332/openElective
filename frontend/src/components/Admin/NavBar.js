@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import gear from "../images/gear.png";
 import { UnlockIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { FaPowerOff } from "react-icons/fa";
 
 function NavBar() {
   let navigate = useNavigate();
@@ -37,7 +38,7 @@ function NavBar() {
             <Link to='/admin/adminmainpage' style={{ marginRight: "10px" }}>
               Main Page
             </Link>
-            <Link to='/admin/adminelecpage' style={{ marginRight: "10px" }}>
+            <Link to='/admin/adminelecpage' style={{ marginRight: "20px" }}>
               Elective Page
             </Link>
             <IconButton
@@ -45,7 +46,8 @@ function NavBar() {
               colorScheme='white'
               fontSize='20px'
               onClick={logout}
-              icon={<UnlockIcon />}
+              isRound={true}
+              icon={<FaPowerOff />}
             />
           </div>
         </Flex>

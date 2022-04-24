@@ -15,7 +15,7 @@ import axios from "axios";
 import ResetAllotModal from "./ResetAllotModal";
 import { FaRegStopCircle, FaRegListAlt, FaClipboardList } from "react-icons/fa";
 
-function ButtonCards() {
+function ButtonCards(props) {
   const [status, setStatus] = useState(null);
   const [stopped, setStopped] = useState(null);
 
@@ -25,7 +25,7 @@ function ButtonCards() {
 
   useEffect(() => {
     api.get("/api/Details").then((res) => {
-      console.log(res);
+      // console.log(res);
       setStatus(res.data.isStarted);
       setStopped(res.data.isCompleted);
     });
@@ -55,7 +55,7 @@ function ButtonCards() {
           bg='white'>
           <Flex>
             <Box bg='#553C9A' w='25%' p={4} color='white' borderRadius='5px'>
-              <Center> 75 / 300 </Center>
+              <Center> {props.filled} </Center>
             </Box>
 
             <Box w='25%' borderRadius='5px'>

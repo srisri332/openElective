@@ -13,6 +13,9 @@ function AdminElectivePage() {
   const [someID, setSomeID] = useState(uuidv4());
   const [value, setValue] = React.useState("3");
 
+  //this are used for displaying total number of students filled
+  const [filled, setFilled] = useState(null);
+  const [total, setTotal] = useState(null);
   const api = axios.create({
     baseURL: "https://localhost:7006/",
   });
@@ -20,12 +23,20 @@ function AdminElectivePage() {
   useEffect(() => {
     api.get("/api/Student").then((res) => {
       setStudents(res.data);
+      setTotal(res.data.length);
+      // console.log(res.data);
     });
 
     api.get("/api/Details").then((res) => {
-      console.log(res);
+      // console.log(res);
       setStatus(res.data.isStarted);
       setStopped(res.data.isCompleted);
+    });
+
+    //this is just to set the state for total number of students
+    api.get("/api/Student/Filled").then((res) => {
+      setFilled(res.data.length);
+      // console.log(res.data);
     });
   }, []);
 
@@ -56,7 +67,7 @@ function AdminElectivePage() {
     <>
       {status || stopped ? (
         <>
-          <ButtonCards />
+          <ButtonCards filled={filled + " / " + total} />
           {students && <SummaryCard studentData={students} key={someID} />}
           <Center mt='10px' mb='10px'>
             <RadioGroup onChange={setValue} value={value}>

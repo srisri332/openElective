@@ -35,12 +35,12 @@ function SummaryCard(props) {
       },
       {
         Header: "Roll",
-        accessor: "roll",
+        accessor: "rollNumber",
         Filter: Filters,
       },
       {
-        Header: "Section",
-        accessor: "sec",
+        Header: "Backlogs",
+        accessor: "backlogs",
         Filter: Filters,
         disableFilters: true,
       },
