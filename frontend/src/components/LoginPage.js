@@ -18,6 +18,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import LastDate from "./LastDate";
 
 function LoginPage() {
   const { setAuth } = useAuth();
@@ -110,6 +111,7 @@ function LoginPage() {
 
   return (
     <div>
+      <LastDate />
       <Flex>
         <Box p='4'>
           <Image src={logo} alt='logo' width='70px' margin='15px' />

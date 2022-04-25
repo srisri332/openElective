@@ -60,7 +60,6 @@ function ButtonCards(props) {
 
             <Box w='25%' borderRadius='5px'>
               <Center>
-                {" "}
                 <Tooltip label='Stop Elective' fontSize='md'>
                   {/* <Button
                     disabled={status && stopped}
@@ -76,7 +75,6 @@ function ButtonCards(props) {
                     onClick={stopAllotment}
                     icon={<FaRegStopCircle />}
                   />
-                  {/* </Button> */}
                 </Tooltip>
               </Center>
             </Box>
@@ -98,8 +96,6 @@ function ButtonCards(props) {
                     fontSize='20px'
                     icon={<FaClipboardList />}
                   />
-                  {/* Get Results
-                  </Button> */}
                 </Tooltip>
               </Center>
             </Box>

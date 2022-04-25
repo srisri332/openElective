@@ -18,15 +18,39 @@ import calendar from "../../images/calendar.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaCalendarAlt } from "react-icons/fa";
+import axios from "axios";
 
 function DateModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const months = {
+    Jan: "01",
+    Feb: "02",
+    Mar: "03",
+    Apr: "04",
+    May: "05",
+    Jun: "06",
+    Jul: "07",
+    Aug: "08",
+    Sep: "09",
+    Oct: "10",
+    Nov: "11",
+    Dec: "12",
+  };
+
+  const api = axios.create({
+    baseURL: "https://localhost:7006",
+  });
 
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  function func(date) {
-    console.log(date.date);
-  }
+  const func = async () => {
+    let text = selectedDate + " ";
+    const myArray = text.split(" ");
+    let word = myArray[2] + months[`${myArray[1]}`] + myArray[3];
+    // console.log(word);
+    let res = await api.put("/api/Details/" + word);
+    console.log(res);
+  };
 
   return (
     <>

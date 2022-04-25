@@ -12,6 +12,7 @@ import React, { useState, useEffect } from "react";
 import StudentNullPage from "../StudentNullComp/StudentNullPage";
 import axios from "axios";
 import OEForm from "./OEForm";
+import LastDate from "../../LastDate";
 
 function StudentMainPage() {
   const [OES, setOES] = useState(null);
@@ -65,6 +66,7 @@ function StudentMainPage() {
     <>
       {!(status && stopped) ? (
         <Center>
+          <LastDate />
           <VStack width='70%'>
             <Box w='100%' p={4} color='black'>
               {OES &&
