@@ -7,6 +7,7 @@ import AdminPage from "./components/Admin/AdminPage";
 import StudentPage from "./components/Student/StudentPage";
 import AdminElectivePage from "./components/Admin/AdminElecComps/AdminElectivePage";
 import RequireAuth from "./components/RequireAuth";
+import RequireStudentAuth from "./components/RequireStudentAuth";
 import { AuthProvider } from "./contexts/AuthProvider";
 
 function App() {
@@ -19,6 +20,9 @@ function App() {
 
             <Route element={<RequireAuth />}>
               <Route path='/admin/*' element={<AdminPage />} />
+            </Route>
+
+            <Route element={<RequireStudentAuth />}>
               <Route path='/studentmainpage' element={<StudentPage />} />
             </Route>
           </Routes>

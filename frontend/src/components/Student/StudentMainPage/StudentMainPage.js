@@ -66,8 +66,8 @@ function StudentMainPage() {
     <>
       {!(status && stopped) ? (
         <Center>
-          <LastDate />
           <VStack width='70%'>
+            <LastDate />
             <Box w='100%' p={4} color='black'>
               {OES &&
                 OES.map((OE) => {

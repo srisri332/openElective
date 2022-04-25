@@ -35,6 +35,8 @@ function LoginPage() {
   const adminLogin = async (e) => {
     e.preventDefault();
     try {
+      let user = "Admin";
+
       const res = await api.post(
         "/api/Student/auth",
         JSON.stringify({ rollNumber: adminMail, password: adminPw }),
@@ -47,8 +49,11 @@ function LoginPage() {
       const accessToken = res.data;
       const resStatus = res.status;
 
-      setAuth({ accessToken, resStatus });
-      localStorage.setItem("token", accessToken);
+      if (resStatus === 200) {
+        setAuth({ accessToken, resStatus, user });
+        localStorage.setItem("token", accessToken);
+        localStorage.setItem("user", user);
+      }
 
       // console.log(res);
       if (resStatus == 200) {
@@ -70,6 +75,8 @@ function LoginPage() {
     e.preventDefault();
     // console.log(studentMail + " " + studentPw);
     try {
+      let user = "Student";
+
       const res = await api.post(
         "/api/Student/auth",
         JSON.stringify({ rollNumber: studentMail, password: studentPw }),
@@ -91,11 +98,12 @@ function LoginPage() {
         localStorage.setItem("studentName", studentData.data.name);
         localStorage.setItem("studentID", studentData.data.id);
         localStorage.setItem("studentRoll", studentData.data.rollNumber);
-      }
+        localStorage.setItem("user", user);
 
-      //setting the data for future use in other components
-      setAuth({ accessToken, resStatus });
-      localStorage.setItem("token", accessToken);
+        //setting the data for future use in other components
+        setAuth({ accessToken, resStatus, user });
+        localStorage.setItem("token", accessToken);
+      }
 
       //navigating to student home page
       if (res.status === 200) {

@@ -11,6 +11,7 @@ function NavBar() {
 
   const clearLocalStorage = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
   };
 
   const logout = async () => {

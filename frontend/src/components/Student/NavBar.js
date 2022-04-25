@@ -18,11 +18,15 @@ function NavBar() {
 
   const clearLocalStorage = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("studentRoll");
+    localStorage.removeItem("studentName");
   };
 
   const logout = async () => {
     const res = await clearLocalStorage();
     navigate("/login");
+    s;
   };
 
   const users = {

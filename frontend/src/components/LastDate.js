@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Center, Text } from "@chakra-ui/react";
+import { Center, Text, Flex } from "@chakra-ui/react";
 
 function LastDate() {
   const [lastDate, setLastDate] = useState(null);
@@ -25,10 +25,14 @@ function LastDate() {
 
   return (
     <Center>
-      <Text fontSize='2xl' as='b'>
-        Last Date To Select
-        <Text color='tomato'>{lastDate}</Text>
-      </Text>
+      <Flex>
+        <Text fontSize='2xl' as='b' mr='10px'>
+          Last Date To Select{" "}
+        </Text>
+        <Text color='tomato' fontSize='2xl' as='b'>
+          {lastDate}
+        </Text>
+      </Flex>
     </Center>
   );
 }
