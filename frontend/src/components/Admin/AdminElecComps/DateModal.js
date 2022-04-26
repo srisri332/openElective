@@ -50,6 +50,7 @@ function DateModal() {
     // console.log(word);
     let res = await api.put("/api/Details/" + word);
     console.log(res);
+    onClose();
   };
 
   return (

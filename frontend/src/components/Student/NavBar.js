@@ -26,7 +26,6 @@ function NavBar() {
   const logout = async () => {
     const res = await clearLocalStorage();
     navigate("/login");
-    s;
   };
 
   const users = {

@@ -16,6 +16,7 @@ function App() {
       <Router>
         <div className='App'>
           <Routes>
+            <Route path='/' element={<Landpage />} />
             <Route path='/login' element={<LoginPage />} />
 
             <Route element={<RequireAuth />}>
