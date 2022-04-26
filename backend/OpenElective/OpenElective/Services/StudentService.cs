@@ -72,6 +72,14 @@ namespace OpenElective.Services
             return appDbContext.Students.Where(s => s.Elected == false && s.RollNumber!="admin");
         }
 
+        public void MarkElected(Student student)
+        {
+            Student s=appDbContext.Students.FirstOrDefault(s=>s.RollNumber==student.RollNumber);
+            s.Elected=true;
+            appDbContext.Students.Attach(s);
+            appDbContext.SaveChanges();
+        }
+
         public Student Update(Student student)
         {
             throw new NotImplementedException();

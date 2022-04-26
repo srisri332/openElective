@@ -112,6 +112,11 @@ namespace OpenElective.Services
             return appDbContext.Allotments.ToList();
         }
 
+        public IEnumerable<Allotment> GetByRollNumber(string id)
+        {
+            return appDbContext.Allotments.Where(a => a.RollNumber == id).ToList();
+        }
+
         public void Reset()
         {
             foreach (var allotment in this.Get()) {
