@@ -49,5 +49,10 @@ namespace OpenElective.Services
             appDbContext.SaveChanges();
             return studentChoice;
         }
+
+        public StudentChoice Get(string rollnumber, Guid subId)
+        {
+            return appDbContext.StudentChoices.FirstOrDefault(sc => sc.RollNumber == rollnumber && sc.SubId == subId);
+        }
     }
 }

@@ -10,6 +10,10 @@ namespace OpenElective.Services.Interfaces
 
         public StudentChoice Get(Guid Id);
 
+        public StudentChoice Get(string rollnumber,Guid subId);
+
+
+
         public IEnumerable<StudentChoice> Get(string RollNumber);
 
         public StudentChoice Create(StudentChoice studentChoice);
