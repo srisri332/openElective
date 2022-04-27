@@ -24,6 +24,7 @@ namespace OpenElective.Services
             StudentChoices = new List<StudentChoice>();
             Students = new List<Student>();
             Students=appDbContext.Students.Where(s=>s.Elected==true).ToList();
+
             IEnumerable<Student> studentsWithoutBacklogs = Students.Where(s => s.Backlogs == 0).ToList();
             studentsWithoutBacklogs = studentsWithoutBacklogs.OrderByDescending(s => s.CGPA);
             foreach(Student student in studentsWithoutBacklogs)
@@ -35,13 +36,18 @@ namespace OpenElective.Services
                 {
                     Subject subject=appDbContext.Subjects.FirstOrDefault(s=>s.Id==studentChoice.SubId);
                     OpenElective.Models.OpenElective openElective = appDbContext.OpenElectives.FirstOrDefault(oe => oe.Id == subject.OpenElectiveId);
-                    OEStatus.Add(openElective.Id, false);
-
+                    if (OEStatus.ContainsKey(openElective.Id))
+                    {
+                        OEStatus[openElective.Id] = false;
+                    }
+                    else
+                    {
+                        OEStatus.Add(openElective.Id, false);
+                    }
                 }
                 foreach (StudentChoice studentChoice in studentChoices)
                 {
-                    Subject subject = appDbContext.Subjects.SingleOrDefault(s => s.Id == studentChoice.SubId);
-                    
+                        Subject subject = appDbContext.Subjects.SingleOrDefault(s => s.Id == studentChoice.SubId);
                         OpenElective.Models.OpenElective openElective = appDbContext.OpenElectives.FirstOrDefault(oe => oe.Id == subject.OpenElectiveId);
                         if (OEStatus[openElective.Id] == false && subject.Seats > 0)
                         {
@@ -57,6 +63,7 @@ namespace OpenElective.Services
                                 SubId = studentChoice.SubId,
                                 RollNumber = studentChoice.RollNumber,
                             };
+                            Console.WriteLine(allotment.ToString());
                             appDbContext.Allotments.Add(allotment);
                             appDbContext.SaveChanges();
                             
@@ -77,7 +84,14 @@ namespace OpenElective.Services
                 {
                     Subject subject = appDbContext.Subjects.FirstOrDefault(s => s.Id == studentChoice.SubId);
                     OpenElective.Models.OpenElective openElective = appDbContext.OpenElectives.FirstOrDefault(oe => oe.Id == subject.OpenElectiveId);
-                    OEStatus.Add(openElective.Id, false);
+                    if (OEStatus.ContainsKey(openElective.Id))
+                    {
+                        OEStatus[openElective.Id] = false;
+                    }
+                    else
+                    {
+                        OEStatus.Add(openElective.Id, false);
+                    }
 
                 }
                 foreach (StudentChoice studentChoice in studentChoices)
