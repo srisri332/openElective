@@ -9,7 +9,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
-import StudentNullPage from "../StudentNullComp/StudentNullPage";
+import StudentNullPage from "../StudentCommon/StudentNullPage";
 import axios from "axios";
 import OEForm from "./OEForm";
 import LastDate from "../../LastDate";

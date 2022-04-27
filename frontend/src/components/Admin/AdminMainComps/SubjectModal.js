@@ -66,7 +66,7 @@ function SubjectModal(props) {
 
     let subject = {
       name: subjectName,
-      departmentId: "aaef2013-5524-4d18-a8c3-e375a158b297",
+      departmentId: subjectDept,
       credits: subjectCredits,
       seats: subjectSeats,
       code: subjectCode,
@@ -154,9 +154,10 @@ function SubjectModal(props) {
                   <option value='CSE'>CSE</option>
                   <option value='ECE'>ECE</option>
                   <option value='EEE'>EEE</option>
-                  <option value='CIVIL'>CIVIL</option>
+                  <option value='CIV'>CIVIL</option>
                   <option value='MECH'>MECH</option>
                   <option value='BME'>BME</option>
+                  <option value='CHE'>CHE</option>
                 </Select>
               </FormControl>
 

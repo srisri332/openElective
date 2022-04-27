@@ -51,8 +51,9 @@ function SummaryCard(props) {
         disableFilters: true,
       },
       {
+        id: "elected",
         Header: "Elected",
-        accessor: "elec",
+        accessor: (d) => d.elected.toString(),
         Filter: Filters,
       },
     ],

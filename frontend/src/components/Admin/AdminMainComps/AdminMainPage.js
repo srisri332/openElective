@@ -27,7 +27,7 @@ function AdminMainPage() {
     });
 
     api.get("/api/OpenElectives", config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setAllOES(res.data);
     });
   }, []);
