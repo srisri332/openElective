@@ -10,6 +10,7 @@
 
         public int Backlogs { get; set; }
 
+        public bool Elected { get; set; }
 
     }
 }

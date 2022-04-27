@@ -6,6 +6,8 @@ namespace OpenElective.Services.Interfaces
     {
         public IEnumerable<Allotment> Get();
 
+        public IEnumerable<Allotment> GetByRollNumber(string id);
+
         public void Reset();
     }
 }

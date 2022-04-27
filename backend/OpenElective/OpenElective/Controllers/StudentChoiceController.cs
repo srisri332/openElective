@@ -97,6 +97,10 @@ namespace OpenElective.Controllers
                 {
                     return Forbid();
                 }
+                if (studentChoiceService.Get(createStudentChoiceDTO.RollNumber, createStudentChoiceDTO.SubId) != null)
+                {
+                    return BadRequest();
+                }
                 var sc=mapper.Map<StudentChoice>(createStudentChoiceDTO);
                 sc.Id = Guid.NewGuid();
                 var created= studentChoiceService.Create(sc);

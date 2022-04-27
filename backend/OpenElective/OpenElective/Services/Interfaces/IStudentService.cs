@@ -12,6 +12,8 @@ namespace OpenElective.Services.Interfaces
         public Student Update(Student student);
         public Student Delete(Student student);
 
+        public void MarkElected(Student student);
+
         public IEnumerable<Student> GetFilled();
         public IEnumerable<Student> GetUnFilled();
         

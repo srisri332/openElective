@@ -61,8 +61,30 @@ namespace OpenElective.Controllers
                 return BadRequest();
             }
         }
+        [AllowAnonymous]
+        [HttpGet("{Id}")]
+        public IActionResult Get(string id)
+        {
+            try
+            {
+                var result = allotmentService.GetByRollNumber(id);
+                IEnumerable<GetAllotmentDTO> allotmentsDTO = mapper.Map<IEnumerable<GetAllotmentDTO>>(result);
+                foreach (var allotmentDTO in allotmentsDTO)
+                {
+                    var allotment = result.SingleOrDefault(a => a.Id == allotmentDTO.Id);
+                    allotmentDTO.SubjectName = subjectService.Get(allotment.SubId).Name;
+                    allotmentDTO.RollNumber = allotment.RollNumber;
+                    allotmentDTO.Name = studentService.Get(allotment.RollNumber).Name;
+                    allotmentDTO.OE = openElectiveService.Get(subjectService.Get(allotment.SubId).OpenElectiveId).Name;
+                }
+                return Ok(allotmentsDTO);
+            }
+            catch (Exception)
+            {
 
-
+                throw;
+            }
+        }
 
         // POST api/<AllotmentController>
         [Authorize(Roles = "admin")]

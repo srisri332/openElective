@@ -23,7 +23,7 @@ namespace OpenElective.Controllers
             this.mapper = mapper;
         }
         // GET: api/<OpenElectivesController>
-        [Authorize(Roles = "admin")]
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
         {
