@@ -5,6 +5,7 @@ import AdminElectivePage from "./AdminElecComps/AdminElectivePage";
 import NavBar from "./NavBar";
 import { OEProvider } from "../../contexts/OEContext";
 import { SubjectProvider } from "../../contexts/SubjectContext";
+import ResultsPage from "./AdminElecComps/ResultsPage";
 
 function AdminPage() {
   return (
@@ -21,6 +22,9 @@ function AdminPage() {
             </OEProvider>
           }></Route>
         <Route path='adminelecpage' element={<AdminElectivePage />}></Route>
+        <Route path='resultspage' element={<ResultsPage />}>
+          {" "}
+        </Route>
       </Routes>
     </div>
   );

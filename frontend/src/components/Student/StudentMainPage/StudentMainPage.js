@@ -13,6 +13,7 @@ import StudentNullPage from "../StudentCommon/StudentNullPage";
 import axios from "axios";
 import OEForm from "./OEForm";
 import LastDate from "../../LastDate";
+import StudentResultPage from "../StudentCommon/StudentResultPage";
 
 function StudentMainPage() {
   const [OES, setOES] = useState(null);
@@ -64,18 +65,24 @@ function StudentMainPage() {
 
   return (
     <>
-      {!(status && stopped) ? (
-        <Center>
-          <VStack width='70%'>
-            <LastDate />
-            <Box w='100%' p={4} color='black'>
-              {OES &&
-                OES.map((OE) => {
-                  return <OEForm singleOE={OE} key={OE.id} />;
-                })}
-            </Box>
-          </VStack>
-        </Center>
+      {status ? (
+        <>
+          {stopped ? (
+            <StudentResultPage />
+          ) : (
+            <Center>
+              <VStack width='70%'>
+                <LastDate />
+                <Box w='100%' p={4} color='black'>
+                  {OES &&
+                    OES.map((OE) => {
+                      return <OEForm singleOE={OE} key={OE.id} />;
+                    })}
+                </Box>
+              </VStack>
+            </Center>
+          )}
+        </>
       ) : (
         <StudentNullPage />
       )}

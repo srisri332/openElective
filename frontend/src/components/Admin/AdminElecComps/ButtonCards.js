@@ -14,14 +14,23 @@ import DateModal from "./DateModal";
 import axios from "axios";
 import ResetAllotModal from "./ResetAllotModal";
 import { FaRegStopCircle, FaRegListAlt, FaClipboardList } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function ButtonCards(props) {
   const [status, setStatus] = useState(null);
   const [stopped, setStopped] = useState(null);
 
+  let navigate = useNavigate();
+
   const api = axios.create({
     baseURL: "https://localhost:7006",
   });
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    },
+  };
 
   useEffect(() => {
     api.get("/api/Details").then((res) => {
@@ -36,9 +45,15 @@ function ButtonCards(props) {
 
     if (temp == true) {
       let res = await api.post("/api/Details/end");
+      let res1 = await api.get("/api/Allotment", config);
+
       window.location.reload(false);
-      console.log(res);
+      console.log(res1);
     }
+  };
+
+  const showResult = () => {
+    navigate("/admin/resultspage");
   };
 
   return (
@@ -94,6 +109,7 @@ function ButtonCards(props) {
                     disabled={!(status && stopped)}
                     colorScheme='cyan'
                     fontSize='20px'
+                    onClick={showResult}
                     icon={<FaClipboardList />}
                   />
                 </Tooltip>
