@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ResultDataPage from "./ResultDataPage";
 
 function ResultsPage() {
   const [results, setResults] = useState(null);
@@ -15,12 +16,18 @@ function ResultsPage() {
   };
 
   useEffect(() => {
-    api.get("/api/Allotment", config).then((res) => {
-      console.log(res);
+    api.get("/api/Details").then((res) => {
+      // console.log(res.data.isCompleted + " " + res.data.isStarted);
+      if (res.data.isCompleted && res.data.isStarted) {
+        api.get("/api/Allotment", config).then((res) => {
+          // console.log(res);
+          setResults(res.data);
+        });
+      }
     });
   }, []);
 
-  return <div>ResultsPage</div>;
+  return <>{results && <ResultDataPage resultData={results} />}</>;
 }
 
 export default ResultsPage;

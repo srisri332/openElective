@@ -22,8 +22,10 @@ import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { Filters } from "./Filters";
 
-function SummaryCard(props) {
-  const data = React.useMemo(() => props.studentData, []);
+function ResultDataPage(props) {
+  const data = React.useMemo(() => props.resultData, []);
+
+  //   console.log(data);
 
   const columns = React.useMemo(
     () => [
@@ -38,22 +40,16 @@ function SummaryCard(props) {
         Filter: Filters,
       },
       {
-        Header: "Backlogs",
-        accessor: "backlogs",
+        Header: "OE",
+        accessor: "oe",
         Filter: Filters,
         disableFilters: true,
       },
       {
-        Header: "CGPA",
-        accessor: "cgpa",
+        Header: "Subject",
+        accessor: "subjectName",
         Filter: Filters,
         disableFilters: true,
-      },
-      {
-        id: "elected",
-        Header: "Elected",
-        accessor: (d) => d.elected.toString(),
-        Filter: Filters,
       },
     ],
     []
@@ -209,4 +205,4 @@ function SummaryCard(props) {
   );
 }
 
-export default SummaryCard;
+export default ResultDataPage;
