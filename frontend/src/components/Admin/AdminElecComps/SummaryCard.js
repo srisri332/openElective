@@ -89,14 +89,16 @@ function SummaryCard(props) {
         // maxW='60vw'
         boxShadow='sm'
         bg='white'>
-        <ReactHTMLTableToExcel
-          id='test-table-xls-button'
-          className='download-table-xls-button'
-          table='table-to-xls'
-          filename='tablexls'
-          sheet='tablexls'
-          buttonText='Download as XLS'
-        />
+        <Button colorScheme='blue' variant='outline'>
+          <ReactHTMLTableToExcel
+            id='test-table-xls-button'
+            className='download-table-xls-button'
+            table='table-to-xls'
+            filename='tablexls'
+            sheet='tablexls'
+            buttonText='Download as XLS'
+          />
+        </Button>
         <Table id='table-to-xls' {...getTableProps()}>
           <Thead>
             {headerGroups.map((headerGroup) => (
@@ -175,7 +177,7 @@ function SummaryCard(props) {
               value={pageSize}
               maxW='6em'
               onChange={(e) => setPageSize(Number(e.target.value))}>
-              {[10, 25, 50].map((pageSize) => (
+              {[10, 25, 50, 350].map((pageSize) => (
                 <option key={pageSize} value={pageSize}>
                   Show {pageSize}
                 </option>

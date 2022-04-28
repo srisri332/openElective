@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import user from "../images/user.png";
 import { UnlockIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { FaPowerOff } from "react-icons/fa";
 
 function NavBar() {
   let navigate = useNavigate();
@@ -54,7 +55,7 @@ function NavBar() {
             colorScheme='white'
             fontSize='20px'
             onClick={logout}
-            icon={<UnlockIcon />}
+            icon={<FaPowerOff />}
           />
         </Flex>
       </Box>

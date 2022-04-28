@@ -85,14 +85,17 @@ function ResultDataPage(props) {
         // maxW='60vw'
         boxShadow='sm'
         bg='white'>
-        <ReactHTMLTableToExcel
-          id='test-table-xls-button'
-          className='download-table-xls-button'
-          table='table-to-xls'
-          filename='tablexls'
-          sheet='tablexls'
-          buttonText='Download as XLS'
-        />
+        <Button colorScheme='blue' variant='outline'>
+          <ReactHTMLTableToExcel
+            id='test-table-xls-button'
+            className='download-table-xls-button'
+            table='table-to-xls'
+            filename='tablexls'
+            sheet='tablexls'
+            buttonText='Download as XLS'
+          />
+        </Button>
+
         <Table id='table-to-xls' {...getTableProps()}>
           <Thead>
             {headerGroups.map((headerGroup) => (
