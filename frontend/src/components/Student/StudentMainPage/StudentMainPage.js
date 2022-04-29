@@ -7,31 +7,30 @@ import {
   FormControl,
   FormLabel,
   Button,
-} from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
-import StudentNullPage from "../StudentCommon/StudentNullPage";
-import axios from "axios";
-import OEForm from "./OEForm";
-import LastDate from "../../LastDate";
-import StudentResultPage from "../StudentCommon/StudentResultPage";
+} from '@chakra-ui/react'
+import React, { useState, useEffect } from 'react'
+import StudentNullPage from '../StudentCommon/StudentNullPage'
+import axios from 'axios'
+import OEForm from './OEForm'
+import LastDate from '../../LastDate'
+import StudentResultPage from '../StudentCommon/StudentResultPage'
 
 function StudentMainPage() {
-  const [OES, setOES] = useState(null);
-  const [status, setStatus] = useState(null);
-
-  const [stopped, setStopped] = useState(null);
+  const [OES, setOES] = useState(null)
+  const [status, setStatus] = useState(null)
+  const [stopped, setStopped] = useState(null)
 
   //authorization configs to authenticate as admin
   const config = {
     headers: {
-      Authorization: `Bearer ` + localStorage.getItem("token"),
+      Authorization: `Bearer ` + localStorage.getItem('token'),
     },
-  };
+  }
 
   useEffect(() => {
     const api = axios.create({
-      baseURL: "https://localhost:7006",
-    });
+      baseURL: 'https://localhost:7006',
+    })
 
     //this is how to get the studnet roll number and ID from local storage
     // console.log(
@@ -41,19 +40,19 @@ function StudentMainPage() {
     //     localStorage.getItem("studentToken")
     // );
 
-    api.get("/api/Details", config).then((res) => {
+    api.get('/api/Details', config).then((res) => {
       // console.log(res);
-      setStatus(res.data.isStarted);
+      setStatus(res.data.isStarted)
 
-      setStopped(res.data.isCompleted);
+      setStopped(res.data.isCompleted)
 
       if (res.data.isStarted === true) {
-        api.get("/api/OpenElectives", config).then((res) => {
+        api.get('/api/OpenElectives', config).then((res) => {
           // console.log(res.data);
-          setOES(res.data);
-        });
+          setOES(res.data)
+        })
       }
-    });
+    })
 
     // if (status === true) {
     //   api.get("/api/OpenElectives").then((res) => {
@@ -61,7 +60,7 @@ function StudentMainPage() {
     //     setOES(res.data);
     //   });
     // }
-  }, []);
+  }, [])
 
   return (
     <>
@@ -76,9 +75,12 @@ function StudentMainPage() {
                 <Box w='100%' p={4} color='black'>
                   {OES &&
                     OES.map((OE) => {
-                      return <OEForm singleOE={OE} key={OE.id} />;
+                      return <OEForm singleOE={OE} key={OE.id} />
                     })}
                 </Box>
+                {/* <Button variantColor='teal' mt={4} onClick={() => {}}>
+                  Confirm
+                </Button> */}
               </VStack>
             </Center>
           )}
@@ -87,7 +89,7 @@ function StudentMainPage() {
         <StudentNullPage />
       )}
     </>
-  );
+  )
 }
 
-export default StudentMainPage;
+export default StudentMainPage
