@@ -137,7 +137,28 @@ namespace OpenElective.Services
                 appDbContext.Allotments.Remove(allotment);
                 appDbContext.SaveChanges();
             }
-
+            foreach(var sc in appDbContext.StudentChoices.ToList())
+            {
+                appDbContext.StudentChoices.Remove(sc);
+                appDbContext.SaveChanges();
+            }
+            foreach(var student in appDbContext.Students.ToList())
+            {
+                var s=appDbContext.Students.FirstOrDefault(s=> s.RollNumber==student.RollNumber);
+                s.Elected = false;
+                appDbContext.Students.Attach(student);
+                appDbContext.SaveChanges();
+            }
+            foreach (var sub in appDbContext.Subjects.ToList())
+            {
+                appDbContext.Subjects.Remove(sub);
+                appDbContext.SaveChanges();
+            }
+            foreach (var oe in appDbContext.OpenElectives.ToList())
+            {
+                appDbContext.OpenElectives.Remove(oe);
+                appDbContext.SaveChanges();
+            }
         }
     }
 }
