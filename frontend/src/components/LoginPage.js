@@ -152,7 +152,7 @@ function LoginPage() {
                 />
                 <Input
                   type='text'
-                  placeholder='Email'
+                  placeholder='Username'
                   size='lg'
                   variant='Filled'
                   required={true}
@@ -210,7 +210,7 @@ function LoginPage() {
                 />
                 <Input
                   type='text'
-                  placeholder='Email'
+                  placeholder='Roll Number'
                   size='lg'
                   variant='Filled'
                   onChange={(e) => setStudentMail(e.target.value)}

@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\backend",
+    "\\backend\\OpenElective",
     "\\frontend"
   ],
-  "SelectedNode": "\\backend",
+  "SelectedNode": "\\backend\\OpenElective\\OpenElective.sln",
   "PreviewInSolutionExplorer": false
 }
