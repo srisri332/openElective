@@ -19,12 +19,13 @@ import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import LastDate from "./LastDate";
+// require("dotenv").config();
 
 function LoginPage() {
   const { setAuth } = useAuth();
 
   const api = axios.create({
-    baseURL: "https://localhost:7006",
+    baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
   let navigate = useNavigate();
@@ -125,15 +126,17 @@ function LoginPage() {
           <Image src={logo} alt='logo' width='70px' margin='15px' />
         </Box>
       </Flex>
-      <Flex>
+      <Flex direction={{ base: "column-reverse", md: "row" }}>
         <Spacer />
+
         <Box
-          maxW='sm'
+          // maxW='sm'
           borderWidth='1px'
           borderRadius='lg'
           overflow='hidden'
-          width='50vw'
-          height='60vh'
+          // width='50vw'
+          // height='60vh'
+          m={3}
           padding='30px'
           color='black'
           bg='blue.400'>
@@ -183,15 +186,17 @@ function LoginPage() {
             </VStack>
           </form>
         </Box>
+
         <Spacer />
 
         <Box
-          maxW='sm'
+          // maxW='sm'
           borderWidth='1px'
           borderRadius='lg'
           overflow='hidden'
-          width='50vw'
-          height='60vh'
+          // width='50vw'
+          // height='60vh'
+          m={3}
           padding='30px'
           color='black'
           bg='gray.700'>

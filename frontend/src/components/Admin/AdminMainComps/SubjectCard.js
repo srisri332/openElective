@@ -28,7 +28,7 @@ function SubjectCard(props) {
 
   //base api url for all requests
   const api = axios.create({
-    baseURL: "https://localhost:7006",
+    baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
   //this fucntion is used for showing toast messages

@@ -8,7 +8,7 @@ import DelOEModal from "./DelOEModal";
 function OECard(props) {
   const [subjects, setSubjects] = useState(null);
   const api = axios.create({
-    baseURL: "https://localhost:7006",
+    baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
   useEffect(() => {

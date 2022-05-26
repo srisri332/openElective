@@ -37,7 +37,7 @@ function StartAllotModel(props) {
   const { setAllOES } = useContext(OEContext);
 
   const api = axios.create({
-    baseURL: "https://localhost:7006",
+    baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
   useEffect(() => {

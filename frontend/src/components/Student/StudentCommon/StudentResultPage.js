@@ -28,7 +28,7 @@ function StudentResultPage() {
 
   useEffect(() => {
     const api = axios.create({
-      baseURL: "https://localhost:7006",
+      baseURL: `${process.env.REACT_APP_ENDPOINT}`,
     });
 
     api

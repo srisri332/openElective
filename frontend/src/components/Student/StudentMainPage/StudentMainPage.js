@@ -31,7 +31,7 @@ function StudentMainPage() {
 
   useEffect(() => {
     const api = axios.create({
-      baseURL: "https://localhost:7006",
+      baseURL: `${process.env.REACT_APP_ENDPOINT}`,
     });
 
     //this is how to get the studnet roll number and ID from local storage

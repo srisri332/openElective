@@ -6,7 +6,7 @@ function LastDate() {
   const [lastDate, setLastDate] = useState(null);
 
   const api = axios.create({
-    baseURL: "https://localhost:7006",
+    baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
   useEffect(() => {

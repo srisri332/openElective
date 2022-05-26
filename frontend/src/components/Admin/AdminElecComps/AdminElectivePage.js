@@ -17,7 +17,7 @@ function AdminElectivePage() {
   const [filled, setFilled] = useState(null);
   const [total, setTotal] = useState(null);
   const api = axios.create({
-    baseURL: "https://localhost:7006/",
+    baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
   useEffect(() => {
