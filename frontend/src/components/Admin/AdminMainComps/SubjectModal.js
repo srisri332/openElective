@@ -42,7 +42,17 @@ function SubjectModal(props) {
       title: "Subject Added",
       description: `Successfully added ${subjectName}`,
       status: "success",
-      duration: 6000,
+      duration: 4000,
+      isClosable: true,
+    });
+  };
+
+  const toggleErrorToast = () => {
+    return toast({
+      title: "Add Error",
+      description: `Please add more than 15 seats`,
+      status: "error",
+      duration: 5000,
       isClosable: true,
     });
   };
@@ -63,6 +73,11 @@ function SubjectModal(props) {
   //This function is used to add subject to any particular OE
   const addSubject = async (e) => {
     e.preventDefault();
+
+    if (subjectSeats < 15) {
+      toggleErrorToast();
+      return;
+    }
 
     let subject = {
       name: subjectName,
