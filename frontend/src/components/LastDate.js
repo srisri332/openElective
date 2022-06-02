@@ -26,10 +26,13 @@ function LastDate() {
   return (
     <Center>
       <Flex>
+        <Text fontSize='2xl' as='b' mr='10px' color='tomato '>
+          Department Of CSE |{" "}
+        </Text>
         <Text fontSize='2xl' as='b' mr='10px'>
           Last Date To Select{" "}
         </Text>
-        <Text color='tomato' fontSize='2xl' as='b'>
+        <Text color='purple.400' fontSize='2xl' as='b'>
           {lastDate}
         </Text>
       </Flex>

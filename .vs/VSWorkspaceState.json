@@ -3,8 +3,10 @@
     "",
     "\\backend",
     "\\backend\\OpenElective",
+    "\\backend\\OpenElective\\OpenElective",
+    "\\backend\\OpenElective\\OpenElective\\Services",
     "\\frontend"
   ],
-  "SelectedNode": "\\backend\\OpenElective\\OpenElective.sln",
+  "SelectedNode": "\\backend\\OpenElective\\OpenElective\\Services\\AllotmentService.cs",
   "PreviewInSolutionExplorer": false
 }

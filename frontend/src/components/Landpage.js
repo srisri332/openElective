@@ -12,6 +12,7 @@ import {
 import LastDate from "./LastDate";
 import learn from "./images/learn.png";
 import logo from "./images/logos.png";
+import Footer from "./Footer";
 import { Link } from "react-router-dom";
 
 function Landpage() {
@@ -53,6 +54,7 @@ function Landpage() {
         </Box>
         <Spacer />
       </Flex>
+      <Footer />
     </>
   );
 }

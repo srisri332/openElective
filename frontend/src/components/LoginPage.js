@@ -10,6 +10,8 @@ import {
   InputLeftElement,
   Center,
   Image,
+  FormControl,
+  useToast,
 } from "@chakra-ui/react";
 
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
@@ -19,9 +21,21 @@ import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import LastDate from "./LastDate";
+import Footer from "./Footer";
 // require("dotenv").config();
 
 function LoginPage() {
+  const toast = useToast();
+  const toggleToast = () => {
+    return toast({
+      title: `Login Error`,
+      description: `Entered Username Or Password Is Incorrect`,
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const { setAuth } = useAuth();
 
   const api = axios.create({
@@ -64,6 +78,9 @@ function LoginPage() {
     } catch (err) {
       if (!err?.response) {
         console.log("no server response");
+      }
+      if (err.response.status == 401) {
+        toggleToast();
       }
     }
   };
@@ -115,16 +132,21 @@ function LoginPage() {
       if (!err?.response) {
         console.log("no server response");
       }
+      if (err.response.status == 401) {
+        toggleToast();
+      }
     }
   };
 
   return (
     <div>
-      <LastDate />
       <Flex>
         <Box p='4'>
           <Image src={logo} alt='logo' width='70px' margin='15px' />
         </Box>
+        <Spacer />
+        <LastDate />
+        <Spacer />
       </Flex>
       <Flex direction={{ base: "column-reverse", md: "row" }}>
         <Spacer />
@@ -140,51 +162,53 @@ function LoginPage() {
           padding='30px'
           color='black'
           bg='blue.400'>
-          <form onSubmit={adminLogin}>
-            <Center>
-              <Text fontSize='3xl' fontWeight='bold' color='white'>
-                ADMIN
-              </Text>
-            </Center>
-            <VStack spacing={10} align='stretch' marginTop='3em'>
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents='none'
-                  children={<EmailIcon color='gray.600' boxSize={5} />}
-                  margin='5px'
-                />
-                <Input
-                  type='text'
-                  placeholder='Username'
-                  size='lg'
-                  variant='Filled'
-                  required={true}
-                  onChange={(e) => setAdminMail(e.target.value)}
-                />
-              </InputGroup>
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents='none'
-                  children={<LockIcon color='gray.600' boxSize={5} />}
-                  margin='5px'
-                />
-                <Input
-                  type='password'
-                  placeholder='Password'
-                  size='lg'
-                  variant='Filled'
-                  onChange={(e) => setAdminPw(e.target.value)}
-                />
-              </InputGroup>
-              <Button
-                variant='solid'
-                background='#FF5151'
-                color='white'
-                type='submit'>
-                LOGIN
-              </Button>
-            </VStack>
-          </form>
+          <FormControl isRequired>
+            <form onSubmit={adminLogin}>
+              <Center>
+                <Text fontSize='3xl' fontWeight='bold' color='white'>
+                  ADMIN
+                </Text>
+              </Center>
+              <VStack spacing={10} align='stretch' marginTop='3em'>
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents='none'
+                    children={<EmailIcon color='gray.600' boxSize={5} />}
+                    margin='5px'
+                  />
+                  <Input
+                    type='text'
+                    placeholder='Username'
+                    size='lg'
+                    variant='Filled'
+                    required={true}
+                    onChange={(e) => setAdminMail(e.target.value)}
+                  />
+                </InputGroup>
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents='none'
+                    children={<LockIcon color='gray.600' boxSize={5} />}
+                    margin='5px'
+                  />
+                  <Input
+                    type='password'
+                    placeholder='Password'
+                    size='lg'
+                    variant='Filled'
+                    onChange={(e) => setAdminPw(e.target.value)}
+                  />
+                </InputGroup>
+                <Button
+                  variant='solid'
+                  background='#FF5151'
+                  color='white'
+                  type='submit'>
+                  LOGIN
+                </Button>
+              </VStack>
+            </form>
+          </FormControl>
         </Box>
 
         <Spacer />
@@ -200,54 +224,57 @@ function LoginPage() {
           padding='30px'
           color='black'
           bg='gray.700'>
-          <form onSubmit={studentLogin}>
-            <Center>
-              <Text fontSize='3xl' fontWeight='bold' color='white'>
-                STUDENT
-              </Text>
-            </Center>
-            <VStack spacing={10} align='stretch' marginTop='3em'>
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents='none'
-                  children={<EmailIcon color='gray.600' boxSize={5} />}
-                  margin='5px'
-                />
-                <Input
-                  type='text'
-                  placeholder='Roll Number'
-                  size='lg'
-                  variant='Filled'
-                  onChange={(e) => setStudentMail(e.target.value)}
-                />
-              </InputGroup>
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents='none'
-                  children={<LockIcon color='gray.600' boxSize={5} />}
-                  margin='5px'
-                />
-                <Input
-                  type='password'
-                  placeholder='Password'
-                  size='lg'
-                  variant='Filled'
-                  onChange={(e) => setStudentPw(e.target.value)}
-                />
-              </InputGroup>
-              <Button
-                variant='solid'
-                background='#FF5151'
-                color='white'
-                type='submit'>
-                LOGIN
-              </Button>
-            </VStack>
-          </form>
+          <FormControl isRequired>
+            <form onSubmit={studentLogin}>
+              <Center>
+                <Text fontSize='3xl' fontWeight='bold' color='white'>
+                  STUDENT
+                </Text>
+              </Center>
+              <VStack spacing={10} align='stretch' marginTop='3em'>
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents='none'
+                    children={<EmailIcon color='gray.600' boxSize={5} />}
+                    margin='5px'
+                  />
+                  <Input
+                    type='text'
+                    placeholder='Roll Number'
+                    size='lg'
+                    variant='Filled'
+                    onChange={(e) => setStudentMail(e.target.value)}
+                  />
+                </InputGroup>
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents='none'
+                    children={<LockIcon color='gray.600' boxSize={5} />}
+                    margin='5px'
+                  />
+                  <Input
+                    type='password'
+                    placeholder='Password'
+                    size='lg'
+                    variant='Filled'
+                    onChange={(e) => setStudentPw(e.target.value)}
+                  />
+                </InputGroup>
+                <Button
+                  variant='solid'
+                  background='#FF5151'
+                  color='white'
+                  type='submit'>
+                  LOGIN
+                </Button>
+              </VStack>
+            </form>
+          </FormControl>
         </Box>
 
         <Spacer />
       </Flex>
+      <Footer />
     </div>
   );
 }
