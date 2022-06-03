@@ -34,8 +34,14 @@ namespace OpenElective.Services
                 studentChoices=studentChoices.OrderBy(sc=>sc.Priority);
                 foreach(StudentChoice studentChoice in studentChoices)
                 {
+
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                     Subject subject=appDbContext.Subjects.FirstOrDefault(s=>s.Id==studentChoice.SubId);
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                     OpenElective.Models.OpenElective openElective = appDbContext.OpenElectives.FirstOrDefault(oe => oe.Id == subject.OpenElectiveId);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                     if (OEStatus.ContainsKey(openElective.Id))
                     {
                         OEStatus[openElective.Id] = false;
@@ -44,12 +50,16 @@ namespace OpenElective.Services
                     {
                         OEStatus.Add(openElective.Id, false);
                     }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 }
                 foreach (StudentChoice studentChoice in studentChoices)
                 {
                         Subject subject = appDbContext.Subjects.SingleOrDefault(s => s.Id == studentChoice.SubId);
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                         OpenElective.Models.OpenElective openElective = appDbContext.OpenElectives.FirstOrDefault(oe => oe.Id == subject.OpenElectiveId);
-                        if (OEStatus[openElective.Id] == false && subject.Seats > 0)
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                    if (OEStatus[openElective.Id] == false && subject.Seats > 0)
                         {
                             OEStatus[openElective.Id] = true;
                             subject.Seats--;
@@ -68,7 +78,8 @@ namespace OpenElective.Services
                             appDbContext.SaveChanges();
                             
                         }
-                    
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+
 
                 }
 
@@ -83,7 +94,10 @@ namespace OpenElective.Services
                 foreach (StudentChoice studentChoice in studentChoices)
                 {
                     Subject subject = appDbContext.Subjects.FirstOrDefault(s => s.Id == studentChoice.SubId);
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                     OpenElective.Models.OpenElective openElective = appDbContext.OpenElectives.FirstOrDefault(oe => oe.Id == subject.OpenElectiveId);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                     if (OEStatus.ContainsKey(openElective.Id))
                     {
                         OEStatus[openElective.Id] = false;
@@ -92,13 +106,18 @@ namespace OpenElective.Services
                     {
                         OEStatus.Add(openElective.Id, false);
                     }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
                 }
                 foreach (StudentChoice studentChoice in studentChoices)
                 {
                     Subject subject = appDbContext.Subjects.SingleOrDefault(s => s.Id == studentChoice.SubId);
 
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                     OpenElective.Models.OpenElective openElective = appDbContext.OpenElectives.FirstOrDefault(oe => oe.Id == subject.OpenElectiveId);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                     if (OEStatus[openElective.Id] == false && subject.Seats > 0)
                     {
                         OEStatus[openElective.Id] = true;
@@ -115,8 +134,10 @@ namespace OpenElective.Services
                         appDbContext.Allotments.Add(allotment);
                         appDbContext.SaveChanges();
 
-                        result.Append(allotment);
+                        _ = result.Append(allotment);
                     }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
 
                 }
@@ -145,7 +166,9 @@ namespace OpenElective.Services
             foreach(var student in appDbContext.Students.ToList())
             {
                 var s=appDbContext.Students.FirstOrDefault(s=> s.RollNumber==student.RollNumber);
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 s.Elected = false;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 appDbContext.Students.Attach(student);
                 appDbContext.SaveChanges();
             }

@@ -2,6 +2,6 @@
 {
     public class DateDTO
     {
-        public string Date { get; set; }
+        public string? Date { get; set; }
     }
 }

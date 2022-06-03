@@ -18,8 +18,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       builder =>
                       {
-                          builder.WithOrigins("http://localhost:3000",
-                                              "http://www.contoso.com")
+                          builder.WithOrigins("https://frontend-8s532wy30-srisri332.vercel.app", "http://localhost:3000",
+                                              "https://open-elective.vercel.app",
+                                              "https://open-elective-srisri332.vercel.app",
+                                              "https://open-elective-git-main-srisri332.vercel.app")
                                                 .AllowAnyHeader()
                                                 .AllowAnyMethod()
                                                 .AllowCredentials();
@@ -65,12 +67,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
 
 app.UseHttpsRedirection();
 

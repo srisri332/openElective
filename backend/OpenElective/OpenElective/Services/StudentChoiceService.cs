@@ -16,6 +16,12 @@ namespace OpenElective.Services
             appDbContext.StudentChoices.Add(studentChoice);
             appDbContext.SaveChanges();
             var created = appDbContext.StudentChoices.FirstOrDefault(sc => sc.Id == studentChoice.Id);
+            if (created == null)
+            {
+#pragma warning disable CS8603 // Possible null reference return.
+                return null;
+#pragma warning restore CS8603 // Possible null reference return.
+            }
             return created;
         }
 
@@ -30,7 +36,14 @@ namespace OpenElective.Services
 
         public StudentChoice Get( Guid Id)
         {
-            return appDbContext.StudentChoices.FirstOrDefault(sc => sc.Id == Id);
+            StudentChoice sc=appDbContext.StudentChoices.FirstOrDefault(sc => sc.Id == Id);
+            if (sc == null)
+            {
+#pragma warning disable CS8603 // Possible null reference return.
+                return null;
+#pragma warning restore CS8603 // Possible null reference return.
+            }
+            return sc;
         }
 
         public IEnumerable<StudentChoice> GetAll()
@@ -52,7 +65,14 @@ namespace OpenElective.Services
 
         public StudentChoice Get(string rollnumber, Guid subId)
         {
-            return appDbContext.StudentChoices.FirstOrDefault(sc => sc.RollNumber == rollnumber && sc.SubId == subId);
+            StudentChoice sc=appDbContext.StudentChoices.FirstOrDefault(sc => sc.RollNumber == rollnumber && sc.SubId == subId);
+            if (sc == null)
+            {
+#pragma warning disable CS8603 // Possible null reference return.
+                return null;
+#pragma warning restore CS8603 // Possible null reference return.
+            }
+            return sc;
         }
     }
 }

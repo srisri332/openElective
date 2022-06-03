@@ -17,20 +17,27 @@ namespace OpenElective.Services
             appDbContext.OpenElectives.Add(openElective);
             appDbContext.SaveChanges();
             var created = appDbContext.OpenElectives.FirstOrDefault(o => o.Id == openElective.Id);
+            if (created == null)
+                throw new Exception();
             return created;
         }
 
         public Models.OpenElective Delete(Guid Id)
         {
             var OE = Get(Id);
-            appDbContext.OpenElectives.Remove(OE);
+#pragma warning disable CS8604 // Possible null reference argument.
+            _ = appDbContext.OpenElectives.Remove(OE);
+#pragma warning restore CS8604 // Possible null reference argument.
             appDbContext.SaveChanges();
             return OE;
         }
 
-        public Models.OpenElective Get(Guid Id)
+        public Models.OpenElective? Get(Guid Id)
         {
-            return appDbContext.OpenElectives.FirstOrDefault(o => (o.Id == Id) );
+            var oe= appDbContext.OpenElectives.FirstOrDefault(o => (o.Id == Id) );
+            if (oe == null)
+                return null;
+            return oe;
         }
 
         public IEnumerable<Models.OpenElective> GetAll()

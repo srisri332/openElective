@@ -7,7 +7,7 @@ namespace OpenElective.Models
     public class StudentChoice
     {
         public Guid Id { get; set; }
-        public string RollNumber { get; set; }
+        public string? RollNumber { get; set; }
         public Guid SubId { get; set; }
 
 

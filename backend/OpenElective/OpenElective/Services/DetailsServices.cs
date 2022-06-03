@@ -12,15 +12,20 @@ namespace OpenElective.Services
         {
             this.appDbContext = appDbContext;
         }
-        public Details Get()
+        public Details? Get()
         {
-            return appDbContext.Details.FirstOrDefault(d => d.Name == "BVRIT");
+            var res= appDbContext.Details.FirstOrDefault(d => d.Name == "BVRIT");
+            if (res == null)
+                return null;
+            return res;
         }
         public Details EndProcess()
         {
 
             Details d=appDbContext.Details.FirstOrDefault(d=>d.Name=="BVRIT");
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             d.IsCompleted=true;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             d.IsStarted=true;
             appDbContext.Details.Attach(d);
             appDbContext.SaveChanges();
@@ -30,7 +35,9 @@ namespace OpenElective.Services
         public Details Reset()
         {
             Details d = appDbContext.Details.FirstOrDefault(d => d.Name == "BVRIT");
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             d.IsCompleted = false;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             d.IsStarted=false;
             d.Date = DateTime.Now.ToString("ddMMyyyy", CultureInfo.InvariantCulture);
             appDbContext.Details.Attach(d);
@@ -41,7 +48,9 @@ namespace OpenElective.Services
         public Details SetDate(string date)
         {
             Details d = appDbContext.Details.FirstOrDefault(d => d.Name == "BVRIT");
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             d.Date = date;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             appDbContext.Details.Attach(d);
             appDbContext.SaveChanges();
             return d;
@@ -50,7 +59,9 @@ namespace OpenElective.Services
         public Details StartProcess()
         {
             Details d = appDbContext.Details.FirstOrDefault(d => d.Name == "BVRIT");
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             d.IsStarted = true;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             appDbContext.Details.Attach(d);
             appDbContext.SaveChanges();
             return d;

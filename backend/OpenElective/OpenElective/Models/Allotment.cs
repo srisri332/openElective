@@ -6,7 +6,7 @@
         
         public Guid StudentChoiceId { get; set; }
 
-        public string RollNumber { get; set; }
+        public string? RollNumber { get; set; }
 
         public Guid SubId { get; set; }
 

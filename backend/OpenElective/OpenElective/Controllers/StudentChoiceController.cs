@@ -41,13 +41,17 @@ namespace OpenElective.Controllers
                 var allDTO = mapper.Map<IEnumerable<GetStudentChoiceDTO>>(all);
                 foreach(var sc in allDTO)
                 {
+#pragma warning disable CS8604 // Possible null reference argument.
                     var s = studentService.Get(sc.RollNumber);
-                    sc.StudentName=s.Name;
+#pragma warning restore CS8604 // Possible null reference argument.
+                    sc.StudentName = s.Name;
                     var sub = subjectService.Get(sc.SubId);
                     if (sub != null)
                     {
                         sc.SubjectName = sub.Name;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                         sc.OEName = openElectiveService.Get(sub.OpenElectiveId).Name;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                     }
                 }
                 return Ok(allDTO);
@@ -67,11 +71,15 @@ namespace OpenElective.Controllers
             {
                 var sc = studentChoiceService.Get(id);
                 var scDTO=mapper.Map<GetStudentChoiceDTO>(sc);
+#pragma warning disable CS8604 // Possible null reference argument.
                 var s= studentService.Get(sc.RollNumber);
+#pragma warning restore CS8604 // Possible null reference argument.
                 scDTO.StudentName = s.Name;
                 var sub = subjectService.Get(sc.SubId);
                 scDTO.SubjectName = sub.Name;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 scDTO.OEName = openElectiveService.Get(sub.OpenElectiveId).Name;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 return Ok(scDTO);
             }
             catch (Exception)
@@ -92,11 +100,15 @@ namespace OpenElective.Controllers
                     return BadRequest(createStudentChoiceDTO);
                 }
                 var claimsIdentity=User.Identity as ClaimsIdentity;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 if (IdClaim.Value.ToString() != createStudentChoiceDTO.RollNumber.ToString())
                 {
                     return Forbid();
                 }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 if (studentChoiceService.Get(createStudentChoiceDTO.RollNumber, createStudentChoiceDTO.SubId) != null)
                 {
                     return BadRequest();
@@ -125,11 +137,15 @@ namespace OpenElective.Controllers
                     return BadRequest(createStudentChoiceDTO);
                 }
                 var claimsIdentity = User.Identity as ClaimsIdentity;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 if (IdClaim.Value.ToString() != createStudentChoiceDTO.RollNumber.ToString())
                 {
                     return Forbid();
                 }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 var sc = mapper.Map<StudentChoice>(createStudentChoiceDTO);
                 var created = studentChoiceService.Update(sc);
                 return CreatedAtAction(nameof(Get), created);

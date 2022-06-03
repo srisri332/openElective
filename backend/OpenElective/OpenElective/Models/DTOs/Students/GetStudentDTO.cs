@@ -3,8 +3,8 @@
     public class GetStudentDTO
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string RollNumber { get; set; }
+        public string? Name { get; set; }
+        public string? RollNumber { get; set; }
 
         public float CGPA { get; set; }
 
