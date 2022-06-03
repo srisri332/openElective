@@ -36,6 +36,16 @@ function LoginPage() {
     });
   };
 
+  const toggleWarnToast = () => {
+    return toast({
+      title: `Server Error`,
+      description: `No Server Response`,
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const { setAuth } = useAuth();
 
   const api = axios.create({
@@ -77,6 +87,7 @@ function LoginPage() {
       }
     } catch (err) {
       if (!err?.response) {
+        toggleWarnToast();
         console.log("no server response");
       }
       if (err.response.status == 401) {
@@ -130,6 +141,7 @@ function LoginPage() {
       }
     } catch (err) {
       if (!err?.response) {
+        toggleWarnToast();
         console.log("no server response");
       }
       if (err.response.status == 401) {
