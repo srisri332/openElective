@@ -30,7 +30,7 @@ function LastDate() {
           Department Of CSE |{" "}
         </Text>
         <Text fontSize='2xl' as='b' mr='10px'>
-          Last Date Select{" "}
+          Last Date To Select{" "}
         </Text>
         <Text color='purple.400' fontSize='2xl' as='b'>
           {lastDate}
