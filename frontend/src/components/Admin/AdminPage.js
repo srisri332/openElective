@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import { OEProvider } from "../../contexts/OEContext";
 import { SubjectProvider } from "../../contexts/SubjectContext";
 import ResultsPage from "./AdminElecComps/ResultsPage";
+import ManageStudents from "./StudentManageComps/ManageStudents";
 
 function AdminPage() {
   return (
@@ -21,10 +22,12 @@ function AdminPage() {
               </SubjectProvider>
             </OEProvider>
           }></Route>
+
         <Route path='adminelecpage' element={<AdminElectivePage />}></Route>
-        <Route path='resultspage' element={<ResultsPage />}>
-          {" "}
-        </Route>
+
+        <Route path='resultspage' element={<ResultsPage />}></Route>
+
+        <Route path='managestudents' element={<ManageStudents />}></Route>
       </Routes>
     </div>
   );

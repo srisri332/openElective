@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\backend",
+    "\\backend\\OpenElective",
+    "\\backend\\OpenElective\\OpenElective",
+    "\\backend\\OpenElective\\OpenElective\\Services",
     "\\frontend"
   ],
-  "SelectedNode": "\\backend",
+  "SelectedNode": "\\backend\\OpenElective\\OpenElective\\Services\\AllotmentService.cs",
   "PreviewInSolutionExplorer": false
 }

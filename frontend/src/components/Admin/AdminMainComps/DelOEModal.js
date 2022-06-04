@@ -50,7 +50,7 @@ function DelOEModal(props) {
   const { setAllOES } = useContext(OEContext);
 
   const api = axios.create({
-    baseURL: "https://localhost:7006",
+    baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
   //this function will update the global context Open Elctives (OES), i.e the total number of OES

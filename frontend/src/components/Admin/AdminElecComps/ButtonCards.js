@@ -23,7 +23,7 @@ function ButtonCards(props) {
   let navigate = useNavigate();
 
   const api = axios.create({
-    baseURL: "https://localhost:7006",
+    baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
   const config = {

@@ -36,11 +36,14 @@ function NavBar() {
           <Spacer />
 
           <div>
-            <Link to='/admin/adminmainpage' style={{ marginRight: "10px" }}>
+            <Link to='/admin/adminmainpage' style={{ marginRight: "15px" }}>
               Main Page
             </Link>
-            <Link to='/admin/adminelecpage' style={{ marginRight: "20px" }}>
+            <Link to='/admin/adminelecpage' style={{ marginRight: "15px" }}>
               Elective Page
+            </Link>
+            <Link to='/admin/managestudents' style={{ marginRight: "20px" }}>
+              Manage Students
             </Link>
             <IconButton
               variant='outline'

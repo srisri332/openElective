@@ -7,7 +7,7 @@ function OEForm(props) {
 
   useEffect(() => {
     const api = axios.create({
-      baseURL: "https://localhost:7006",
+      baseURL: `${process.env.REACT_APP_ENDPOINT}`,
     });
 
     api.get("/api/Subjects/" + props.singleOE.id).then((res) => {
