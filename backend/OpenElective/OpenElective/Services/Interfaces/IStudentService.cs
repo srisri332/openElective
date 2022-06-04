@@ -10,7 +10,7 @@ namespace OpenElective.Services.Interfaces
 
         public Student Create(Student student);
         public Student Update(Student student);
-        public Student Delete(Student student);
+        public Student Delete(string RollNumber);
 
         public void MarkElected(Student student);
 

@@ -47,9 +47,12 @@ namespace OpenElective.Services
             return student;
         }
 
-        public Student Delete(Student student)
+        public Student Delete(string rollnumber)
         {
-            throw new NotImplementedException();
+            var s=Get(rollnumber);
+            appDbContext.Students.Remove(s);
+            appDbContext.SaveChanges();
+            return s;
         }
 
         public Student Get(string RollNumber)

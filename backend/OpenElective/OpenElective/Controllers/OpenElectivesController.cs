@@ -144,7 +144,7 @@ namespace OpenElective.Controllers
             }
             catch (Exception)
             {
-                throw;
+                return BadRequest();
             }
         }
     }

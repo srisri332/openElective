@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpenElective.Models;
 using OpenElective.Models.DTOs;
 using OpenElective.Models.DTOs.Students;
 using OpenElective.Services.Interfaces;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OpenElective.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase
@@ -21,6 +24,7 @@ namespace OpenElective.Controllers
             this.mapper = mapper;
         }
         // GET: api/<StudentController>
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Get()
         {
@@ -37,6 +41,7 @@ namespace OpenElective.Controllers
         }
 
         // GET api/<StudentController>/5
+        [AllowAnonymous]
         [HttpGet("{RollNumber}")]
         public IActionResult Get( string RollNumber)
         {
@@ -51,6 +56,7 @@ namespace OpenElective.Controllers
                 throw;
             }
         }
+        [Authorize(Roles = "admin")]
         [HttpGet("Filled")]
         public IActionResult GetFilled()
         {
@@ -65,7 +71,7 @@ namespace OpenElective.Controllers
                 throw;
             }
         }
-
+        [Authorize(Roles = "admin")]
         [HttpGet("Unfilled")]
         public IActionResult GetUnfilled()
         {
@@ -81,12 +87,23 @@ namespace OpenElective.Controllers
             }
         }
         // POST api/<StudentController>
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Post([FromBody] CreateStudentDTO createStudentDTO)
         {
             try
             {
-                if(createStudentDTO == null)
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
+                if (IdClaim.Value.ToString() != "admin")
+                {
+                    return Forbid();
+                }
+                if (createStudentDTO == null)
+                {
+                    return BadRequest();
+                }
+                if(studentService.Get(createStudentDTO.RollNumber)!= null)
                 {
                     return BadRequest();
                 }
@@ -95,7 +112,7 @@ namespace OpenElective.Controllers
                 st.RollNumber = createStudentDTO.RollNumber;
                 st.Backlogs = createStudentDTO.Backlogs;
                 st.Id=Guid.NewGuid();
-                st.Password = st.RollNumber;
+                st.Password = st.RollNumber?.ToUpper();
                 var createdStudent = studentService.Create(st);
                 return CreatedAtAction(nameof(Get),createdStudent);
             }
@@ -112,6 +129,7 @@ namespace OpenElective.Controllers
         {
             try
             {
+              
                 var s = studentService.Get(id);
                 studentService.MarkElected(s);
                 return Ok();
@@ -123,11 +141,30 @@ namespace OpenElective.Controllers
         }
 
         // DELETE api/<StudentController>/5
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(string id)
         {
+            try
+            {
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+                var IdClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
+                if (IdClaim.Value.ToString() != "admin")
+                {
+                    return Forbid();
+                }
+                if(studentService.Get(id)==null) return BadRequest();
+                var deleted = studentService.Delete(id);
+                return Ok(deleted);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
         }
 
+        [AllowAnonymous]
         [HttpPost("auth")]
         public IActionResult Authenticate([FromBody] StudentLoginDTO studentLoginDTO)
         {
