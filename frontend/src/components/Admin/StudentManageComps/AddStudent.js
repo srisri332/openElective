@@ -5,26 +5,57 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Select,
+  useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
 
 function AddStudent() {
   const initialRef = React.useRef();
+
+  const toast = useToast();
+  const toggleToast = () => {
+    return toast({
+      title: `Student Added`,
+      description: `${studentName} added successfully`,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
+  const toggleWarnToast = () => {
+    return toast({
+      title: `Server Error`,
+      description: `No Server Response`,
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
+  const api = axios.create({
+    baseURL: `${process.env.REACT_APP_ENDPOINT}`,
+  });
 
   const [studentName, setStudentname] = useState(null);
   const [studentRoll, setStudentRoll] = useState(" ");
   const [studentCGPA, setStudentCGPA] = useState(null);
   const [studentBacklogs, setStudentBacklogs] = useState(" ");
 
-  const addStudent = () => {
+  const addStudent = async (e) => {
     let subject = {
       name: studentName,
-      seats: studentCGPA,
-      code: studentRoll,
-      instructor: studentBacklogs,
-      details: "lols",
+      rollNumber: studentRoll,
+      cgpa: studentCGPA,
+      backlogs: studentBacklogs,
     };
-    console.log(subject);
+
+    let res = await api.post("/api/Student", subject);
+
+    console.log(res.status);
+
+    toggleToast();
+    //     console.log(subject);
   };
 
   return (
@@ -59,7 +90,7 @@ function AddStudent() {
           <Input
             variant='filled'
             placeholder='CGPA'
-            type='number'
+            type='float'
             onChange={(e) => setStudentCGPA(e.target.value)}
           />
         </FormControl>
