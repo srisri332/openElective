@@ -13,6 +13,10 @@ function AdminElectivePage() {
   const [someID, setSomeID] = useState(uuidv4());
   const [value, setValue] = React.useState("3");
 
+  const config = {
+    headers: { Authorization: `Bearer ` + localStorage.getItem("token") },
+  };
+
   //this are used for displaying total number of students filled
   const [filled, setFilled] = useState(null);
   const [total, setTotal] = useState(null);
@@ -21,20 +25,20 @@ function AdminElectivePage() {
   });
 
   useEffect(() => {
-    api.get("/api/Student").then((res) => {
+    api.get("/api/Student", config).then((res) => {
       setStudents(res.data);
       setTotal(res.data.length);
       // console.log(res.data);
     });
 
-    api.get("/api/Details").then((res) => {
+    api.get("/api/Details", config).then((res) => {
       // console.log(res);
       setStatus(res.data.isStarted);
       setStopped(res.data.isCompleted);
     });
 
     //this is just to set the state for total number of students
-    api.get("/api/Student/Filled").then((res) => {
+    api.get("/api/Student/Filled", config).then((res) => {
       setFilled(res.data.length);
       // console.log(res.data);
     });
@@ -42,7 +46,7 @@ function AdminElectivePage() {
 
   //get students that filled the OE form
   const getFilledDetails = async () => {
-    const res = await api.get("/api/Student/Filled");
+    const res = await api.get("/api/Student/Filled", config);
     await setStudents(res.data);
     await setSomeID(uuidv4());
     // console.log(students);
@@ -50,14 +54,14 @@ function AdminElectivePage() {
 
   //get students that did not fill the OE form
   const getUnfilledDetails = async () => {
-    const res = await api.get("/api/Student/Unfilled");
+    const res = await api.get("/api/Student/Unfilled", config);
     await setStudents(res.data);
     await setSomeID(uuidv4());
     // console.log(students);
   };
 
   const getAllDetails = async () => {
-    const res = await api.get("/api/Student");
+    const res = await api.get("/api/Student", config);
     await setStudents(res.data);
     await setSomeID(uuidv4());
     // console.log(students);

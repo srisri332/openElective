@@ -43,12 +43,16 @@ function DateModal() {
 
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  const config = {
+    headers: { Authorization: `Bearer ` + localStorage.getItem("token") },
+  };
+
   const func = async () => {
     let text = selectedDate + " ";
     const myArray = text.split(" ");
     let word = myArray[2] + months[`${myArray[1]}`] + myArray[3];
     // console.log(word);
-    let res = await api.put("/api/Details/" + word);
+    let res = await api.put("/api/Details/" + word, config);
     console.log(res);
     onClose();
   };

@@ -11,15 +11,19 @@ function OECard(props) {
     baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
+  const config = {
+    headers: { Authorization: `Bearer ` + localStorage.getItem("token") },
+  };
+
   useEffect(() => {
-    api.get("/api/Subjects/" + props.elective.id).then((res) => {
+    api.get("/api/Subjects/" + props.elective.id, config).then((res) => {
       // console.log(res.data);
       setSubjects(res.data);
     });
   }, []);
 
   const updateSubjects = () => {
-    api.get("/api/Subjects/" + props.elective.id).then((res) => {
+    api.get("/api/Subjects/" + props.elective.id, config).then((res) => {
       // console.log(res.data);
       setSubjects(res.data);
     });

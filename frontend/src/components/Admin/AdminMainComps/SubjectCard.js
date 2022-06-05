@@ -19,7 +19,7 @@ function SubjectCard(props) {
   const [status, setStatus] = useState(null);
 
   useEffect(() => {
-    api.get("/api/Details").then((res) => {
+    api.get("/api/Details", config).then((res) => {
       // console.log(res.data);
       setStatus(res.data.isStarted);
       // console.log(status);

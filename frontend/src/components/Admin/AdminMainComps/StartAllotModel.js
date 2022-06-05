@@ -40,8 +40,12 @@ function StartAllotModel(props) {
     baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
+  const config = {
+    headers: { Authorization: `Bearer ` + localStorage.getItem("token") },
+  };
+
   useEffect(() => {
-    api.get("/api/Details").then((res) => {
+    api.get("/api/Details", config).then((res) => {
       // console.log(res.data);
       setStatus(res.data.isStarted);
       // console.log(status);
@@ -50,7 +54,7 @@ function StartAllotModel(props) {
 
   //This function is used to start the OE allotment process
   const startAllotment = async () => {
-    let res = await api.post("/api/Details/start");
+    let res = await api.post("/api/Details/start", config);
     console.log(res.status);
     //     if (res.status == 200) {
     //       updateAllOES();
