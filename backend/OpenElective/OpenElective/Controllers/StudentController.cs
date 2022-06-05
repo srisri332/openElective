@@ -153,13 +153,11 @@ namespace OpenElective.Controllers
                 {
                     return Forbid();
                 }
-                if(studentService.Get(id)==null) return BadRequest();
                 var deleted = studentService.Delete(id);
                 return Ok(deleted);
             }
             catch (Exception)
             {
-
                 return BadRequest();
             }
         }
