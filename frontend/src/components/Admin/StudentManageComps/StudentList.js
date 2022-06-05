@@ -38,6 +38,16 @@ function StudentList(props) {
     });
   };
 
+  const warnToast = () => {
+    return toast({
+      title: `Delete Error`,
+      description: `You cannot delete Admin`,
+      status: "warning",
+      duration: 6000,
+      isClosable: true,
+    });
+  };
+
   const api = axios.create({
     baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
@@ -52,11 +62,15 @@ function StudentList(props) {
     let temp = window.confirm(" Are you sure you want to delete the student?");
 
     if (temp === true) {
-      let res = await api.delete("/api/Student/" + rollNumber, config);
-      if (res.status === 200) {
-        toggleToast();
+      if (rollNumber != "admin") {
+        let res = await api.delete("/api/Student/" + rollNumber, config);
+        if (res.status === 200) {
+          toggleToast();
+        }
+        console.log(res);
+      } else {
+        warnToast();
       }
-      console.log(res);
     }
   };
 
