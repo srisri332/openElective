@@ -14,15 +14,52 @@ import {
   Spacer,
   Flex,
   Select,
-  useEditableState,
+  useToast,
 } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination, useFilters } from "react-table";
-import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import {
+  ChevronRightIcon,
+  ChevronLeftIcon,
+  DeleteIcon,
+} from "@chakra-ui/icons";
 import { Filters } from "../AdminElecComps/Filters";
+import axios from "axios";
 
 function StudentList(props) {
+  const toast = useToast();
+  const toggleToast = () => {
+    return toast({
+      title: `Student Deleted Successfully`,
+      description: `Please refresh the page to update list `,
+      status: "success",
+      duration: 6000,
+      isClosable: true,
+    });
+  };
+
+  const api = axios.create({
+    baseURL: `${process.env.REACT_APP_ENDPOINT}`,
+  });
+
+  //authorization configs to authenticate as admin
+  const config = {
+    headers: { Authorization: `Bearer ` + localStorage.getItem("token") },
+  };
+
+  //function used to delete the student
+  const deletStudent = async (rollNumber) => {
+    let temp = window.confirm(" Are you sure you want to delete the student?");
+
+    if (temp === true) {
+      let res = await api.delete("/api/Student/" + rollNumber, config);
+      if (res.status === 200) {
+        toggleToast();
+      }
+      console.log(res);
+    }
+  };
+
   const data = React.useMemo(() => props.studentData, []);
 
   const columns = React.useMemo(
@@ -52,8 +89,19 @@ function StudentList(props) {
       {
         id: "delete",
         Header: "DELETE",
-
-        Filter: Filters,
+        Cell: ({ row }) => (
+          <Button
+            size='sm'
+            type='submit'
+            leftIcon={<DeleteIcon />}
+            color='red.300'
+            cursor='pointer'
+            colorScheme='white'
+            variant='solid'
+            onClick={() => {
+              deletStudent(row.original.rollNumber);
+            }}></Button>
+        ),
       },
     ],
     []
