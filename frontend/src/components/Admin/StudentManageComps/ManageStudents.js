@@ -7,12 +7,17 @@ import axios from "axios";
 function ManageStudents() {
   const [students, setStudents] = useState(null);
 
+  //authorization configs to authenticate as admin
+  const config = {
+    headers: { Authorization: `Bearer ` + localStorage.getItem("token") },
+  };
+
   const api = axios.create({
     baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
   useEffect(() => {
-    api.get("/api/Student").then((res) => {
+    api.get("/api/Student", config).then((res) => {
       setStudents(res.data);
       // console.log(res.data);
     });

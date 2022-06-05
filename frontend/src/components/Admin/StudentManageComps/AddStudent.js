@@ -37,6 +37,11 @@ function AddStudent() {
     baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
+  //authorization configs to authenticate as admin
+  const config = {
+    headers: { Authorization: `Bearer ` + localStorage.getItem("token") },
+  };
+
   const [studentName, setStudentname] = useState(null);
   const [studentRoll, setStudentRoll] = useState(" ");
   const [studentCGPA, setStudentCGPA] = useState(null);
@@ -50,7 +55,7 @@ function AddStudent() {
       backlogs: studentBacklogs,
     };
 
-    let res = await api.post("/api/Student", subject);
+    let res = await api.post("/api/Student", subject, config);
 
     console.log(res.status);
 
