@@ -16,11 +16,21 @@ function ManageStudents() {
     baseURL: `${process.env.REACT_APP_ENDPOINT}`,
   });
 
+  const removeAdmin = (student) => {
+    return student.rollNumber != "admin";
+  };
+
   useEffect(() => {
-    api.get("/api/Student", config).then((res) => {
-      setStudents(res.data);
-      // console.log(res.data);
-    });
+    api
+      .get("/api/Student", config)
+      .then((res) => {
+        let data = res.data.filter(removeAdmin);
+        return data;
+      })
+      .then((res) => {
+        setStudents(res);
+        // console.log(res);
+      });
   }, []);
 
   return (
