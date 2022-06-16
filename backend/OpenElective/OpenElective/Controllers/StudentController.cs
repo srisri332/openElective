@@ -124,12 +124,12 @@ namespace OpenElective.Controllers
         }
 
         // PUT api/<StudentController>/5
+        [AllowAnonymous]
         [HttpPut("elected/{id}")]
         public IActionResult Put(string id)
         {
             try
             {
-              
                 var s = studentService.Get(id);
                 studentService.MarkElected(s);
                 return Ok();
