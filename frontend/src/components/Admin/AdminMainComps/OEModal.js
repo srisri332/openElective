@@ -70,7 +70,7 @@ function OEModal() {
   //this is used to get the status of the allotment and then enable or diable adding of allotments
   const [status, setStatus] = useState(null);
   useEffect(() => {
-    api.get("/api/Details").then((res) => {
+    api.get("/api/Details", config).then((res) => {
       // console.log(res.data);
       setStatus(res.data.isStarted);
       console.log(localStorage.getItem("token"));

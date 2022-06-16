@@ -16,7 +16,7 @@ function ResultsPage() {
   };
 
   useEffect(() => {
-    api.get("/api/Details").then((res) => {
+    api.get("/api/Details", config).then((res) => {
       // console.log(res.data.isCompleted + " " + res.data.isStarted);
       if (res.data.isCompleted && res.data.isStarted) {
         api.get("/api/Allotment", config).then((res) => {

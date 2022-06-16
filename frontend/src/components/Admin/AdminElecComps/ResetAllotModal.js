@@ -47,7 +47,7 @@ function ResetAllotModal(props) {
     },
   };
   useEffect(() => {
-    api.get("/api/Details").then((res) => {
+    api.get("/api/Details", config).then((res) => {
       // console.log(res.data);
       setStatus(res.data.isStarted);
       setStopped(res.data.isCompleted);
@@ -61,7 +61,7 @@ function ResetAllotModal(props) {
     // --header 'Authorization: Bearer
 
     let res = await api.post("api/Allotment/reset", {}, config);
-    let res2 = await api.post("/api/Details/reset");
+    let res2 = await api.post("/api/Details/reset", config);
     window.location.reload(false);
     console.log(res2.status);
 

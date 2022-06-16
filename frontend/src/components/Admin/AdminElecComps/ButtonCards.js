@@ -33,7 +33,7 @@ function ButtonCards(props) {
   };
 
   useEffect(() => {
-    api.get("/api/Details").then((res) => {
+    api.get("/api/Details", config).then((res) => {
       // console.log(res);
       setStatus(res.data.isStarted);
       setStopped(res.data.isCompleted);
@@ -44,7 +44,7 @@ function ButtonCards(props) {
     let temp = window.confirm(" Are you sure you want to stop allotment?");
 
     if (temp == true) {
-      let res = await api.post("/api/Details/end");
+      let res = await api.post("/api/Details/end", config);
       let res1 = await api.get("/api/Allotment", config);
 
       window.location.reload(false);
